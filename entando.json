@@ -1,0 +1,9 @@
+{
+    "microservices": [],
+    "microfrontends": [],
+    "svc": [],
+    "name": "case-management-bundle",
+    "version": "0.0.1",
+    "description": "case-management-bundle description",
+    "type": "bundle"
+}
