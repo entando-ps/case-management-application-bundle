@@ -1,7 +1,54 @@
 {
-    "microservices": [],
-    "microfrontends": [],
-    "svc": [],
+    "microservices": [
+        {
+            "name": "case-service",
+            "stack": "spring-boot",
+            "healthCheckPath": "/api/health"
+        }
+    ],
+    "microfrontends": [
+        {
+            "name": "case-admin-mfe",
+            "customElement": "case-admin-mfe",
+            "stack": "react",
+            "type": "widget",
+            "group": "free",
+            "publicFolder": "public",
+            "titles": {
+                "en": "case-admin-mfe",
+                "it": "case-admin-mfe"
+            },
+            "apiClaims": [
+                {
+                    "name": "case-api",
+                    "type": "internal",
+                    "serviceName": "case-service"
+                }
+            ]
+        },
+        {
+            "name": "case-entry-mfe",
+            "customElement": "case-entry-mfe",
+            "stack": "react",
+            "type": "widget",
+            "group": "free",
+            "publicFolder": "public",
+            "titles": {
+                "en": "case-entry-mfe",
+                "it": "case-entry-mfe"
+            },
+            "apiClaims": [
+                {
+                    "name": "case-api",
+                    "type": "internal",
+                    "serviceName": "case-service"
+                }
+            ]
+        }
+    ],
+    "svc": [
+        "keycloak"
+    ],
     "name": "case-management-bundle",
     "version": "0.0.1",
     "description": "case-management-bundle description",
