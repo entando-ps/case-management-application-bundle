@@ -1,0 +1,25 @@
+logging:
+  level:
+    ROOT: INFO
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/case-management-bundle?useSSL=false&allowPublicKeyRetrieval=true
+    username: case-management-bundle-user
+    password: case-management-bundle-password
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: http://localhost:9080/auth/realms/entando-dev
+        registration:
+          oidc:
+            client-id: web_app

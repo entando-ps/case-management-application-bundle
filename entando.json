@@ -47,6 +47,7 @@
         }
     ],
     "svc": [
+        "mysql",
         "keycloak"
     ],
     "name": "case-management-bundle",
