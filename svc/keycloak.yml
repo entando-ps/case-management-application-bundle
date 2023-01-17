@@ -12,7 +12,7 @@ services:
         '-Dkeycloak.migration.action=import',
         '-Dkeycloak.migration.provider=dir',
         '-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config',
-        '-Dkeycloak.migration.strategy=OVERWRITE_EXISTING', # use 'OVERWRITE_EXISTING' instead if you want to reset your current configuration
+        '-Dkeycloak.migration.strategy=IGNORE_EXISTING', # use 'OVERWRITE_EXISTING' instead if you want to reset your current configuration
         '-Djboss.socket.binding.port-offset=1000'
       ]
     volumes:
