@@ -1,9 +1,7 @@
 package org.entando.codemotion.controller;
 
 import org.entando.codemotion.entity.Process;
-import org.entando.codemotion.entity.enumeration.State;
 import org.entando.codemotion.service.ProcessService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @org.springframework.web.bind.annotation.RestController
