@@ -1,7 +1,7 @@
-package org.entando.codemotion.entity;
+package org.entando.bundle.entity;
 
 import lombok.Data;
-import org.entando.codemotion.entity.enumeration.State;
+import org.entando.bundle.entity.enumeration.State;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 @Entity(name = "processes")
 @Data

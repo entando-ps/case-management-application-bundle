@@ -7,7 +7,16 @@
 						"dbms": "mysql",
             "ingressPath": "/cm",
             "deploymentBaseName": "case-management",
-            "roles": ["case-management-entry", "case-management-admin"]
+            "roles": ["case-management-entry", "case-management-admin"],
+						"env" : [
+						    {
+						        "name" : "MY_ENV_VAR_FROM_SECRET",
+						        "secretKeyRef" : {
+						            "name" : "secret_id_with_a_password",
+						            "key" : "password"
+						        }
+						    }
+						]
         }
     ],
     "microfrontends": [

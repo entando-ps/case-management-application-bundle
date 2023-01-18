@@ -1,7 +1,7 @@
-package org.entando.codemotion.service;
+package org.entando.bundle.service;
 
-import org.entando.codemotion.entity.Process;
-import org.entando.codemotion.repository.ProcessRepository;
+import org.entando.bundle.entity.Process;
+import org.entando.bundle.repository.ProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
