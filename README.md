@@ -1,7 +1,7 @@
-# CDP Case management plugin
+# CDP Case Management microservice
 
 
-## Development
+## Development environment
 
 Before running make sure to have the following *environment variables* defined correctly:
 
@@ -9,6 +9,7 @@ Before running make sure to have the following *environment variables* defined c
 - AWS_SECRET_ACCESS_KEY
 - S3_BUCKET_NAME
 - S3_BUCKET_URL
+- AWS_DEFAULT_REGION (optional, the default `EU-WEST-1` will be used if not defined)
 
 *NOTE:* it's possible to avoid defining those variables by editing the configuration file `application.yml` and
 defining the appropriate defaults in the following section:
@@ -33,7 +34,7 @@ aws:
     secret: ${AWS_SECRET_ACCESS_KEY:1234567890}   
     region: eu-west-1                          # this won't be overridden    
     bucket:
-      name: ${S3_BUCKET_NAME:bucketName}
+      name: ${S3_BUCKET_NAME:production-bucket-name}
       url: ${S3_BUCKET_URL:https://bucket.url}
 ```
 
@@ -41,4 +42,4 @@ aws:
 
 At this point it's possible to run the microservice from the root of the bundle by typing the command `ent bundle run case-service`
 
-## Production
+## Production environment

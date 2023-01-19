@@ -31,7 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,7 +39,7 @@ import java.util.Optional;
 @Service
 public class FileServiceImpl implements FileService {
 
-  private Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
+  private final Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
 
   private final BundleConfiguration config;
 
@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
     this.config = config;
   }
 
-  private String getBuketName() {
+  private String getBucketName() {
     String name = null;
 
     try {
@@ -58,7 +58,7 @@ public class FileServiceImpl implements FileService {
     return name;
   }
 
-  private String getBuketUrl() {
+  private String getBucketUrl() {
     String url = null;
 
     try {
@@ -69,14 +69,23 @@ public class FileServiceImpl implements FileService {
     return url;
   }
 
+  private Region getBucketRegion() {
+    Region region = Region.EU_WEST_1;
+
+    try {
+      region = Region.of(config.getS3().getRegion());
+    } catch (Throwable t) {
+      log.error("Configuration error detected! No AWS region defined", t.getLocalizedMessage());
+    }
+    return region;
+  }
+
   private S3Client getClient() {
     // Create the S3Client object.
-    Region region = Region.EU_WEST_1;
-    S3Client s3 = S3Client.builder()
+    return S3Client.builder()
       .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
-      .region(region)
+      .region(getBucketRegion())
       .build();
-    return s3;
   }
 
   @Override
@@ -85,7 +94,7 @@ public class FileServiceImpl implements FileService {
 
     try {
       PutObjectRequest putOb = PutObjectRequest.builder()
-        .bucket(getBuketName())
+        .bucket(getBucketName())
         .key(file.getName())
         .metadata(metadata)
         .build();
@@ -129,7 +138,7 @@ public class FileServiceImpl implements FileService {
     try {
       ListObjectsRequest listObjects = ListObjectsRequest
         .builder()
-        .bucket(getBuketName())
+        .bucket(getBucketName())
         .build();
 
       ListObjectsResponse res = s3.listObjects(listObjects);
@@ -150,7 +159,7 @@ public class FileServiceImpl implements FileService {
       GetObjectRequest objectRequest = GetObjectRequest
         .builder()
         .key(keyName)
-        .bucket(getBuketName())
+        .bucket(getBucketName())
         .build();
 
       ResponseBytes<GetObjectResponse> objectBytes = s3.getObjectAsBytes(objectRequest);
@@ -158,7 +167,7 @@ public class FileServiceImpl implements FileService {
 
       // Write the data to a local file.
       dest = new File(FileHelper.getTmpPathForFile(keyName));
-      try (OutputStream os = new FileOutputStream(dest);) {
+      try (OutputStream os = new FileOutputStream(dest)) {
         os.write(data);
         log.debug("{} successfully downloaded from bucket", dest.getAbsolutePath());
       }
@@ -175,12 +184,12 @@ public class FileServiceImpl implements FileService {
     ObjectIdentifier objectId = ObjectIdentifier.builder()
       .key(keyName)
       .build();
-    return deleteFile(Arrays.asList(new ObjectIdentifier[] {objectId}));
+    return deleteFile(Collections.singletonList(objectId));
   }
 
+  @Override
   public boolean deleteFile(List<ObjectIdentifier> keys) {
     S3Client s3 = getClient();
-    boolean deleted = true;
     DeleteObjectsResponse response = null;
 
     log.debug("{} element(s) to delete", keys.size());
@@ -189,19 +198,17 @@ public class FileServiceImpl implements FileService {
         .objects(keys)
         .build();
       DeleteObjectsRequest multiObjectDeleteRequest = DeleteObjectsRequest.builder()
-        .bucket(getBuketName())
+        .bucket(getBucketName())
         .delete(del)
         .build();
 
       response = s3.deleteObjects(multiObjectDeleteRequest);
-      log.debug("Multiple objects have been deleted from bucket");
+      log.debug("delete overall result: {}\n {}", response.hasErrors(), response);
+      log.debug(" has deleted? {}", response.hasDeleted());
     } catch (S3Exception e) {
       log.error(e.awsErrorDetails().errorMessage());
-      deleted = false;
     }
-    log.debug("delete overall result: {}\n {}", response.hasErrors(), response);
-    log.debug(" has deleted? {}", response.hasDeleted());
-    return (response != null && !response.hasErrors() && response.hasDeleted());
+    return (!response.hasErrors() && response.hasDeleted());
   }
 
   @Override
@@ -226,8 +233,8 @@ public class FileServiceImpl implements FileService {
 
     if (StringUtils.isNotBlank(keyName)) {
       try {
-        URIBuilder builder = new URIBuilder(getBuketUrl());
-        builder.setPath(getBuketName() + "/" + keyName);
+        URIBuilder builder = new URIBuilder(getBucketUrl());
+        builder.setPath(getBucketName() + "/" + keyName);
         name = builder.toString();
       } catch (Throwable t) {
         log.error("Error generating public url of a file", t.getLocalizedMessage());

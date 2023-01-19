@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @NoArgsConstructor
 @Configuration
-@ConfigurationProperties(prefix = "aws", ignoreUnknownFields = true)
+@ConfigurationProperties(prefix = "aws")
 public class BundleConfiguration {
 
   private S3 s3;
@@ -27,6 +27,7 @@ public class BundleConfiguration {
     private String secret;
     private String key;
     private Bucket bucket;
+    private String region;
   }
 
 }

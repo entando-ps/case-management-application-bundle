@@ -23,7 +23,6 @@ spring:
         registration:
           oidc:
             client-id: internal
-
 aws:
   s3:
     key: ${AWS_ACCESS_KEY_ID:my_access_key}
