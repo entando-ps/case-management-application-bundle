@@ -1,6 +1,5 @@
 package org.entando.bundle.controller;
 
-import org.entando.bundle.config.BundleConfiguration;
 import org.entando.bundle.entity.Process;
 import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.FileService;
@@ -23,13 +22,13 @@ import java.util.Optional;
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class RestController {
+public class CaseController {
 
     private final CaseService processService;
 
     private final FileService fileService;
 
-    public RestController(CaseServiceImpl processService, FileServiceImpl fileService) {
+    public CaseController(CaseServiceImpl processService, FileServiceImpl fileService) {
         this.processService = processService;
         this.fileService = fileService;
     }

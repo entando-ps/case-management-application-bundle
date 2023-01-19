@@ -1,7 +1,7 @@
 package org.entando.bundle.service.impl;
 
 import org.entando.bundle.entity.Process;
-import org.entando.bundle.repository.ProcessRepository;
+import org.entando.bundle.repository.CaseRepository;
 import org.entando.bundle.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,21 +13,21 @@ import java.util.Optional;
 public class CaseServiceImpl extends CaseService {
 
   @Autowired
-  private ProcessRepository processRepository;
+  private CaseRepository caseRepository;
 
   @Override
   public List<Process> getAllProcesses() {
-    return processRepository.findAll();
+    return caseRepository.findAll();
   }
 
   @Override
   public Process crateProcess(Process process) {
-    return processRepository.save(process);
+    return caseRepository.save(process);
   }
 
   @Override
   public Optional<Process> getProcess(Long id) {
-    return processRepository.findById(id);
+    return caseRepository.findById(id);
   }
 
 
