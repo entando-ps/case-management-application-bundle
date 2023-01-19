@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 @SpringBootTest
-class UserServiceApplicationTests {
+class CaseServiceApplicationTests {
 
 	@MockBean
 	JwtDecoder jwtDecoder;
