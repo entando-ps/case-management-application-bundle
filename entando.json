@@ -4,10 +4,7 @@
             "name": "case-service",
             "stack": "spring-boot",
             "healthCheckPath": "/api/health",
-						"dbms": "mysql",
-            "ingressPath": "/cm",
-            "deploymentBaseName": "case-management",
-            "roles": ["case-management-entry", "case-management-admin"]
+            "dbms": "mysql"
         }
     ],
     "microfrontends": [
