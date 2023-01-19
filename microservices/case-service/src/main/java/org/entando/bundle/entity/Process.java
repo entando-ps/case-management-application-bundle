@@ -32,6 +32,9 @@ public class Process {
   private LocalDateTime created;
 
   @Column(nullable = false)
-  private String note;
+  private String identifier;
+
+  @Column(nullable = false)
+  private String data;
 
 }
