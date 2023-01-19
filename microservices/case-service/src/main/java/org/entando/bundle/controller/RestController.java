@@ -1,8 +1,11 @@
 package org.entando.bundle.controller;
 
+import org.entando.bundle.config.BundleConfiguration;
 import org.entando.bundle.entity.Process;
+import org.entando.bundle.service.CaseService;
+import org.entando.bundle.service.FileService;
+import org.entando.bundle.service.impl.CaseServiceImpl;
 import org.entando.bundle.service.impl.FileServiceImpl;
-import org.entando.bundle.service.ProcessService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,11 +25,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RestController {
 
-    private final ProcessService processService;
+    private final CaseService processService;
 
-    private final FileServiceImpl fileService;
+    private final FileService fileService;
 
-    public RestController(ProcessService processService, FileServiceImpl fileService) {
+    public RestController(CaseServiceImpl processService, FileServiceImpl fileService) {
         this.processService = processService;
         this.fileService = fileService;
     }

@@ -1,6 +1,7 @@
 package org.entando.bundle.service.impl;
 
 import org.entando.bundle.BundleConstants;
+import org.entando.bundle.config.BundleConfiguration;
 import org.entando.bundle.service.FileService;
 import org.entando.bundle.service.impl.utils.FileHelper;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,6 +39,23 @@ import java.util.Map;
 public class FileServiceImpl implements FileService {
 
   private Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
+
+  private final BundleConfiguration config;
+  
+  public FileServiceImpl(BundleConfiguration config) {
+    this.config = config;
+  }
+  
+  private String getBuketName() {
+    String name = null;
+  
+    try {
+      name = config.getS3().getBucket().getName();
+    } catch (Throwable t) {
+        log.error("Configuration error detected! No bucket name defined", t.getLocalizedMessage());
+    }
+    return name;
+  }
 
   private S3Client getClient() {
     // Create the S3Client object.
@@ -54,12 +73,8 @@ public class FileServiceImpl implements FileService {
     S3Client s3 = getClient();
 
     try {
-//      File file = new File("/home/matteo/Pictures/WTF.png");
-      // Set the tags to apply to the object.
-//      Map<String, String> metadata = new HashMap<>();
-//      metadata.put("x-amz-meta-myVal", "test");
       PutObjectRequest putOb = PutObjectRequest.builder()
-        .bucket(BundleConstants.S3_BUCKET_NAME)
+        .bucket(getBuketName())
         .key(file.getName())
         .metadata(metadata)
         .build();
@@ -72,7 +87,7 @@ public class FileServiceImpl implements FileService {
     return null;
   }
 
-  private static byte[] getObjectFile(String filePath) {
+  private byte[] getObjectFile(String filePath) {
     FileInputStream fileInputStream = null;
     byte[] bytesArray = null;
 
@@ -83,7 +98,7 @@ public class FileServiceImpl implements FileService {
       fileInputStream.read(bytesArray);
 
     } catch (IOException e) {
-      e.printStackTrace();
+      log.error("error building byte array of file", e);
     } finally {
       if (fileInputStream != null) {
         try {
@@ -103,7 +118,7 @@ public class FileServiceImpl implements FileService {
     try {
       ListObjectsRequest listObjects = ListObjectsRequest
         .builder()
-        .bucket(BundleConstants.S3_BUCKET_NAME)
+        .bucket(getBuketName())
         .build();
 
       ListObjectsResponse res = s3.listObjects(listObjects);
@@ -124,7 +139,7 @@ public class FileServiceImpl implements FileService {
       GetObjectRequest objectRequest = GetObjectRequest
         .builder()
         .key(keyName)
-        .bucket(BundleConstants.S3_BUCKET_NAME)
+        .bucket(getBuketName())
         .build();
 
       ResponseBytes<GetObjectResponse> objectBytes = s3.getObjectAsBytes(objectRequest);
@@ -163,7 +178,7 @@ public class FileServiceImpl implements FileService {
         .objects(keys)
         .build();
       DeleteObjectsRequest multiObjectDeleteRequest = DeleteObjectsRequest.builder()
-        .bucket(BundleConstants.S3_BUCKET_NAME)
+        .bucket(getBuketName())
         .delete(del)
         .build();
 
@@ -175,7 +190,7 @@ public class FileServiceImpl implements FileService {
     }
     log.debug("delete overall result: {}\n {}", response.hasErrors(), response);
     log.debug(" has deleted? {}", response.hasDeleted());
-    return (response != null && !response.hasErrors());
+    return (response != null && !response.hasErrors() && response.hasDeleted());
   }
 
 
