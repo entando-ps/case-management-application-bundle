@@ -8,6 +8,8 @@ import software.amazon.awssdk.utils.StringUtils;
 import java.io.File;
 import java.io.IOException;
 
+import static org.entando.bundle.BundleConstants.PROP_TMP_DIR;
+
 public class FileHelper {
 
   private static Logger log = LoggerFactory.getLogger(FileHelper.class);
@@ -68,7 +70,5 @@ public class FileHelper {
     }
     return null;
   }
-
-  final static String PROP_TMP_DIR = "java.io.tmpdir";
 
 }

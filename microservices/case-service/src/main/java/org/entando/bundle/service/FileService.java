@@ -15,4 +15,8 @@ public interface FileService {
   File downloadFile(String keyName);
 
   boolean deleteFile(String keyName);
+
+  String getFilePublicUrl(String keyName);
+
+  String getFilePublicUrlNoCheck(String keyName);
 }
