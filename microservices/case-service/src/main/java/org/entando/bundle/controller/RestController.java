@@ -1,7 +1,11 @@
-package org.entando.codemotion.controller;
+package org.entando.bundle.controller;
 
-import org.entando.codemotion.entity.Process;
-import org.entando.codemotion.service.ProcessService;
+import org.entando.bundle.config.BundleConfiguration;
+import org.entando.bundle.entity.Process;
+import org.entando.bundle.service.CaseService;
+import org.entando.bundle.service.FileService;
+import org.entando.bundle.service.impl.CaseServiceImpl;
+import org.entando.bundle.service.impl.FileServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +25,13 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RestController {
 
-    private final ProcessService processService;
+    private final CaseService processService;
 
-    public RestController(ProcessService processService) {
+    private final FileService fileService;
+
+    public RestController(CaseServiceImpl processService, FileServiceImpl fileService) {
         this.processService = processService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/processes")
@@ -42,6 +51,21 @@ public class RestController {
     @PreAuthorize("hasAnyAuthority('case-management-entry')")
     public @ResponseBody Process createProcess(@RequestBody Process process) {
         return processService.crateProcess(process);
+    }
+
+    @PostMapping("/start")
+    public @ResponseBody Process startProcess(@RequestParam(value = "attachment") MultipartFile[] files,
+                                              @RequestParam(value = "name", required = false) String name) {
+
+        for (MultipartFile file : files) {
+            System.out.println("NOME: " + file.getName());
+            System.out.println("size: " + file.getSize());
+            System.out.println("content type: " + file.getContentType());
+            System.out.println("original filename: " + file.getOriginalFilename());
+            System.out.println("");
+        }
+        System.out.println("\nData: " + name);
+        return null;
     }
 
 }
