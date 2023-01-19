@@ -3,7 +3,8 @@
         {
             "name": "case-service",
             "stack": "spring-boot",
-            "healthCheckPath": "/api/health"
+            "healthCheckPath": "/api/health",
+            "dbms": "mysql"
         }
     ],
     "microfrontends": [
@@ -47,6 +48,7 @@
         }
     ],
     "svc": [
+        "mysql",
         "keycloak"
     ],
     "name": "case-management-bundle",

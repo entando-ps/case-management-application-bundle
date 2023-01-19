@@ -1,0 +1,598 @@
+{
+	"info": {
+		"_postman_id": "79a7db58-0a62-41f8-b7e1-6c16805135ec",
+		"name": "CDP - POC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET SERVICE ACCOUNT TOKEN",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"realms",
+						"{{realm}}",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET SERVICE ACCOUNT TOKEN",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"{{realm}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/entando-dev/; HttpOnly"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Jan 2023 17:08:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1497"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJMMTJwcVRrd2lqQ2JUd0RmLWtuRDlsdU1iMHVKUFhQQ2FPUnUzNnVzdEtZIn0.eyJleHAiOjE2NzM5NzU1ODgsImlhdCI6MTY3Mzk3NTI4OCwianRpIjoiOThjYjkwNWUtZDcyOS00YWNmLTgyY2MtMDIyOGIyMjgwZjg1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL2VudGFuZG8tZGV2IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImY4MWI2MDE4LTljMDYtNGI5NS1hZGY0LWU4ZTk5YzRmNzExMiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImludGVybmFsIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVudGFuZG8tZGV2Iiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImludGVybmFsIjp7InJvbGVzIjpbInVtYV9wcm90ZWN0aW9uIiwiY2FzZS1tYW5hZ2VtZW50LWFkbWluIiwiY2FzZS1tYW5hZ2VtZW50LWVudHJ5Il19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudElkIjoiaW50ZXJuYWwiLCJjbGllbnRIb3N0IjoiMTAuNzYuMTQuMSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1pbnRlcm5hbCIsImNsaWVudEFkZHJlc3MiOiIxMC43Ni4xNC4xIn0.fdm2j-kvtXGmmCZyHGgkUPhooB79PDbe5gaNEQsquM63FCTcBnB7FcrpFZXV2stF-xAgIKGXt8Et9QgDKJudGfhAgma_t08VV92xjhGdwpJChI1-5ThllwXIuVlyNMa8Iv0LkU28-V-zhoAi-GW2D3wl5QaN_svCxJ9PPzyH5yFQ6mhOma74X38X_TJCh_35mdo6WEhdVobIVT0VEufsffGMpm414QNp9zfhNCaHgeaSO441G9reHKEUoEj_aPRP5wg1avc0zTTCYN1CYX_2UeqYlZpQmg54lM9nE7kz4W_rsvIvkviBvnDASo1HrslG8RnIvX-YM2XpH-RuMjMhRw\",\n    \"expires_in\": 300,\n    \"refresh_expires_in\": 0,\n    \"token_type\": \"Bearer\",\n    \"not-before-policy\": 0,\n    \"scope\": \"email profile\"\n}"
+				},
+				{
+					"name": "GET SAT",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "forumpa",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "KoECqCntfJWilLVi5plEOwmQnnfkS4hP",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"{{realm}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "cache-control",
+							"value": "no-store"
+						},
+						{
+							"key": "set-cookie",
+							"value": "KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/entando/; HttpOnly"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 12 Jul 2022 09:49:58 GMT"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "content-length",
+							"value": "2179"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJIX3d4OEswOTkwdkpGYlA3SWR4WXo3NnJMMUFFdXNmLTRfaTQ1TkZjbEJvIn0.eyJleHAiOjE2NTc2MTk2OTgsImlhdCI6MTY1NzYxOTM5OCwianRpIjoiOTk4NjA0MmYtZDlmMi00ZjM3LWFjY2ItOTE5NGYzZTQwNjdiIiwiaXNzIjoiaHR0cHM6Ly9mb3J1bXBhLmFwcHMucHNkZW1vLmVuZy1lbnRhbmRvLmNvbS9hdXRoL3JlYWxtcy9lbnRhbmRvIiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJwbi1jMGE0YzVlNi02NDQ1M2ZlMi1lbnRhbmRvcHNkaC1zcGlkLWJ1bmRsZS1zZXJ2ZXIiLCJwbi1jZDcwMWQyMi02NDQ1M2ZlMi1lbnRhbmRvcHNkaC1zcGlkLWJ1bmRsZS1zZXJ2ZXIiLCJhY2NvdW50Il0sInN1YiI6ImMzYmNmMTA0LWYxMTUtNDFlNy05NzMxLTEzMTk0N2ZiMmI0ZiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZvcnVtcGEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vZm9ydW1wYS5hcHBzLnBzZGVtby5lbmctZW50YW5kby5jb20iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLWVudGFuZG8iXX0sInJlc291cmNlX2FjY2VzcyI6eyJmb3J1bXBhIjp7InJvbGVzIjpbInVtYV9wcm90ZWN0aW9uIiwic3VwZXJ1c2VyIl19LCJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbIm1hbmFnZS1yZWFsbSJdfSwicG4tYzBhNGM1ZTYtNjQ0NTNmZTItZW50YW5kb3BzZGgtc3BpZC1idW5kbGUtc2VydmVyIjp7InJvbGVzIjpbImVudGFuZG9BcHAiXX0sInBuLWNkNzAxZDIyLTY0NDUzZmUyLWVudGFuZG9wc2RoLXNwaWQtYnVuZGxlLXNlcnZlciI6eyJyb2xlcyI6WyJlbnRhbmRvQXBwIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudElkIjoiZm9ydW1wYSIsImNsaWVudEhvc3QiOiI5NC4zOS4xMDAuNzUiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtZm9ydW1wYSIsImNsaWVudEFkZHJlc3MiOiI5NC4zOS4xMDAuNzUifQ.ErwwEE7_y5v7xeEQ1KVuCZFrpJBVRbjaCNnVEJEPl5h--rNVmi_S6BhIqrAnQA1rPMfMwDojXH4SCr9-CAqRKXikEdv3yH4uE2Xv750pjcX_ZLXQIR6kgiIFfYF9G2Fs3mo4IwEV94U8KodT1NBVuVLE43sC4fVi5aP485fjKbCliLY8IMETAJ_AQqcfBwqQYUmtZOIYQh4LYJjE1TvmuZyL87cLpHo-182PURmmcGiom0HKS0Q862hNeS6iBxgIlA_nUTI8K9AvzqnzMvq-fW55DWXSgduaZpXy_LTZ1k4ONtrqN0RRFPTwiuh-TdiFuu3o0ixqGsLpBM4O7fZHpWZod4N-zZU8xrS1xh862ErPffMeoDaN2OtHpvvzGgnk0J8vVq8PdZXg-GkNr2BtxnECS_ioXOkqKZgPpppVetCETU504qa9Ej8cPPJOJjcrCMBx9CuRHANsThOnC0pGn-ot89_rMON2IoW1sExRTEoW566B0_JRBZxk-hbipA5Y\",\n    \"expires_in\": 300,\n    \"refresh_expires_in\": 0,\n    \"token_type\": \"Bearer\",\n    \"not-before-policy\": 1657544757,\n    \"scope\": \"profile email\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GET PROCESSES LIST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/processes",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"processes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GTE PROCESSES LIST",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/processes",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"processes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Jan 2023 17:08:41 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-17T17:56:40\",\n        \"note\": \"nota\"\n    },\n    {\n        \"id\": 2,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-17T17:56:40\",\n        \"note\": \"nota 2\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET PROCESS BY INTERNAL ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/process/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"process",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET PROCESS BY INTERNAL ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/process/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"process",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Jan 2023 17:08:25 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-17T17:56:40\",\n    \"note\": \"nota\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CREATE PROCESS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-17T17:56:39.96534\",\n    \"note\": \"nota 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/api/processes",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"processes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CREATE PROCESS",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-17T17:56:39.96534\",\n    \"note\": \"nota 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/processes",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"processes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Jan 2023 17:08:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-17T17:56:39.96534\",\n    \"note\": \"nota 2\"\n}"
+				}
+			]
+		}
+	]
+}
