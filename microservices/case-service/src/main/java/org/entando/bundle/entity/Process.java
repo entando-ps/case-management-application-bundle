@@ -1,8 +1,11 @@
 package org.entando.bundle.entity;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.Data;
-import org.entando.bundle.domain.CaseUserData;
+import org.entando.bundle.domain.CaseMetadata;
 import org.entando.bundle.entity.enumeration.State;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Entity(name = "processes")
 @Data
+@Entity(name = "processes")
+@TypeDef(name = "json", typeClass = JsonType.class)
 public class Process {
 
   @Id
@@ -35,7 +39,8 @@ public class Process {
   @Column(nullable = false)
   private String identifier;
 
-  @Column(nullable = false)
-  private CaseUserData data;
+  @Type(type = "json")
+  @Column(columnDefinition = "json", nullable = false)
+  private CaseMetadata metadata;
 
 }

@@ -5,9 +5,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CaseUserData {
+public class Resource {
 
-  private AuthorizedUser authorized;
-  private SubscribedUser subscriber;
+  private String key;
+  private String url;
+  private Long size;
 
 }

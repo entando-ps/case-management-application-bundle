@@ -256,7 +256,7 @@ public class FileServiceImpl implements FileService {
         List<S3Object> files = fileList();
         Optional<S3Object> opt = files.stream().filter(f -> f.key().equals(keyName)).findFirst();
         if (opt.isPresent()) {
-          return getFilePublicUrlNoCheck( keyName);
+          return getFilePublicUrlNoCheck(keyName);
         }
       }
     } catch(Throwable t) {
