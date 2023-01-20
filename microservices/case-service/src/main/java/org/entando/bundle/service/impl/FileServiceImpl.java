@@ -7,6 +7,7 @@ import org.entando.bundle.service.impl.utils.FileHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +82,48 @@ public class FileServiceImpl implements FileService {
   }
 
   @Override
+  public String fileUpload(MultipartFile file, Map<String, String> metadata) {
+    S3Client s3 = getClient();
+
+    try {
+      PutObjectRequest putOb = PutObjectRequest.builder()
+        .bucket(getBuketName())
+        .key(file.getName())
+        .metadata(metadata)
+        .build();
+      PutObjectResponse response = s3.putObject(putOb, RequestBody.fromBytes(getObjectFile(file)));
+      return response.eTag();
+    } catch (S3Exception t) {
+      log.error(t.awsErrorDetails().errorMessage());
+      t.printStackTrace();
+    }
+    return null;
+  }
+
+  private byte[] getObjectFile(MultipartFile file) {
+    byte[] bytesArray = null;
+    InputStream is = null;
+
+    try {
+      is = file.getInputStream();
+      bytesArray = new byte[(int) file.getSize()];
+      file.getInputStream().read(bytesArray);
+    } catch (IOException e) {
+      log.error("error building byte array of file", e);
+    } finally {
+      if (is != null) {
+        try {
+          is.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return bytesArray;
+  }
+
+  @Override
+  @Deprecated
   public String fileUpload(File file, Map<String, String> metadata) {
     S3Client s3 = getClient();
 
@@ -98,6 +142,7 @@ public class FileServiceImpl implements FileService {
     return null;
   }
 
+  @Deprecated
   private byte[] getObjectFile(String filePath) {
     FileInputStream fileInputStream = null;
     byte[] bytesArray = null;

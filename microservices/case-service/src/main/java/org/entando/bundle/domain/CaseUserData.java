@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CaseUser {
+public class CaseUserData {
 
   private AuthorizedUser authorized;
   private SubscribedUser subscriber;

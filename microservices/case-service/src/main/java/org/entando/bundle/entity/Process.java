@@ -1,6 +1,7 @@
 package org.entando.bundle.entity;
 
 import lombok.Data;
+import org.entando.bundle.domain.CaseUserData;
 import org.entando.bundle.entity.enumeration.State;
 
 import javax.persistence.Column;
@@ -35,6 +36,6 @@ public class Process {
   private String identifier;
 
   @Column(nullable = false)
-  private String data;
+  private CaseUserData data;
 
 }
