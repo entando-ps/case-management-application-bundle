@@ -1,6 +1,7 @@
 package org.entando.bundle.service;
 
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.io.File;
@@ -18,6 +19,8 @@ public interface FileService {
   File downloadFile(String keyName);
 
   boolean deleteFile(String keyName);
+
+  boolean deleteFile(List<ObjectIdentifier> keys);
 
   String getFilePublicUrl(String keyName);
 

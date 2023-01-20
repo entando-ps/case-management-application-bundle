@@ -1,18 +1,15 @@
 package org.entando.bundle.controller;
 
-import org.entando.bundle.domain.AuthorizedUser;
 import org.entando.bundle.domain.CaseMetadata;
-import org.entando.bundle.domain.Delegation;
-import org.entando.bundle.domain.SubscribedUser;
 import org.entando.bundle.entity.Process;
 import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.impl.CaseServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,12 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/cases")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CaseController {
 
@@ -35,36 +31,45 @@ public class CaseController {
         this.caseService = caseService;
     }
 
-    @GetMapping("/processes")
+    @GetMapping("/list")
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
     public @ResponseBody List<Process> getProcesses() {
         return caseService.getAllProcesses();
     }
 
-    @GetMapping("/process/{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
     public @ResponseBody Optional<Process> getProcess(@PathVariable Long id) {
         Optional<Process> process = caseService.getProcess(id);
         return process;
     }
 
-    @PostMapping("/processes")
+    @PostMapping(value = "/create", consumes = {"multipart/form-data"})
     @PreAuthorize("hasAnyAuthority('case-management-entry')")
-    public @ResponseBody Process createProcess(@RequestBody Process process) {
-        return caseService.createProcess(process);
-    }
-
-    @PostMapping(value = "/start", consumes = {"multipart/form-data"})
-    public @ResponseBody Process startProcess(@RequestPart("attachments") MultipartFile[] files,
+    public @ResponseBody Process createCase(@RequestPart("attachments") MultipartFile[] files,
                                               @Valid @RequestPart("case_metadata") CaseMetadata data) {
+        // TODO ERROR MANAGEMENT
         Process process = null;
-
         try {
-            process = caseService.startProcess(files, data);
+            process = caseService.createProcess(files, data);
         } catch (Throwable t) {
             t.printStackTrace();
         }
         return process;
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('case-management-entry')")
+    public @ResponseBody boolean createDelete(@PathVariable Long id) {
+        boolean process = false;
+        // TODO ERROR MANAGEMENT
+        try {
+            process = caseService.destroyProcess(id);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        return process;
+    }
+
 
 }

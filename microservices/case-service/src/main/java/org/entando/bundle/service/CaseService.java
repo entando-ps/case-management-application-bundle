@@ -2,17 +2,28 @@ package org.entando.bundle.service;
 
 import org.entando.bundle.domain.CaseMetadata;
 import org.entando.bundle.entity.Process;
+import org.entando.bundle.entity.enumeration.State;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class CaseService {
-  public abstract List<Process> getAllProcesses();
+public interface CaseService {
 
-  public abstract Process createProcess(Process process);
+  List<Process> getAllProcesses();
 
-  public abstract Optional<Process> getProcess(Long id);
+  Process saveProcess(Process process);
 
-  public abstract Process startProcess(MultipartFile[] files, CaseMetadata data);
+  Optional<Process> getProcess(Long id);
+
+  void deleteProcess(Long id);
+
+  @Transactional
+  void updateState(Long id, State state);
+
+  Process createProcess(MultipartFile[] files, CaseMetadata data);
+
+  boolean destroyProcess(Long id);
+
 }
