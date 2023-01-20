@@ -30,4 +30,3 @@ aws:
     region: ${AWS_DEFAULT_REGION:eu-west-1}
     bucket:
       name: ${S3_BUCKET_NAME:entando-cdp-poc}
-      url: ${S3_BUCKET_URL:fancy_aws_url}

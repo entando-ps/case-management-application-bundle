@@ -18,7 +18,6 @@ public class BundleConfiguration {
   @NoArgsConstructor
   public static class Bucket {
     private String name;
-    private String url;
   }
 
   @NoArgsConstructor

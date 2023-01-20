@@ -62,7 +62,7 @@ public class FileServiceImpl implements FileService {
     String url = null;
 
     try {
-      url = config.getS3().getBucket().getUrl();
+      url = "https://" + getBucketName() + ".s3." + getBucketRegion() + ".amazonaws.com";
     } catch (Throwable t) {
       log.error("Configuration error detected! No bucket url defined", t.getLocalizedMessage());
     }
