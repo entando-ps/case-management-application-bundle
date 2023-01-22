@@ -1,1 +1,8 @@
+:host {
+  margin: 0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";

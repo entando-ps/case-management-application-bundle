@@ -1,10 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
+import WelcomeArea from './components/WelcomeArea';
 
 function App() {
   return (
-    <div>
-      Case Entry MFE
-    </div>
+    <Routes>
+      <Route path="/" element={<WelcomeArea />} />
+    </Routes>
   );
 }
 
