@@ -1,10 +1,11 @@
 import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function WelcomeArea() {
   return (
     <div>
       <div className="mb-5">
-        <h1>Benvenuto nella tua Area Riservata</h1>
+        <h2>Benvenuto nella tua Area Riservata</h2>
         <Container className="p-0" fluid>
           <Row>
             <Col xs="3">Nome: <b>Mario</b></Col>
@@ -20,7 +21,9 @@ function WelcomeArea() {
         <div>
           <Stack direction="horizontal">
             <h3>La tua pratica</h3>
-            <Button className="ms-auto">Crea Nuova Pratica</Button>
+            <Link to="/case-entry" className="ms-auto">
+              <Button>Crea Nuova Pratica</Button>
+            </Link>
           </Stack>
         </div>
       </div>
