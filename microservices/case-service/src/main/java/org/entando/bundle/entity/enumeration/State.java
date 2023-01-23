@@ -1,4 +1,4 @@
-package org.entando.codemotion.entity.enumeration;
+package org.entando.bundle.entity.enumeration;
 
 public enum State {
   CREATED,

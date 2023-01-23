@@ -1,4 +1,4 @@
-package org.entando.codemotion;
+package org.entando.bundle;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
