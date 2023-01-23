@@ -92,7 +92,7 @@ public class CaseServiceImpl implements CaseService {
       process.setCreated(LocalDateTime.now());
       process.setIdentifier(progressive);
       process.setState(State.CREATED);
-      process.setPid(2677L); // FIXME 
+      process.setPid(2677L); // FIXME
       // persist
       saveProcess(process);
       // TODO start the process and change state

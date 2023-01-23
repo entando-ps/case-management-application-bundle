@@ -21,7 +21,7 @@ public class ExternalServiceImpl implements ExternalService {
     final Optional<Long> progressive = caseRepository.getNextId();
     final LocalDate localDate = LocalDate.now();
     final String year = String.valueOf(localDate.getYear()).substring(2, 4);
-    final Long number = progressive.map(aLong -> aLong + 1L).orElse(1L);
+    final Long number = progressive.map(num -> num + 1L).orElse(1L);
     return String.format("%07d", number) + "/" + year;
   }
 

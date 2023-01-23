@@ -233,14 +233,14 @@ public class FileServiceImpl implements FileService {
   }
 
   @Override
-  public boolean deleteFile(List<ObjectIdentifier> keys) {
+  public boolean deleteFile(List<ObjectIdentifier> objectIdentifiers) {
     S3Client s3 = getClient();
     DeleteObjectsResponse response = null;
 
-    log.debug("{} element(s) to delete", keys.size());
+    log.debug("{} element(s) to delete", objectIdentifiers.size());
     try {
       Delete del = Delete.builder()
-        .objects(keys)
+        .objects(objectIdentifiers)
         .build();
       DeleteObjectsRequest multiObjectDeleteRequest = DeleteObjectsRequest.builder()
         .bucket(getBucketName())
