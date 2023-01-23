@@ -1,5 +1,6 @@
 import { Button, Form, Stack } from 'react-bootstrap';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import CaseEntryFormSubjectSection from './CaseEntryFormSubjectSection';
 import CaseEntryFormSubscriberSection from './CaseEntryFormSubscriberSection';
@@ -7,9 +8,11 @@ import CaseEntryFormUploadSection from './CaseEntryFormUploadSection';
 
 function CaseEntryForm() {
   const formMethods = useForm();
+  const navigate = useNavigate();
 
   const handleSubmit = data => {
     console.log(data);
+    navigate('/case-entry-success');
   };
 
   return (
