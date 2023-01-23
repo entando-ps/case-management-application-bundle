@@ -1,17 +1,24 @@
-import { Form } from 'react-bootstrap';
+import { Button, Form, Stack } from 'react-bootstrap';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import CaseEntryFormSubjectSection from './CaseEntryFormSubjectSection';
 import CaseEntryFormSubscriberSection from './CaseEntryFormSubscriberSection';
 import CaseEntryFormUploadSection from './CaseEntryFormUploadSection';
 
 function CaseEntryForm() {
+  const formMethods = useForm();
+
+  const handleSubmit = data => {
+    console.log(data);
+  };
+
   return (
-    <div>
+    <FormProvider {...formMethods}>
       <div className="mb-5">
         <h2>Compilazione dati autorizzazione e richiesta codice dispositivo</h2>
         <p>Inserire di seguito i dati del sottoscrittore dell’autorizzazione e le informazioni del soggetto autorizzato</p>
       </div>
-      <Form>
+      <Form onSubmit={formMethods.handleSubmit(handleSubmit)}>
         <div className="mb-4">
           <CaseEntryFormSubscriberSection />
         </div>
@@ -21,8 +28,11 @@ function CaseEntryForm() {
         <div className="mb-4">
           <CaseEntryFormUploadSection />
         </div>
+        <Stack direction="horizontal">
+          <Button type="submit" className="ms-auto">Invia</Button>
+        </Stack>
       </Form>
-    </div>
+    </FormProvider>
   );
 }
 
