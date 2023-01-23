@@ -1,8 +1,8 @@
 logging:
   level:
-    ROOT: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.entando.bundle: DEBUG
+    ROOT: INFO
+    org.hibernate.SQL: INFO
+    org.entando.bundle: INFO
 server:
   port: 8081
 spring:
@@ -16,7 +16,7 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -28,7 +28,7 @@ spring:
             issuer-uri: http://localhost:9080/auth/realms/entando-dev
         registration:
           oidc:
-            client-id: internal
+            client-id: web_app
 aws:
   s3:
     key: ${AWS_ACCESS_KEY_ID:my_access_key}

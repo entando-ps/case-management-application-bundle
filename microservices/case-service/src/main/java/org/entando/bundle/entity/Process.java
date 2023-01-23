@@ -36,8 +36,11 @@ public class Process {
   @Column(name = "created", columnDefinition = "TIMESTAMP")
   private LocalDateTime created;
 
-  @Column(nullable = false)
+  @Column(nullable = false, length = 20)
   private String identifier;
+
+  @Column(nullable = false, length = 40)
+  private String name;
 
   @Type(type = "json")
   @Column(columnDefinition = "json", nullable = false)

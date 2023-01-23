@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +45,11 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
+  public List<Process> getProcessesByName(String name) {
+    return caseRepository.findByNameIs(name);
+  }
+
+  @Override
   public Process saveProcess(Process process) {
     return caseRepository.save(process);
   }
@@ -51,6 +57,11 @@ public class CaseServiceImpl implements CaseService {
   @Override
   public Optional<Process> getProcess(Long id) {
     return caseRepository.findById(id);
+  }
+
+  @Override
+  public Optional<Process> getProcessByIdAndOwner(Long id, String name) {
+    return caseRepository.findByIdAndNameIs(id,name);
   }
 
   @Override
@@ -66,39 +77,36 @@ public class CaseServiceImpl implements CaseService {
 
   @Override
   @Transactional
-  public Process createProcess(MultipartFile[] files, CaseMetadata data) {
+  public Process createProcess(MultipartFile[] files, CaseMetadata data, String name) {
     List<Resource> resources = new ArrayList<>();
     Process process = new Process();
 
-    try {
-      final String progressive = externalService.generateIdentifier();
-      log.debug("Using progressive {}", progressive);
+    final String progressive = externalService.generateIdentifier();
+    log.debug("Using progressive {}", progressive);
 
-      // track resource name
-      for (MultipartFile file: files) {
-        Resource resource = new Resource();
-        String fileName = file.getOriginalFilename();
+    // track resource name
+    for (MultipartFile file: files) {
+      Resource resource = new Resource();
+      String fileName = file.getOriginalFilename();
 
-        resource.setKey(fileName);
-        resource.setUrl(fileService.getFilePublicUrlNoCheck(fileName));
-        resource.setSize(file.getSize());
-        resources.add(resource);
-        log.info("adding resource {} (size: {}) to case metadata", file.getOriginalFilename(), file.getSize());
-        // upload resource
-        fileService.fileUpload(file, new HashMap<>());
-      }
-      data.setResources(resources);
-      process.setMetadata(data);
-      process.setCreated(LocalDateTime.now());
-      process.setIdentifier(progressive);
-      process.setState(State.CREATED);
-      process.setPid(2677L); // FIXME
-      // persist
-      saveProcess(process);
-      // TODO start the process and change state
-    } catch (Throwable t) {
-      log.error("Error persisting case", t.getLocalizedMessage());
+      resource.setKey(fileName);
+      resource.setUrl(fileService.getFilePublicUrlNoCheck(fileName));
+      resource.setSize(file.getSize());
+      resources.add(resource);
+      log.info("adding resource {} (size: {}) to case metadata", file.getOriginalFilename(), file.getSize());
+      // upload resource
+      fileService.fileUpload(file, new HashMap<>());
     }
+    data.setResources(resources);
+    process.setMetadata(data);
+    process.setCreated(LocalDateTime.now());
+    process.setIdentifier(progressive);
+    process.setState(State.CREATED);
+    process.setPid(2677L); // FIXME
+    process.setName(name);
+    // persist
+    saveProcess(process);
+    // TODO start the process and change state
     return process;
   }
 
@@ -107,39 +115,34 @@ public class CaseServiceImpl implements CaseService {
   public boolean destroyProcess(Long id) {
     boolean deleted = true;
 
-    try {
-        Optional<Process> process = getProcess(id);
-        if (process.isPresent()) {
-          // delete the resources
-          deleted = deleteProcessResources(process.get());
-          if (deleted) {
-              // delete from DB
-            deleteProcess(id);
-          } else {
-            log.error("Couldn't remove at least one resource from the storage service");
-            log.error("the process persisted {} won't be deleted and will be marked \"DELETED\"", id);
-            //  update state -> DELETED
-            updateState(id, State.DELETED);
-          }
-        }
-    } catch (Throwable t) {
-      log.error("Error deleting process from DB", t.getMessage());
-      t.printStackTrace();
+    Optional<Process> process = getProcess(id);
+    if (process.isPresent()) {
+      // delete the resources
+      deleted = deleteProcessResources(process.get());
+      if (deleted) {
+        // delete from DB
+        deleteProcess(id);
+      } else {
+        log.error("Couldn't remove at least one resource from the storage service");
+        log.error("the process persisted {} won't be deleted and will be marked \"DELETED\"", id);
+        //  update state -> DELETED
+        updateState(id, State.DELETED);
+      }
     }
     return deleted;
   }
 
   /**
    * Delete process resources from storage service
-   * @param process
-   * @return
+   * @param process the process object to delete
+   * @return true if the process was successfully deleted, false otherwise
    */
   private boolean deleteProcessResources(Process process) {
     final boolean[] deleted = {true};
     List<Resource> resources = process != null && process.getMetadata() != null && process.getMetadata().getResources() != null ? process.getMetadata().getResources() : null;
 
     if (resources != null && !resources.isEmpty()) {
-        resources.stream().forEach(r ->{
+        resources.forEach(r ->{
           boolean res = fileService.deleteFile(r.getKey());
 
           if (res) {
