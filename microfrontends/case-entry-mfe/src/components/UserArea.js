@@ -1,7 +1,14 @@
+import { useEffect } from 'react';
 import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function WelcomeArea() {
+function UserArea() {
+
+  useEffect(() => {
+    // fetch user
+    // fetch user case
+  });
+
   return (
     <div>
       <div className="mb-5">
@@ -18,7 +25,7 @@ function WelcomeArea() {
         </Container>
       </div>
       <div>
-        <div>
+        <div className="mb-4">
           <Stack direction="horizontal">
             <h3>La tua pratica</h3>
             <Link to="/case-entry" className="ms-auto">
@@ -26,9 +33,15 @@ function WelcomeArea() {
             </Link>
           </Stack>
         </div>
+        <div>
+          <h4>Compilazione dati autorizzazione e richiesta codice dispositivo</h4>
+          <p className="mb-1">Data Creazione: <b>21 Dicembre 2022</b></p>
+          <p>Stato: <b className="text-success">Approvata</b></p>
+          <Button>Vai alla tua pratica</Button>
+        </div>
       </div>
     </div>
   );
 }
 
-export default WelcomeArea;
+export default UserArea;
