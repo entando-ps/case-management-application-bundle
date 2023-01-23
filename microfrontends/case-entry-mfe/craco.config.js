@@ -18,6 +18,10 @@ module.exports = {
   
                   parent.appendChild(element);
                 },
+                styleTagTransform: function transformCSS(css, style) {
+                  // makes root styles (i.e. Bootstrap CSS variables) apply to shadow DOM host
+                  style.innerHTML = css.replace(':root', ':host,:root');
+                }
             }
         }
 
