@@ -1,10 +1,10 @@
-code: cdp_admin
+code: cdp_register
 parentCode: homepage
 titles:
-  en: CDP - POC admin
-  it: CDP - POC admin
-pageModel: cdppoc
-ownerGroup: cdp_admin
+  en: CDP - POC registration
+  it: CDP - POC registration
+pageModel: cdppoc_login
+ownerGroup: free
 joinGroups: []
 displayedInMenu: true
 seo: false
@@ -20,7 +20,7 @@ widgets:
   - code: cdp_login_kc
     config: null
     pos: 2
-  - code: aaa_1
+  - code: cdp_login_2steps
     config: null
     pos: 3
   - code: cdp_footer_link

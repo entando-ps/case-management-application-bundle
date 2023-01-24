@@ -23,6 +23,9 @@ widgets:
   - code: aaa_2
     config: null
     pos: 3
+  - code: cdp_footer_link
+    config: null
+    pos: 11
   - code: cdp_footer_social
     config: null
     pos: 12

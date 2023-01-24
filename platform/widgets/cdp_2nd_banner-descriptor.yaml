@@ -12,7 +12,12 @@ customUi: >
                   <p class="lead">L'Avviso Pubblico con risorse PNRR per la protezione e la valorizzazione dell’architettura e del paesaggio rurale è finalizzato a preservare e valorizzare i paesaggi rurali e storici, attraverso la tutela dei beni della cultura materiale e immateriale, e promuovere iniziative e attività legate alla fruizione turistico-culturale sostenibile, dando valore alle tradizioni e alla cultura locale.
                   </p>
                   <p class="sub">Per inviare la tua domanda accedi all’ Area riservata e compila l’apposito form</p>
-                  <a class="btn btn-success" href="#">Area riservata</a>
+                  <#if (Session.currentUser.username != "guest") >
+                  <a class="btn btn-success" href="#">Compila il campo</a>
+                  <#else>
+                  <@wp.currentPage param="code" var="currentPageVar" />
+                  <a class="btn btn-success" href="<@wp.info key="systemParam" paramName="applicationBaseURL"/>do/login.action?redirectTo=<@wp.url page="${currentPageVar}" />">Area riservata</a>
+                  </#if>
               </div>
               <div class="col-md-6  align-self-center">
                   <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/image 1.jpg" />

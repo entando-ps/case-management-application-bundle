@@ -23,7 +23,7 @@ customUi: |
   <a class="retrieve-password" href="">Recupera Password</a>
   </div>
   <div class="col-12">
-  <p>Se non sei registrato <a href="">clicca qui e Registrati</a></p>
+  <p>Se non sei registrato <a href="<@wp.url page="cdp_register" />">clicca qui e Registrati</a></p>
   </div>
   </div>
   </div>

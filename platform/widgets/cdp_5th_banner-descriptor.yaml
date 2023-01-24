@@ -25,7 +25,12 @@ customUi: >
                       </ul>
                   </div>
                   <p class="boldline">Per inviare la tua domanda accedi all’ Area riservata e compila l’apposito form</p>
-                  <a class="btn btn-success" href="#">Area riservata</a>
+                  <#if (Session.currentUser.username != "guest") >
+                  <a class="btn btn-success" href="#">Compila il campo</a>
+                  <#else>
+                  <@wp.currentPage param="code" var="currentPageVar" />
+                  <a class="btn btn-success" href="<@wp.info key="systemParam" paramName="applicationBaseURL"/>do/login.action?redirectTo=<@wp.url page="${currentPageVar}" />">Area riservata</a>
+                  </#if>
               </div>
           </div>
       </div>

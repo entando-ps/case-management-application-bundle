@@ -11,11 +11,11 @@ customUi: >
         <button class="btn btn-cdp-navbar dropdown-toggle" type="button" id="cdpdrop" data-bs-toggle="dropdown" aria-expanded="false">
             <!--User Mario-->
             <@wp.ifauthorized groupName="cdp_user"> 
-            ${Session.currentUser} <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/mario.png" alt="login">
+            Mario <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/mario.png" alt="login">
             </@wp.ifauthorized>
             <!--Admin Paolo-->
             <@wp.ifauthorized groupName="cdp_admin"> 
-            ${Session.currentUser} <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/paolo.png" alt="login">
+            Paolo <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/paolo.png" alt="login">
             </@wp.ifauthorized>
   
         </button>

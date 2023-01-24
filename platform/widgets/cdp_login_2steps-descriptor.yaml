@@ -128,7 +128,7 @@ customUi: >
 
   <div class="back-home">
 
-  <button class="btn btn-success">Torna alla Home</button>
+  <a class="btn btn-success" href="<@wp.url page="cdp" />">Torna alla Home</a>
 
   </div>
 

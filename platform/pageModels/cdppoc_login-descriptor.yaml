@@ -131,7 +131,7 @@ template: |-
   <!-- Custom CDP page template styles -->
   <link rel="stylesheet" href="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/css/cdppoc.css" rel="stylesheet">
   <!-- End Custom CDP page template styles -->
-  <@wp.fragment code="keycloak_auth" escapeXml=false />
+  <@wp.fragment code="cdp_kc_auth-descriptor" escapeXml=false />
   </head>
   <body>
   <header>
@@ -205,7 +205,7 @@ template: |-
   }
   </script>
   <!-- bootstrap JS -->
-  <script nonce="<@wp.cspNonce />" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script nonce="<@wp.cspNonce />" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/js/bootstrap.bundle.min.js" ></script>
   <!-- End bootstrap  JS -->
   </body>
   </html>

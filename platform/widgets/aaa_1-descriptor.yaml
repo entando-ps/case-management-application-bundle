@@ -2,10 +2,8 @@ code: aaa_1
 titles:
   en: aaa_1
   it: aaa_1
-group: free
+group: cdp_user
 customUi: >
   <#assign wp=JspTaglibs["/aps-core"]>
-  <a class="navbar-brand" href="#">
-  <img class="bd-placeholder-img" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/cdp.svg"
-  width="100%" height="100%"  />
-  </a>
+    <h1>admin</h1>
+  

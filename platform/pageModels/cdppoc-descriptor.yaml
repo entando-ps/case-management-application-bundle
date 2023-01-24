@@ -132,7 +132,7 @@ template: |-
   <link rel="stylesheet" href="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/css/cdppoc.css" rel="stylesheet">
   <!-- End Custom CDP page template styles -->
   <link rel="stylesheet" href="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/css/cdppoc.css" rel="stylesheet">
-  <@wp.fragment code="keycloak_auth" escapeXml=false />
+  <@wp.fragment code="cdp_kc_auth-descriptor" escapeXml=false />
   </head>
   <body>
   <header>
@@ -167,7 +167,9 @@ template: |-
   <footer>
   <div class="footer-1st-level">
   <div class="footer-brand">
-  <img class="footer-logo" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/cdp.svg" alt="CDP"  />
+  <a href="<@wp.url page="cdp" />">
+   <img class="footer-logo" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/cdp.svg" alt="CDP"  />
+  </a>
   </div>
   <@wp.show frame=11 />
   
