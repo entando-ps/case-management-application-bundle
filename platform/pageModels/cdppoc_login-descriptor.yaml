@@ -1,5 +1,5 @@
 code: cdppoc_login
-description: Template per cdppoc login
+description: Template for cdppoc login
 configuration:
   frames:
     - pos: 0

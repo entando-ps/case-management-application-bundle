@@ -1,0 +1,31 @@
+code: cdp_login
+parentCode: homepage
+titles:
+  en: CDP - POC user entry
+  it: CDP - POC user entry
+pageModel: cdppoc
+ownerGroup: cdp_user
+joinGroups: []
+displayedInMenu: true
+seo: false
+charset: utf8
+status: published
+widgets:
+  - code: cdp_logo
+    config: null
+    pos: 0
+  - code: cdp_navbar_mock
+    config: null
+    pos: 1
+  - code: cdp_login_kc
+    config: null
+    pos: 2
+  - code: case-entry-mfe
+    config: null
+    pos: 3
+  - code: cdp_footer_social
+    config: null
+    pos: 12
+  - code: cdp_footer_link2
+    config: null
+    pos: 13
