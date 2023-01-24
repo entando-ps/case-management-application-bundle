@@ -1,0 +1,4 @@
+- code: cdp_user
+  name: CDP user
+- code: cdp_admin
+  name: CDP admin

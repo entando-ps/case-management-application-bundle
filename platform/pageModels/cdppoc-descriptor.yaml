@@ -1,0 +1,213 @@
+code: cdppoc
+description: Template per cdppoc app
+configuration:
+  frames:
+    - pos: 0
+      description: Logo
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 0
+        x2: 1
+        y2: 0
+    - pos: 1
+      description: Navigation bar
+      mainFrame: false
+      sketch:
+        x1: 2
+        y1: 0
+        x2: 8
+        y2: 0
+    - pos: 2
+      description: Login keyclock
+      mainFrame: false
+      sketch:
+        x1: 9
+        y1: 0
+        x2: 11
+        y2: 0
+    - pos: 3
+      description: banner-info 3
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 1
+        x2: 11
+        y2: 1
+    - pos: 4
+      description: Content Frame 4
+      mainFrame: true
+      sketch:
+        x1: 0
+        y1: 2
+        x2: 11
+        y2: 2
+    - pos: 5
+      description: Content Frame 5
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 3
+        x2: 11
+        y2: 3
+    - pos: 6
+      description: Content Frame 6
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 4
+        x2: 11
+        y2: 4
+    - pos: 7
+      description: Content Frame 7
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 5
+        x2: 11
+        y2: 5
+    - pos: 8
+      description: Content Frame 8
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 6
+        x2: 11
+        y2: 6
+    - pos: 9
+      description: CDP Generic user login 8
+      mainFrame: false
+      sketch:
+        x1: 0
+        y1: 7
+        x2: 5
+        y2: 7
+    - pos: 10
+      description: CDP Operator 10
+      mainFrame: false
+      sketch:
+        x1: 6
+        y1: 7
+        x2: 11
+        y2: 7
+    - pos: 11
+      description: Footer link main
+      mainFrame: false
+      sketch:
+        x1: 2
+        y1: 8
+        x2: 7
+        y2: 8
+    - pos: 12
+      description: Footer social
+      mainFrame: false
+      sketch:
+        x1: 8
+        y1: 8
+        x2: 11
+        y2: 8
+    - pos: 13
+      description: Footer links 2
+      mainFrame: false
+      sketch:
+        x1: 7
+        y1: 9
+        x2: 11
+        y2: 9
+template: |-
+  <#assign wp=JspTaglibs["/aps-core"]>
+  <@wp.info key="systemParam" paramName="applicationBaseURL" var="appUrl" />
+  <html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <title>
+  <@wp.currentPage param="title" />
+  </title>
+  <meta name="viewport" content="width=device-width,  user-scalable=no" />
+  <link rel="icon" href="${appUrl}favicon.png" type="image/png" />
+  <!-- bootstrap styles -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- End bootstrap styles-->
+  <!-- Custom CDP page template styles -->
+  <link rel="stylesheet" href="<@wp.resourceURL />static/cdppoc/css/cdppoc.css" rel="stylesheet">
+  <!-- End Custom CDP page template styles -->
+  <link rel="stylesheet" href="<@wp.resourceURL />static/cdppoc/css/cdppoc.css" rel="stylesheet">
+  <@wp.fragment code="keycloak_auth" escapeXml=false />
+  </head>
+  <body>
+  <header>
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <div class="container-fluid cdp-musthead">
+  <@wp.show frame=0 />
+  <@wp.show frame=1 />
+  <@wp.show frame=2 />
+  </div>
+  </nav>
+  </header>
+  <main>
+  <@wp.show frame=3 />
+  
+  <@wp.show frame=4 />
+  
+  <@wp.show frame=6 />
+  
+  <@wp.show frame=7 />
+  
+  <@wp.show frame=8 />
+  
+  <div class="cdp-container">
+  <div class="container marketing">
+  <div class="row featurette">
+  <@wp.show frame=9 />
+  <@wp.show frame=10 />
+  </div>
+  </div>
+  </div>
+  </main>
+  <footer>
+  <div class="footer-1st-level">
+  <div class="footer-brand">
+  <img class="footer-logo" src="<@wp.resourceURL />static/cdppoc/img/cdp.svg" alt="CDP"  />
+  </div>
+  <@wp.show frame=11 />
+  
+  <@wp.show frame=12 />
+  
+  </div>
+  <hr class="featurette-divider">
+  <@wp.show frame=13 />
+  
+  </footer>
+  <div id="btn-back-to-top2">
+  <button id="btn-back-to-top"  class="btn btn-success btn-lg">
+  </div>
+  <script nonce="<@wp.cspNonce />" >
+  //back to the top
+  let mybutton = document.getElementById("btn-back-to-top");
+  window.onscroll = function () {
+  scrollFunction();
+  };
+  
+  function scrollFunction() {
+  if (
+  document.body.scrollTop > 20 ||
+  document.documentElement.scrollTop > 20
+  ) {
+  mybutton.style.display = "block";
+  } else {
+  mybutton.style.display = "none";
+  }
+  }
+  mybutton.addEventListener("click", backToTop);
+  
+  function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+  }
+  </script>
+  <!-- bootstrap JS -->
+  <script nonce="<@wp.cspNonce />" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <!-- End bootstrap  JS -->
+  </body>
+  </html>
+

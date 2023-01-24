@@ -1,0 +1,27 @@
+code: cdp_footer_link
+titles:
+  en: cdp_footer_link
+  it: cdp_footer_link
+group: free
+customUi: >
+  <#assign wp=JspTaglibs["/aps-core"]> <ul class="footer-links navbar-nav
+  me-auto mb-md-0">
+      <li class="nav-item">
+          <a class="nav-link" href="/sitointernet/it/esplora_il_futuro.page" class="text-medium-main item-footer">I nostri progetti</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/sitointernet/it/contatti_sedi.page"class="text-medium-main item-footer">Contatti</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/sitointernet/it/opportunit_di_lavoro.page" class="text-medium-main item-footer">Lavora con noi</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/sitointernet/it/portale_acquisti.page" class="text-medium-main item-footer">Portale acquisti</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/sitointernet/it/aree_operative.page" class="text-medium-main item-footer">Aree Riservate</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/sitointernet/it/avvisi_ricerca.page" class="text-medium-main item-footer">Avvisi</a>
+      </li>
+  </ul>

@@ -1,0 +1,10 @@
+code: cdp_logo
+titles:
+  en: cdp_logo
+  it: cdp_logo
+customUi: >
+  <#assign wp=JspTaglibs["/aps-core"]>
+  <a class="navbar-brand" href="#">
+  <img class="bd-placeholder-img" src="<@wp.resourceURL />static/cdppoc/img/cdp.svg"
+  width="100%" height="100%"  />
+  </a>

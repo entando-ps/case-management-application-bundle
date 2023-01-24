@@ -1,0 +1,29 @@
+code: cdp_admin_login
+titles:
+  en: cdp_admin_login
+  it: cdp_admin_login
+customUi: |
+  <#assign wp=JspTaglibs["/aps-core"]>
+  <div class="col cdp-user">
+
+  <p class="generic">
+  Se sei un Operatore Cdp Accedi alla tua Area Riservatata
+  </p>
+  <div class="input-text">
+  <input type="text" class="form-control" placeholder="Nome">
+  </div>
+
+  <div class="col-12">
+  <div class="input-text">
+  <input type="text" class="form-control" placeholder="Password" >
+  </div>
+  </div>
+  <div class="login-actions">
+  <div class="col-12">
+  <button class="btn btn-success">Accedi</button>
+  </div>
+  <div class="col-12">
+  <a class="retrieve-password" href="">Recupera Password</a>
+  </div>
+  </div>
+  </div>

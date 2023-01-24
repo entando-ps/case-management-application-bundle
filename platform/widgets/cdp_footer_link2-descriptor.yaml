@@ -1,0 +1,19 @@
+code: cdp_footer_link2
+titles:
+  en: cdp_footer_link2
+  it: cdp_footer_link2
+group: free
+customUi: |
+  <#assign wp=JspTaglibs["/aps-core"]> <div class="footer-2st-level">
+      <div class="footer-copyright ">
+          <p>© 2019-2023 Cassa Depositi e Prestiti S.p.A. - Partita IVA 07756511007</p>
+      </div>
+      <div class="footer-links-2" align="right">
+          <a href="/sitointernet/it/esplora_il_futuro.page" class="text-medium-main item-footer">Disclaimer</a>
+          <a href="/sitointernet/it/contatti_sedi.page"class="text-medium-main item-footer">Disclaimer </a>
+          <a href="/sitointernet/it/opportunit_di_lavoro.page" class="text-medium-main item-footer"> Accessibilità </a>
+          <a href="/sitointernet/it/portale_acquisti.page" class="text-medium-main item-footer">Antiriciclaggio</a>
+          <a href="/sitointernet/it/aree_operative.page" class="text-medium-main item-footer">Privacy policy</a>
+          <a href="/sitointernet/it/avvisi_ricerca.page" class="text-medium-main item-footer">Trasparenza</a>
+      </div>
+  </div>

@@ -1,0 +1,27 @@
+code: cdp_3rd_banner
+titles:
+  en: cdp_3rd_banner
+  it: cdp_3rd_banner
+customUi: >
+  <#assign wp=JspTaglibs["/aps-core"]> 
+  <div class="cdp-container">
+  <div class="container marketing">
+  <div class="row featurette">
+  <div class="col-md-12">
+  <h3>A chi è rivolto</h3>
+  <p class="lead 2-column">
+  Possono presentare domanda le persone fisiche e i soggetti privati profit e
+  non profit, con titolarità del bene antecedente al 31.12.2020.
+  I proprietari, possessori o detentori del bene devono impegnarsi a proseguire
+  l’attività oggetto dell’intervento per una durata di almeno 5 anni dalla
+  conclusione dell’intervento.Gli immobili definiti come architetture rurali
+  devono essere provvisti della dichiarazione di interesse culturale con
+  corrispondente decreto ministeriale (ai sensi del D.lgs. n. 42/2004) oppure
+  devono essere stati costruiti da più di 70 anni ed essere censiti o
+  classificati dagli strumenti regionali e comunali di pianificazione
+  territoriale e urbanistica (ex art 1, comma 5).
+  </p>
+  </div>
+  </div>
+  </div>
+  </div>

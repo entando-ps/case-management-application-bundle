@@ -1,0 +1,313 @@
+code: cdp_login_2steps
+titles:
+  en: cdp_login_2steps
+  it: cdp_login_2steps
+group: free
+customUi: >
+  <#assign wp=JspTaglibs["/aps-core"]>
+
+  <div class="cdp-container-login">
+
+  <div class="container-login">
+
+  <div class="card">
+
+  <div class="main active">
+
+  <div class="top-div">
+
+  <div class="msg-img">
+
+  <img class="bd-placeholder-img" src="<@wp.resourceURL />static/cdppoc/img/cdp.svg"
+  width="100%" height="100%"  />
+
+  <p>L’iscrizione all’Area Riservata Imprese è subordinata alla presenza di
+  operazioni in essere e/o in corso di valutazione con CDP.</p>
+
+  <p> Ti ricordiamo che tutti i campi sono obbligatori per procedere con la
+  registrazione.</p>
+
+  </div>
+
+
+  <p class="insert-data">Inserisci i tuoi dati per registrarti</p>
+
+  </div>
+
+  <div class="row">
+
+  <div class="col">
+
+  <div class="input-text">
+
+  <input type="text" class="form-control" placeholder="Nome" require
+  id="f_name">
+
+  <input type="text" class="form-control" placeholder="Cognome" id="f_sname"
+  require>
+
+  <input type="text" class="form-control" placeholder="Paese" >
+
+  <input type="text" class="form-control" placeholder="Comune" >
+
+  </div>
+
+  </div>
+
+  <div class="col">
+
+  <div class="input-text">
+
+  <input type="text" class="form-control" placeholder="Codice fiscale" >
+
+  <input type="text" class="form-control" placeholder="Email" >
+
+  <input type="text" class="form-control" placeholder="Telefono" >
+
+  <input type="text" class="form-control" placeholder="Azienda" >
+
+  </div>
+
+  </div>
+
+  </div>
+
+  <div class="row">
+
+  <div class="col">
+
+  <div class="submit-button">
+
+  <button class="btn btn-success submit-btn">Avanti</button>
+
+  </div>
+
+  <div class="sign-in">
+
+  <p>Per qualsiasi informazione o problemi con l’accesso puoi contattarci al
+  seguente indirizzo: <a href="#">infoimprese@cdp.it</a></p>
+
+  </div>
+
+  </div>
+
+  </div>
+  </div>
+  <div class="main main-ok">
+
+  <div class="top-div">
+
+  <div class="msg-img">
+
+  <img class="bd-placeholder-img" src="<@wp.resourceURL />static/cdppoc/img/cdp.svg"
+  alt="cdp logo"/>
+
+  </div>
+
+  <p class="insert-data">Grazie per esserti registrato <span id="s_name"></span>
+  <span id="s_sname"></span>, </br> controlla il tuo indirizzo mail e clicca sul
+  link presente per verificare il tuo account</p>
+
+  </div>
+
+  <div class="checkmark">
+
+  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+
+  <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+
+  <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+
+  </svg>
+
+  </div>
+
+  <div class="row">
+
+  <div class="col">
+
+  <div class="back-home">
+
+  <button class="btn btn-success">Torna alla Home</button>
+
+  </div>
+
+  <div class="sign-in">
+
+  <p>Per qualsiasi informazione o problemi con l’accesso puoi contattarci al
+  seguente indirizzo: <a href="#">infoimprese@cdp.it</a></p>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  <script nonce="<@wp.cspNonce />" >
+
+  var next_click = document.querySelectorAll(".next-btn");
+
+  var previous_click = document.querySelectorAll(".previous-btn");
+
+  var submit_click = document.querySelector(".submit-btn");
+
+  var main_click = document.querySelectorAll(".main");
+
+  let forumnum = 0;
+
+  next_click.forEach(function (btn) {
+
+  btn.addEventListener('click', function () {
+
+  if (!validate_form()) {
+
+  return false;
+
+  }
+
+  forumnum++;
+
+  updateform();
+
+  });
+
+  });
+
+  previous_click.forEach(function (butn) {
+
+  butn.addEventListener('click', function () {
+
+  forumnum--;
+
+  updateform();
+
+  });
+
+  });
+
+  submit_click.addEventListener('click', function () {
+
+  if (!validate_form())
+
+  return false;
+
+  var f_name = document.getElementById("f_name");
+
+  var s_name = document.getElementById("s_name");
+
+  var f_sname = document.getElementById("f_sname");
+
+  var s_sname = document.getElementById("s_sname");
+
+  s_name.innerHTML = f_name.value;
+
+  s_sname.innerHTML = f_sname.value;
+
+  forumnum++;
+
+  updateform();
+
+  });
+
+
+  function updateform() {
+
+  main_click.forEach(function (forms) {
+
+  forms.classList.remove('active');
+
+  });
+
+  main_click[forumnum].classList.add('active');
+
+  }
+
+
+  function validate_form() {
+
+
+  var validate = true;
+
+  var inputs = document.querySelectorAll(".main.active input");
+
+  inputs.forEach(function (inpt) {
+
+  inpt.classList.remove('warning');
+
+  if (inpt.hasAttribute("require")) {
+
+  if (inpt.value.length == 0) {
+
+  validate = false;
+
+  inpt.classList.add('warning');
+
+  }
+
+  }
+
+  });
+
+
+  return validate;
+
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+  for (const el of document.querySelectorAll("[placeholder][data-slots]")) {
+
+  const pattern = el.getAttribute("placeholder"),
+
+  slots = new Set(el.dataset.slots || "_"),
+
+  prev = (j => Array.from(pattern, (c, i) => slots.has(c) ? j = i + 1 : j))(0),
+
+  first = [...pattern].findIndex(c => slots.has(c)),
+
+  accept = new RegExp(el.dataset.accept || "\\d", "g"),
+
+  clean = input => {
+
+  input = input.match(accept) || [];
+
+  return Array.from(pattern, c =>
+
+  input[0] === c || slots.has(c) ? input.shift() || c : c
+   );
+  },
+
+  format = () => {
+
+  const [i, j] = [el.selectionStart, el.selectionEnd].map(i => {
+
+  i = clean(el.value.slice(0, i)).findIndex(c => slots.has(c));
+
+  return i < 0 ? prev[prev.length - 1] : back ? prev[i - 1] || first : i;
+    });
+  el.value = clean(el.value).join``;
+
+  el.setSelectionRange(i, j);
+
+  back = false;
+    };
+  let back = false;
+
+  el.addEventListener("keydown", (e) => back = e.key === "Backspace");
+
+  el.addEventListener("input", format);
+
+  el.addEventListener("focus", format);
+
+  el.addEventListener("blur", () => el.value === pattern && (el.value = ""));
+    }
+    });
+  </script>

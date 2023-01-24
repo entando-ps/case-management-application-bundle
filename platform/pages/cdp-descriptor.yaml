@@ -1,0 +1,49 @@
+code: cdp
+parentCode: homepage
+titles:
+  en: CDP - POC Homepage
+  it: CDP - POC Homepage
+pageModel: cdppoc
+ownerGroup: free
+joinGroups: []
+displayedInMenu: true
+seo: false
+charset: utf8
+status: published
+widgets:
+  - code: cdp_logo
+    config: null
+    pos: 0
+  - code: cdp_navbar_mock
+    config: null
+    pos: 1
+  - code: cdp_login_kc
+    config: null
+    pos: 2
+  - code: cdp_banner_main
+    config: null
+    pos: 3
+  - code: cdp_2nd_banner
+    config: null
+    pos: 4
+  - code: cdp_3rd_banner
+    config: null
+    pos: 5
+  - code: cdp_4th_banner
+    config: null
+    pos: 6
+  - code: cdp_5th_banner
+    config: null
+    pos: 7
+  - code: cdp_6th_banner
+    config: null
+    pos: 8
+  - code: cdp_footer_link
+    config: null
+    pos: 11
+  - code: cdp_footer_social
+    config: null
+    pos: 12
+  - code: cdp_footer_link2
+    config: null
+    pos: 13

@@ -1,0 +1,28 @@
+code: cdp_users_login
+titles:
+  en: cdp_users_login
+  it: cdp_users_login
+customUi: |
+  <#assign wp=JspTaglibs["/aps-core"]>
+  <div class="col cdp-user">
+  <p class="generic">
+  Se sei un Utente Privato e sei già registrato accedi alla tua Area Riservata
+  </p>
+  <div class="input-text">
+  <input type="text" class="form-control" placeholder="Nome">
+  </div>
+  <div class="input-text">
+  <input type="text" class="form-control" placeholder="Password" >
+  </div>
+  <div class="login-actions">
+  <div class="col-12">
+  <button class="btn btn-success">Accedi</button>
+  </div>
+  <div class="col-12">
+  <a class="retrieve-password" href="">Recupera Password</a>
+  </div>
+  <div class="col-12">
+  <p>Se non sei registrato <a href="">clicca qui e Registrati</a></p>
+  </div>
+  </div>
+  </div>
