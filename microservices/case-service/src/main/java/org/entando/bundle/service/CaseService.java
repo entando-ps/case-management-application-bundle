@@ -19,7 +19,7 @@ public interface CaseService {
 
   /**
    * Return all cases belonging to the given user. FULL information is returned
-   * @param name the name of the owner of the process
+   * @param name the name of the owner of the case
    * @return the list of cases
    */
   List<Case> getCasesByName(String name);
@@ -29,11 +29,11 @@ public interface CaseService {
    * @param aCase the object
    * @return the saved case
    */
-  Case saveProcess(Case aCase);
+  Case saveCase(Case aCase);
 
   /**
    * Return the desired case
-   * @param id process ID
+   * @param id case ID
    * @return the desired case
    */
   Optional<Case> getCase(Long id);
@@ -50,7 +50,7 @@ public interface CaseService {
    * Delete the case record from the database
    * @param id the case ID
    */
-  void deleteProcess(Long id);
+  void deleteCase(Long id);
 
   /**
    * Update the state of the desired case
@@ -72,7 +72,7 @@ public interface CaseService {
 
   /**
    * Delete the case attachments and then delete the record from the DB.
-   * If attachments are not deleted the process is kept with status DELETED, this allows
+   * If attachments are not deleted the case is kept with status DELETED, this allows
    * for sequent retry
    * @param id the case to delete
    * @return tru if everything ok, false otherwise

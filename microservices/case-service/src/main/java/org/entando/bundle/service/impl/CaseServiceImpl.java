@@ -50,7 +50,7 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public Case saveProcess(Case aCase) {
+  public Case saveCase(Case aCase) {
     return caseRepository.save(aCase);
   }
 
@@ -65,7 +65,7 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public void deleteProcess(Long id) {
+  public void deleteCase(Long id) {
     caseRepository.deleteById(id);
   }
 
@@ -105,7 +105,7 @@ public class CaseServiceImpl implements CaseService {
     aCase.setPid(2677L); // FIXME
     aCase.setOwnerId(name);
     // persist
-    saveProcess(aCase);
+    saveCase(aCase);
     // TODO start the related process and change state
     return aCase;
   }
@@ -115,17 +115,16 @@ public class CaseServiceImpl implements CaseService {
   public boolean destroyCase(Long id) {
     boolean deleted = true;
 
-    Optional<Case> process = getCase(id);
-    if (process.isPresent()) {
+    Optional<Case> caseOptional = getCase(id);
+    if (caseOptional.isPresent()) {
       // delete the resources
-      deleted = deleteProcessResources(process.get());
+      deleted = deleteCaseResources(caseOptional.get());
       if (deleted) {
         // delete from DB
-        deleteProcess(id);
+        deleteCase(id);
       } else {
         log.error("Couldn't remove at least one resource from the storage service");
-        log.error("the process persisted {} won't be deleted and will be marked \"DELETED\"", id);
-        //  update state -> DELETED
+        log.error("the case persisted {} won't be deleted and will be marked \"DELETED\"", id);
         updateState(id, State.DELETED);
       }
     }
@@ -137,7 +136,7 @@ public class CaseServiceImpl implements CaseService {
    * @param aCase the aCase object to delete
    * @return true if the aCase was successfully deleted, false otherwise
    */
-  private boolean deleteProcessResources(Case aCase) {
+  private boolean deleteCaseResources(Case aCase) {
     final boolean[] deleted = {true};
     List<Resource> resources = aCase != null && aCase.getMetadata() != null && aCase.getMetadata().getResources() != null ? aCase.getMetadata().getResources() : null;
 
