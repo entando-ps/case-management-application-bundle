@@ -5,13 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import CaseEntryFormSubjectSection from './CaseEntryFormSubjectSection';
 import CaseEntryFormSubscriberSection from './CaseEntryFormSubscriberSection';
 import CaseEntryFormUploadSection from './CaseEntryFormUploadSection';
+import { postCase } from '../api/case';
 
 function CaseEntryForm() {
   const formMethods = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = data => {
+  const handleSubmit = async data => {
     console.log(data);
+    
+    try {
+      const newCase = await postCase(data, config, token);
+    } catch (error) {
+      console.error(error);
+    }
+
     navigate('/case-entry-success');
   };
 

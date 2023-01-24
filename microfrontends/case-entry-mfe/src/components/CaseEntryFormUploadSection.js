@@ -8,9 +8,9 @@ function CaseEntryFormUploadSection() {
     <div>
       <h4 className="mb-4">Caricamento Documenti</h4>
       <Stack direction="horizontal">
-        <small>Documento 1</small>
-        <input id="document1" type="file" style={{ display: 'none' }} {...register('document1')} />
-        <label htmlFor="document1" className="ms-auto btn btn-primary">Carica</label>
+        <small>Documento</small>
+        <input id="document" type="file" style={{ display: 'none' }} {...register('document')} />
+        <label htmlFor="document" className="ms-auto btn btn-primary">Carica</label>
       </Stack>
     </div>
   );

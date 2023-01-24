@@ -5,7 +5,7 @@ import CaseEntryForm from './components/CaseEntryForm';
 import CaseEntrySuccess from './components/CaseEntrySuccess';
 import UserArea from './components/UserArea';
 
-function App() {
+function App({ config }) {
   return (
     <Routes>
       <Route path="/" element={<UserArea />} />

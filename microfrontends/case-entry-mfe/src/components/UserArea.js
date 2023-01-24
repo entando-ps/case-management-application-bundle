@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { useCases } from '../hooks/useCases';
+
 function UserArea() {
+  const { isLoading, cases } = useCases();
 
   useEffect(() => {
-    // fetch user
-    // fetch user case
+    // fetch user/get user data from keycloak
   });
 
   return (
