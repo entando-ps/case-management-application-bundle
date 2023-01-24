@@ -1,7 +1,7 @@
 package org.entando.bundle.service;
 
 import org.entando.bundle.domain.CaseMetadata;
-import org.entando.bundle.entity.Process;
+import org.entando.bundle.entity.Case;
 import org.entando.bundle.entity.enumeration.State;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,71 +12,71 @@ import java.util.Optional;
 public interface CaseService {
 
   /**
-   * Return all processes FULL information
-   * @return the list of the processes
+   * Return all cases FULL information
+   * @return the list of cases
    */
-  List<Process> getAllProcesses();
+  List<Case> getAllCases();
 
   /**
-   * Return all processes belonging to the given user. FULL information is returned
+   * Return all cases belonging to the given user. FULL information is returned
    * @param name the name of the owner of the process
-   * @return the list of the processes
+   * @return the list of cases
    */
-  List<Process> getProcessesByName(String name);
+  List<Case> getCasesByName(String name);
 
   /**
-   * Persist a complete process object in the database
-   * @param process the object
-   * @return the saved process
+   * Persist a complete case object in the database
+   * @param aCase the object
+   * @return the saved case
    */
-  Process saveProcess(Process process);
+  Case saveProcess(Case aCase);
 
   /**
-   * Return the desired process
+   * Return the desired case
    * @param id process ID
-   * @return the desired process
+   * @return the desired case
    */
-  Optional<Process> getProcess(Long id);
+  Optional<Case> getCase(Long id);
 
   /**
-   * Return the desired process making sure that belongs to the given user
-   * @param id the process id
+   * Return the desired case making sure that it belongs to the given user
+   * @param id the case id
    * @param name the name of the owner
-   * @return the process
+   * @return the case
    */
-  Optional<Process> getProcessByIdAndOwner(Long id, String name);
+  Optional<Case> getCaseByIdAndOwner(Long id, String name);
 
   /**
-   * Delete the process record from the database
-   * @param id the process ID
+   * Delete the case record from the database
+   * @param id the case ID
    */
   void deleteProcess(Long id);
 
   /**
-   * Update the state of the desired process
-   * @param id the process ID
+   * Update the state of the desired case
+   * @param id the case ID
    * @param state the new state
    */
   @Transactional
   void updateState(Long id, State state);
 
   /**
-   * Create a process starting from the metadata and attachment information and persist it in the database
+   * Create a case starting from the metadata and attachment information and persist it in the database
    *
    * @param files the attachment (multipart)
-   * @param data  the metadata of the process
+   * @param data  the metadata of the case
    * @param name the principal name of the user making the request
-   * @return the saved process
+   * @return the saved case
    */
-  Process createProcess(MultipartFile[] files, CaseMetadata data, String name);
+  Case createCase(MultipartFile[] files, CaseMetadata data, String name);
 
   /**
-   * Delete the process attachments and then delete the record from the DB.
-   * If attachments are not deleted the process is kept with status DELETED, this allow
+   * Delete the case attachments and then delete the record from the DB.
+   * If attachments are not deleted the process is kept with status DELETED, this allows
    * for sequent retry
-   * @param id the process to delete
+   * @param id the case to delete
    * @return tru if everything ok, false otherwise
    */
-  boolean destroyProcess(Long id);
+  boolean destroyCase(Long id);
 
 }

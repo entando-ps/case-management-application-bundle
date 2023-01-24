@@ -2,11 +2,11 @@ package org.entando.bundle.service.impl;
 
 import org.entando.bundle.domain.CaseMetadata;
 import org.entando.bundle.domain.Resource;
-import org.entando.bundle.entity.Process;
+import org.entando.bundle.entity.Case;
 import org.entando.bundle.entity.enumeration.State;
 import org.entando.bundle.repository.CaseRepository;
 import org.entando.bundle.service.CaseService;
-import org.entando.bundle.service.ExternalService;
+import org.entando.bundle.service.CaseIdentityService;
 import org.entando.bundle.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,41 +27,41 @@ public class CaseServiceImpl implements CaseService {
 
   private Logger log = LoggerFactory.getLogger(CaseServiceImpl.class);
 
-  private final ExternalService externalService;
+  private final CaseIdentityService caseIdentityService;
 
   private final FileService fileService;
 
   @Autowired
   private CaseRepository caseRepository;
 
-  public CaseServiceImpl(ExternalService externalService, FileService fileService) {
-    this.externalService = externalService;
+  public CaseServiceImpl(CaseIdentityService caseIdentityService, FileService fileService) {
+    this.caseIdentityService = caseIdentityService;
     this.fileService = fileService;
   }
 
   @Override
-  public List<Process> getAllProcesses() {
+  public List<Case> getAllCases() {
     return caseRepository.findAll();
   }
 
   @Override
-  public List<Process> getProcessesByName(String name) {
-    return caseRepository.findByNameIs(name);
+  public List<Case> getCasesByName(String name) {
+    return caseRepository.findByOwnerId(name);
   }
 
   @Override
-  public Process saveProcess(Process process) {
-    return caseRepository.save(process);
+  public Case saveProcess(Case aCase) {
+    return caseRepository.save(aCase);
   }
 
   @Override
-  public Optional<Process> getProcess(Long id) {
+  public Optional<Case> getCase(Long id) {
     return caseRepository.findById(id);
   }
 
   @Override
-  public Optional<Process> getProcessByIdAndOwner(Long id, String name) {
-    return caseRepository.findByIdAndNameIs(id,name);
+  public Optional<Case> getCaseByIdAndOwner(Long id, String name) {
+    return caseRepository.findByIdAndOwnerIdIs(id,name);
   }
 
   @Override
@@ -77,11 +77,11 @@ public class CaseServiceImpl implements CaseService {
 
   @Override
   @Transactional
-  public Process createProcess(MultipartFile[] files, CaseMetadata data, String name) {
+  public Case createCase(MultipartFile[] files, CaseMetadata data, String name) {
     List<Resource> resources = new ArrayList<>();
-    Process process = new Process();
+    Case aCase = new Case();
 
-    final String progressive = externalService.generateIdentifier();
+    final String progressive = caseIdentityService.generateIdentifier();
     log.debug("Using progressive {}", progressive);
 
     // track resource name
@@ -98,24 +98,24 @@ public class CaseServiceImpl implements CaseService {
       fileService.fileUpload(file, new HashMap<>());
     }
     data.setResources(resources);
-    process.setMetadata(data);
-    process.setCreated(LocalDateTime.now());
-    process.setIdentifier(progressive);
-    process.setState(State.CREATED);
-    process.setPid(2677L); // FIXME
-    process.setName(name);
+    aCase.setMetadata(data);
+    aCase.setCreated(LocalDateTime.now());
+    aCase.setIdentifier(progressive);
+    aCase.setState(State.CREATED);
+    aCase.setPid(2677L); // FIXME
+    aCase.setOwnerId(name);
     // persist
-    saveProcess(process);
-    // TODO start the process and change state
-    return process;
+    saveProcess(aCase);
+    // TODO start the related process and change state
+    return aCase;
   }
 
   @Override
   @Transactional
-  public boolean destroyProcess(Long id) {
+  public boolean destroyCase(Long id) {
     boolean deleted = true;
 
-    Optional<Process> process = getProcess(id);
+    Optional<Case> process = getCase(id);
     if (process.isPresent()) {
       // delete the resources
       deleted = deleteProcessResources(process.get());
@@ -133,22 +133,22 @@ public class CaseServiceImpl implements CaseService {
   }
 
   /**
-   * Delete process resources from storage service
-   * @param process the process object to delete
-   * @return true if the process was successfully deleted, false otherwise
+   * Delete aCase resources from storage service
+   * @param aCase the aCase object to delete
+   * @return true if the aCase was successfully deleted, false otherwise
    */
-  private boolean deleteProcessResources(Process process) {
+  private boolean deleteProcessResources(Case aCase) {
     final boolean[] deleted = {true};
-    List<Resource> resources = process != null && process.getMetadata() != null && process.getMetadata().getResources() != null ? process.getMetadata().getResources() : null;
+    List<Resource> resources = aCase != null && aCase.getMetadata() != null && aCase.getMetadata().getResources() != null ? aCase.getMetadata().getResources() : null;
 
     if (resources != null && !resources.isEmpty()) {
         resources.forEach(r ->{
           boolean res = fileService.deleteFile(r.getKey());
 
           if (res) {
-            log.info("resource {} successfully removed from process {}", r.getKey(), process.getId());
+            log.info("resource {} successfully removed from aCase {}", r.getKey(), aCase.getId());
           } else {
-            log.warn("could not remove resource {} from process {}", r.getKey(), process.getId());
+            log.warn("could not remove resource {} from aCase {}", r.getKey(), aCase.getId());
           }
           deleted[0] = deleted[0] && res;
         });

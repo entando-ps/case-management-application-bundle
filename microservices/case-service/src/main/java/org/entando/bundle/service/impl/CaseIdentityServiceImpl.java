@@ -1,18 +1,18 @@
 package org.entando.bundle.service.impl;
 
 import org.entando.bundle.repository.CaseRepository;
-import org.entando.bundle.service.ExternalService;
+import org.entando.bundle.service.CaseIdentityService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-public class ExternalServiceImpl implements ExternalService {
+public class CaseIdentityServiceImpl implements CaseIdentityService {
 
   private final CaseRepository caseRepository;
 
-  public ExternalServiceImpl(CaseRepository caseRepository) {
+  public CaseIdentityServiceImpl(CaseRepository caseRepository) {
     this.caseRepository = caseRepository;
   }
 

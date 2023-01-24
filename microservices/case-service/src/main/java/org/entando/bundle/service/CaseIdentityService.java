@@ -1,6 +1,6 @@
 package org.entando.bundle.service;
 
-public interface ExternalService {
+public interface CaseIdentityService {
 
   /**
    * Simulates an external service connection

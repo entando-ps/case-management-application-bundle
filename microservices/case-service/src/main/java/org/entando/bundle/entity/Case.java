@@ -17,9 +17,9 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Data
-@Entity(name = "processes")
+@Entity(name = "cases")
 @TypeDef(name = "json", typeClass = JsonType.class)
-public class Process {
+public class Case {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class Process {
   private String identifier;
 
   @Column(nullable = false, length = 40)
-  private String name;
+  private String ownerId;
 
   @Type(type = "json")
   @Column(columnDefinition = "json", nullable = false)
