@@ -73,7 +73,7 @@ public class CaseController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('case-management-admin','case-management-entry')")
-    public @ResponseBody Object getCase(Authentication authentication, Principal principal, @PathVariable Long id) {
+    public @ResponseBody ResponseEntity<Case> getCase(Authentication authentication, Principal principal, @PathVariable Long id) {
         try {
             Optional<Case> optionalCase;
 
@@ -84,10 +84,11 @@ public class CaseController {
                 log.debug("returning Case {} of the user {}", id, principal.getName());
                 optionalCase = caseService.getCaseByIdAndOwner(id, principal.getName());
             }
-            if (!optionalCase.isPresent()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            if (optionalCase.isPresent()) {
+                return ResponseEntity.ok(optionalCase.get());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
-            return optionalCase;
         } catch (Throwable t) {
             log.error("error getting a Cases", t);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error getting a Case", t);
@@ -115,7 +116,6 @@ public class CaseController {
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
     public @ResponseBody ResponseEntity deleteCase(@PathVariable Long id) {
-
 
         log.info("REST to delete the case ID ", id);
         try {
