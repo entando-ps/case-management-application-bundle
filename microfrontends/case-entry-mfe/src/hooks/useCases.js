@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useKeycloak } from '../auth/Keycloak';
-import { fetchCases } from '../api/case';
+import { getCases } from '../api/case';
 
 export function useCases(config) {
   const [isLoading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ export function useCases(config) {
         keycloak.login();
       } else {
         const request = async () => {
-          const cases = await fetchCases(config, keycloak.token);
+          const cases = await getCases(config, keycloak.token);
           
           setLoading(false);
           setCases(cases);

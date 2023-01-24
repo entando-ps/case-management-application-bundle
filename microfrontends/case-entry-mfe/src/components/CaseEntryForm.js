@@ -6,8 +6,10 @@ import CaseEntryFormSubjectSection from './CaseEntryFormSubjectSection';
 import CaseEntryFormSubscriberSection from './CaseEntryFormSubscriberSection';
 import CaseEntryFormUploadSection from './CaseEntryFormUploadSection';
 import { postCase } from '../api/case';
+import { useKeycloak } from '../auth/Keycloak';
 
-function CaseEntryForm() {
+function CaseEntryForm({ config }) {
+  const { token } = useKeycloak();
   const formMethods = useForm();
   const navigate = useNavigate();
 
@@ -16,6 +18,7 @@ function CaseEntryForm() {
     
     try {
       const newCase = await postCase(data, config, token);
+      console.log(newCase);
     } catch (error) {
       console.error(error);
     }

@@ -8,8 +8,8 @@ import UserArea from './components/UserArea';
 function App({ config }) {
   return (
     <Routes>
-      <Route path="/" element={<UserArea />} />
-      <Route path="/case-entry" element={<CaseEntryForm />} />
+      <Route path="/" element={<UserArea config={config} />} />
+      <Route path="/case-entry" element={<CaseEntryForm config={config} />} />
       <Route path="/case-entry-success" element={<CaseEntrySuccess />} />
     </Routes>
   );

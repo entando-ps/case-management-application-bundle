@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { useCases } from '../hooks/useCases';
 
-function UserArea() {
-  const { isLoading, cases } = useCases();
+function UserArea({ config }) {
+  const { isLoading, cases } = useCases(config);
 
   useEffect(() => {
     // fetch user/get user data from keycloak
