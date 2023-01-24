@@ -10,7 +10,7 @@ function CaseEntrySuccess() {
         <p>Di seguito il numero di pratica assegnato</p>
       </div>
       <Link to="/" className="text-decoration-none">
-        <big className="text-success fw-bold">123456723</big>
+        <big className="text-primary fw-bold">123456723</big>
       </Link>
     </div>
   );

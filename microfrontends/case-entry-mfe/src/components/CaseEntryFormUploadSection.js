@@ -1,4 +1,5 @@
 import { Stack } from 'react-bootstrap';
+import { ReactComponent as UploadIcon } from 'bootstrap-icons/icons/upload.svg';
 import { useFormContext } from 'react-hook-form';
 
 function CaseEntryFormUploadSection() {
@@ -10,7 +11,10 @@ function CaseEntryFormUploadSection() {
       <Stack direction="horizontal">
         <small>Documento</small>
         <input id="document" type="file" style={{ display: 'none' }} {...register('document')} />
-        <label htmlFor="document" className="ms-auto btn btn-primary">Carica</label>
+        <label htmlFor="document" className="ms-auto btn btn-light">
+          <UploadIcon className="text-primary align-middle me-2" />
+          <small>Carica</small>
+        </label>
       </Stack>
     </div>
   );

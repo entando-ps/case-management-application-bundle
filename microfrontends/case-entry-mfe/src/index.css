@@ -1,8 +1,36 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 :host {
   margin: 0;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #405464;
+  
+  /* Bootstrap overrides */
+  --bs-primary: #009640;
+  --bs-primary-rgb: 0,150,64;
+  --bs-light: #F3F5F7;
 }
 
-@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: var(--bs-primary);
+  --bs-btn-hover-border-color: var(--bs-primary);
+  --bs-btn-active-bg: var(--bs-primary);
+  --bs-btn-active-border-color: var(--bs-primary);
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+.btn-light {
+  --bs-btn-bg: var(--bs-light);
+  --bs-btn-border-color: var(--bs-light);
+  --bs-btn-disabled-bg: var(--bs-light);
+  --bs-btn-disabled-border-color: var(--bs-light);
+}
+
+.form-label {
+  color: var(--bs-dark);
+}
