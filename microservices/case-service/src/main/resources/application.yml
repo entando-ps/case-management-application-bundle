@@ -23,3 +23,10 @@ spring:
         registration:
           oidc:
             client-id: internal
+aws:
+  s3:
+    key: ${AWS_ACCESS_KEY_ID:my_access_key}
+    secret: ${AWS_SECRET_ACCESS_KEY:my_secret_access_key}
+    region: ${AWS_DEFAULT_REGION:eu-west-1}
+    bucket:
+      name: ${S3_BUCKET_NAME:entando-cdp-poc}
