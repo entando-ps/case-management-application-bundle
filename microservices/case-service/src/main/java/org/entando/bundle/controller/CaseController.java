@@ -115,16 +115,20 @@ public class CaseController {
 
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
-    public @ResponseBody boolean deleteCase(@PathVariable Long id) {
-        boolean process = false;
+    public @ResponseBody ResponseEntity deleteCase(@PathVariable Long id) {
+
 
         log.info("REST to delete the process ID ", id);
         try {
-            process = caseService.destroyProcess(id);
+            if (caseService.destroyProcess(id)) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                // logical deletion because some resource could not be deleted. Status = DELETED
+                return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+            }
         } catch (Throwable t) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error deleting process", t);
         }
-        return process;
     }
 
 
