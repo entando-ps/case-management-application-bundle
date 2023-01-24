@@ -1,4 +1,4 @@
-code: cdp_login
+code: cdp_user
 parentCode: homepage
 titles:
   en: CDP - POC user entry
@@ -20,7 +20,7 @@ widgets:
   - code: cdp_login_kc
     config: null
     pos: 2
-  - code: case-entry-mfe
+  - code: aaa_2
     config: null
     pos: 3
   - code: cdp_footer_social

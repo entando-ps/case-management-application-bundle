@@ -2,6 +2,7 @@ code: cdp_users_login
 titles:
   en: cdp_users_login
   it: cdp_users_login
+group: free
 customUi: |
   <#assign wp=JspTaglibs["/aps-core"]>
   <div class="col cdp-user">

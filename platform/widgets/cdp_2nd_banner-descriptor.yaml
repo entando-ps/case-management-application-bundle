@@ -2,7 +2,8 @@ code: cdp_2nd_banner
 titles:
   en: cdp_2nd_banner
   it: cdp_2nd_banner
-customUi: |
+group: free
+customUi: >
   <#assign wp=JspTaglibs["/aps-core"]>
   <div class="cdp-container-2col">
       <div class="container marketing">
@@ -14,7 +15,7 @@ customUi: |
                   <a class="btn btn-success" href="#">Area riservata</a>
               </div>
               <div class="col-md-6  align-self-center">
-                  <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<@wp.resourceURL />static/cdppoc/img/image 1.jpg" />
+                  <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/image 1.jpg" />
               </div>
           </div>
       </div>

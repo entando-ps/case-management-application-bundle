@@ -18,7 +18,7 @@ customUi: >
 
   <div class="msg-img">
 
-  <img class="bd-placeholder-img" src="<@wp.resourceURL />static/cdppoc/img/cdp.svg"
+  <img class="bd-placeholder-img" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/cdp.svg"
   width="100%" height="100%"  />
 
   <p>L’iscrizione all’Area Riservata Imprese è subordinata alla presenza di
@@ -99,7 +99,7 @@ customUi: >
 
   <div class="msg-img">
 
-  <img class="bd-placeholder-img" src="<@wp.resourceURL />static/cdppoc/img/cdp.svg"
+  <img class="bd-placeholder-img" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/cdp.svg"
   alt="cdp logo"/>
 
   </div>

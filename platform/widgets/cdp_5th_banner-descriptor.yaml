@@ -2,26 +2,31 @@ code: cdp_5th_banner
 titles:
   en: cdp_5th_banner
   it: cdp_5th_banner
-customUi: |
+group: free
+customUi: >
   <#assign wp=JspTaglibs["/aps-core"]>
   <div class="cdp-container-white">
-  <div class="container marketing">
-  <div class="row featurette">
-  <div class="col-md-12">
-  <h3>Come funziona</h3>
-
-  <div class="list">
-La dotazione prevista è pari a 590 milioni di euro a valere sul PNRR. Le risorse a fondo perduto vengono assegnate secondo una ripartizione di base regionale: >-
-  <ul> <li>fino al 80% delle spese ammissibili, nei limiti massimi di 150 mila
-  euro per soggetto ammissibile</li> <li>fino al 100% delle spese ammissibili,
-  nei limiti massimi di 150 mila euro per soggetto ammissibile, se il bene è
-  oggetto di dichiarazione di interesse culturale con corrispondente decreto
-  ministeriale ai sensi del D.lgs. n. 42/2004</li> </ul>
-'Gli interventi avranno come oggetto opere materiali, in particolare': >-
-  <ul> <li>Risanamento conservativo e recupero funzionale di elementi tipici
-  dell’architettura e del paesaggio rurale</li> <li>Interventi di manutenzione
-  del paesaggio rurale</li> <li>Allestimento di spazi da destinare a piccoli
-  servizi sociali, ambientali turistici (escluso ricettività)</li> </ul> </div>
-  <p class="boldline">Per inviare la tua domanda accedi all’ Area riservata e
-  compila l’apposito form</p> <a class="btn btn-success" href="#">Area
-  riservata</a> </div> </div> </div> </div>
+      <div class="container marketing">
+          <div class="row featurette">
+              <div class="col-md-12">
+                  <h3>Come funziona</h3>
+  
+                  <div class="list">
+                      La dotazione prevista è pari a 590 milioni di euro a valere sul PNRR. Le risorse a fondo perduto vengono assegnate secondo una ripartizione di base regionale:
+                      <ul>
+                          <li>fino al 80% delle spese ammissibili, nei limiti massimi di 150 mila euro per soggetto ammissibile</li>
+                          <li>fino al 100% delle spese ammissibili, nei limiti massimi di 150 mila euro per soggetto ammissibile, se il bene è oggetto di dichiarazione di interesse culturale con corrispondente decreto ministeriale ai sensi del D.lgs. n. 42/2004</li>
+                      </ul>
+                      Gli interventi avranno come oggetto opere materiali, in particolare:
+                      <ul>
+                          <li>Risanamento conservativo e recupero funzionale di elementi tipici dell’architettura e del paesaggio rurale</li>
+                          <li>Interventi di manutenzione del paesaggio rurale</li>
+                          <li>Allestimento di spazi da destinare a piccoli servizi sociali, ambientali turistici (escluso ricettività)</li>
+                      </ul>
+                  </div>
+                  <p class="boldline">Per inviare la tua domanda accedi all’ Area riservata e compila l’apposito form</p>
+                  <a class="btn btn-success" href="#">Area riservata</a>
+              </div>
+          </div>
+      </div>
+  </div>

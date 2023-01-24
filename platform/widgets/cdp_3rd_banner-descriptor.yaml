@@ -2,6 +2,7 @@ code: cdp_3rd_banner
 titles:
   en: cdp_3rd_banner
   it: cdp_3rd_banner
+group: free
 customUi: >
   <#assign wp=JspTaglibs["/aps-core"]> 
   <div class="cdp-container">

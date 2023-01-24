@@ -1,7 +1,7 @@
-code: cdp_logo
+code: aaa_1
 titles:
-  en: cdp_logo
-  it: cdp_logo
+  en: aaa_1
+  it: aaa_1
 group: free
 customUi: >
   <#assign wp=JspTaglibs["/aps-core"]>

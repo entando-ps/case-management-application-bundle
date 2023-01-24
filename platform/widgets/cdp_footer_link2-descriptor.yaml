@@ -3,7 +3,7 @@ titles:
   en: cdp_footer_link2
   it: cdp_footer_link2
 group: free
-customUi: |
+customUi: >
   <#assign wp=JspTaglibs["/aps-core"]> <div class="footer-2st-level">
       <div class="footer-copyright ">
           <p>© 2019-2023 Cassa Depositi e Prestiti S.p.A. - Partita IVA 07756511007</p>

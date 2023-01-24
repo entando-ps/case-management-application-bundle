@@ -1,7 +1,7 @@
-code: cdp-login-banner
+code: cdp_login_banner
 titles:
-  en: cdp-login-banner
-  it: cdp-login-banner
+  en: cdp_login_banner
+  it: cdp_login_banner
 group: free
 customUi: >
   <#assign wp=JspTaglibs["/aps-core"]> <div class="px-4 py-5 my-5 text-center

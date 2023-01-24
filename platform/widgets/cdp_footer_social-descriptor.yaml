@@ -3,12 +3,12 @@ titles:
   en: cdp_footer_social
   it: cdp_footer_social
 group: free
-customUi: |
+customUi: >
   <#assign wp=JspTaglibs["/aps-core"]>
   <div class="footer-icons" align="right" >
-  <a href="https://it-it.facebook.com/GruppoCdp/" alt="facebook" class="fa-social" target="_blank"><img src="<@wp.resourceURL />static/cdppoc/img/fb-icon_d0.png"></a>
-  <a href="https://twitter.com/gruppocdp" alt="twitter" class="fa-social" target="_blank"><img src="<@wp.resourceURL />static/cdppoc/img/tw-icon_d0.png"></a>
-  <a href="https://www.linkedin.com/company/cdp-cassa-depositi-e-prestiti/mycompany/" alt="linkedin" class="fa-social" target="_blank"><img src="<@wp.resourceURL />static/cdppoc/img/in-icon_d0.png"></a>
-  <a href="https://www.youtube.com/channel/UChVRDM88-O5TTHGmiRPhPBw" alt="youtube" class="fa-social" target="_blank"><img src="<@wp.resourceURL />static/cdppoc/img/yt-icon_d0.png"></a>
-  <a href="https://www.instagram.com/gruppo_cdp/" alt="instagram" class="fa-social" target="_blank"><img src="<@wp.resourceURL />static/cdppoc/img/inst-icon_d0.png"></a>
+  <a href="https://it-it.facebook.com/GruppoCdp/" alt="facebook" class="fa-social" target="_blank"><img src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/fb-icon_d0.png"></a>
+  <a href="https://twitter.com/gruppocdp" alt="twitter" class="fa-social" target="_blank"><img src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/tw-icon_d0.png"></a>
+  <a href="https://www.linkedin.com/company/cdp-cassa-depositi-e-prestiti/mycompany/" alt="linkedin" class="fa-social" target="_blank"><img src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/in-icon_d0.png"></a>
+  <a href="https://www.youtube.com/channel/UChVRDM88-O5TTHGmiRPhPBw" alt="youtube" class="fa-social" target="_blank"><img src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/yt-icon_d0.png"></a>
+  <a href="https://www.instagram.com/gruppo_cdp/" alt="instagram" class="fa-social" target="_blank"><img src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/inst-icon_d0.png"></a>
   </div>

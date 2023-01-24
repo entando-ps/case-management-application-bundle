@@ -23,6 +23,15 @@ widgets:
   - code: cdp-login-banner
     config: null
     pos: 3
+  - code: cdp_users_login
+    config: null
+    pos: 9
+  - code: cdp_admin_login
+    config: null
+    pos: 10
+  - code: cdp_footer_link
+    config: null
+    pos: 11
   - code: cdp_footer_social
     config: null
     pos: 12
