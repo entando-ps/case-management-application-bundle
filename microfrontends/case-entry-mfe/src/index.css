@@ -31,6 +31,11 @@
   --bs-btn-disabled-border-color: var(--bs-light);
 }
 
+.list-group {
+  --bs-list-group-border-color: #E9EBED;
+  --bs-list-group-color: #405464;
+}
+
 .form-label {
   color: var(--bs-dark);
 }

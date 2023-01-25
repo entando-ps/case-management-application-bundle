@@ -7,9 +7,7 @@ function CaseEntryFormSubjectSection() {
   return (
     <div>
       <Stack direction="horizontal" className="mb-4">
-        <h4>Dati del sottoscrittore dell’autorizzazione<br />
-          (legale rappresentante del Sogetto Proponente o suo delegato)
-        </h4>
+        <h4>Dati del soggetto autorizzato</h4>
         <small className="text-muted ms-auto">*Campi Obbligatori</small>
       </Stack>
       <Container className="p-0" fluid>

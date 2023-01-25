@@ -39,7 +39,9 @@ function UserArea({ config }) {
           <h4>Compilazione dati autorizzazione e richiesta codice dispositivo</h4>
           <p className="mb-1">Data Creazione: <b>21 Dicembre 2022</b></p>
           <p>Stato: <b className="text-primary">Approvata</b></p>
-          <Button>Vai alla tua pratica</Button>
+          <Link to="/case-view">
+            <Button>Vai alla tua pratica</Button>
+          </Link>
         </div>
       </div>
     </div>
