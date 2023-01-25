@@ -1,9 +1,0 @@
-code: aaa_1
-titles:
-  en: aaa_1
-  it: aaa_1
-group: cdp_user
-customUi: >
-  <#assign wp=JspTaglibs["/aps-core"]>
-    <h1>admin</h1>
-  

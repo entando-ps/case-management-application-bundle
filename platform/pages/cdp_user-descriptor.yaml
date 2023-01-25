@@ -20,7 +20,7 @@ widgets:
   - code: cdp_login_kc
     config: null
     pos: 2
-  - code: aaa_2
+  - code: cdp_mock_user
     config: null
     pos: 3
   - code: cdp_footer_link

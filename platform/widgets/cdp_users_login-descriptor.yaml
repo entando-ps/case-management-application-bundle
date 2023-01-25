@@ -17,7 +17,7 @@ customUi: |
   </div>
   <div class="login-actions">
   <div class="col-12">
-  <button class="btn btn-success">Accedi</button>
+      <a class="btn btn-success" href="<@wp.url page="cdp_user" />">Accedi</a>
   </div>
   <div class="col-12">
   <a class="retrieve-password" href="">Recupera Password</a>

@@ -3,68 +3,81 @@ titles:
   en: Legacy login with KC
   it: Legacy login with KC
 group: free
-customUi: >
+customUi: |
   <#assign wp=JspTaglibs["/aps-core"]>
-    <div class="d-flex align-self-center">
-    <div class="dropdown">
-        <#if (Session.currentUser.username != "guest") >
-        <button class="btn btn-cdp-navbar dropdown-toggle" type="button" id="cdpdrop" data-bs-toggle="dropdown" aria-expanded="false">
-            <!--User Mario-->
-            <@wp.ifauthorized groupName="cdp_user"> 
-            Mario <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/mario.png" alt="login">
-            </@wp.ifauthorized>
-            <!--Admin Paolo-->
-            <@wp.ifauthorized groupName="cdp_admin"> 
-            Paolo <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/paolo.png" alt="login">
-            </@wp.ifauthorized>
+  <div class="d-flex align-self-center">
+  <@wp.url  page="cdp_user" var="userUrlVar"/>
+  <@wp.url  page="cdp_admin" var="adminUrlVar"/>
+  <@wp.ifauthorized groupName="cdp_user"><#assign isUserVar=true /></@wp.ifauthorized>
+  <@wp.ifauthorized groupName="cdp_admin"><#assign isAdminVar=true /></@wp.ifauthorized>
   
-        </button>
+  <div class="dropdown">
+  <#if (Session.currentUser.username != "guest") >
+  <button class="btn btn-cdp-navbar dropdown-toggle" type="button" id="cdpdrop" data-bs-toggle="dropdown" aria-expanded="false">
+  <#if (isUserVar?? && isUserVar  && isAdminVar?? && isAdminVar)><img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/logo.png" alt="login">
+  <#elseif (isUserVar?? && isUserVar)> <@wp.currentUserProfileAttribute attributeName="fullname"  /> <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/mario.png" alt="login">
+  <#elseif (isAdminVar?? && isAdminVar)> <@wp.currentUserProfileAttribute attributeName="fullname"  /> <img class="cdp-face" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/paolo.png" alt="login">
+  </#if>
+  </button>
   
-        <#if (Session.currentUser.entandoUser) >
-        <ul class="dropdown-menu" aria-labelledby="cdpdrop">
-            <#if (!Session.currentUser.credentialsNotExpired) > 
-            <div class="alert alert-block">
-                <span><@wp.i18n key="USER_STATUS_EXPIRED_PASSWORD" />: <a href="<@wp.info key="systemParam" paramName="applicationBaseURL" />do/editPassword.action"><@wp.i18n key="USER_STATUS_EXPIRED_PASSWORD_CHANGE" /></a></span>
-            </div>
-            </#if>
-            </#if>
-            <@wp.ifauthorized permission="enterBackend">
-            <li>
-                <a class="dropdown-item" href="<@wp.info key="systemParam" paramName="applicationBaseURL" />do/main.action?request_locale=<@wp.info key="currentLang" />" class="btn"><@wp.i18n key="ADMINISTRATION" /></a>
-            </li>
-            </@wp.ifauthorized>
-            <li>
-                <a class="dropdown-item" href="<@wp.info key="systemParam" paramName="applicationBaseURL" />do/logout.action" >
-                <@wp.i18n key="LOGOUT" /> <img class="cdp-logout-img" src="<@wp.resourceURL />bundles/case-management-bundle-29795610/resources/cdppoc/img/box-arrow-right.png" alt="logout">
-                </a>
-            </li>
-            <@wp.pageWithWidget widgetTypeCode="userprofile_editCurrentUser" var="userprofileEditingPageVar" listResult=false />
-            <#if (userprofileEditingPageVar??) >
-            <li>
-                <a href="<@wp.url page="${userprofileEditingPageVar.code}" />" >
-                <@wp.i18n key="userprofile_CONFIGURATION" />
-                </a>
-            </li>
-            </#if>
-        </ul>
-    </div>
-    <#else>
-    <#if (accountExpired?? && accountExpired == true) >
-    <div class="alert alert-block alert-error">
-        <@wp.i18n key="USER_STATUS_EXPIRED" />
-    </div>
-    </#if>
-  
-    <#if (wrongAccountCredential?? && wrongAccountCredential == true) >
-    <div class="alert alert-block alert-error">
-        <@wp.i18n key="USER_STATUS_CREDENTIALS_INVALID" />
-    </div>
-    </#if>
-    <@wp.currentPage param="code" var="currentPageVar" />
-    <a href="<@wp.info key="systemParam" paramName="applicationBaseURL"/>do/login.action?redirectTo=<@wp.url page="${currentPageVar}" />" class="btn btn-success">
-    Area riservata
-   </a>
-   </#if>
-   </div>
+  <#if (Session.currentUser.entandoUser) >
+  <ul class="dropdown-menu" aria-labelledby="cdpdrop">
+  <#if (!Session.currentUser.credentialsNotExpired) >
+  <div class="alert alert-block">
+  <span><@wp.i18n key="USER_STATUS_EXPIRED_PASSWORD" />: <a href="<@wp.info key="systemParam" paramName="applicationBaseURL" />do/editPassword.action"><@wp.i18n key="USER_STATUS_EXPIRED_PASSWORD_CHANGE" /></a></span>
   </div>
+  </#if>
+  </#if>
+  <@wp.ifauthorized permission="enterBackend">
+  <li>
+  <a class="dropdown-item" href="<@wp.info key="systemParam" paramName="applicationBaseURL" />do/main.action?request_locale=<@wp.info key="currentLang" />" class="btn"><@wp.i18n key="ADMINISTRATION" /></a>
+  </li>
+  </@wp.ifauthorized>
+  <li>
+  <a class="dropdown-item" href="<@wp.url page="cdp_login" />" class="btn"><@wp.i18n key="CDP_RISERVATA" /></a>
+  </li>
   
+  <#if (isUserVar?? && isUserVar  && isAdminVar?? && isAdminVar)>
+  <li><a class="dropdown-item" href="<@wp.url page="cdp_user" />" ><@wp.i18n key="CDP_USER" /></a>
+  </li><li><a class="dropdown-item" href="<@wp.url page="cdp_user" />" ><@wp.i18n key="CDP_ADMIN" /></a></li>
+  <#elseif (isUserVar?? && isUserVar)>
+  <li><a class="dropdown-item" href="<@wp.url page="cdp_user" />" ><@wp.i18n key="CDP_USER" /></a></li>
+  <#elseif (isAdminVar?? && isAdminVar)>
+  <li><a class="dropdown-item" href="<@wp.url page="cdp_user" />" ><@wp.i18n key="CDP_USER" /></a></li>
+  <li><a class="dropdown-item" href="<@wp.url page="cdp_admin" />" ><@wp.i18n key="CDP_ADMIN" /></a></li>
+  </#if>
+  <li>
+  <a class="dropdown-item" href="<@wp.info key="systemParam" paramName="applicationBaseURL" />do/logout.action" >
+  <@wp.i18n key="LOGOUT" />
+  </a>
+  </li>
+  <@wp.pageWithWidget widgetTypeCode="userprofile_editCurrentUser" var="userprofileEditingPageVar" listResult=false />
+  <#if (userprofileEditingPageVar??) >
+  <li>
+  <a href="<@wp.url page="${userprofileEditingPageVar.code}" />" >
+  <@wp.i18n key="userprofile_CONFIGURATION" />
+  </a>
+  </li>
+  </#if>
+  </ul>
+  </div>
+  <#else>
+  <#if (accountExpired?? && accountExpired == true) >
+  <div class="alert alert-block alert-error">
+  <@wp.i18n key="USER_STATUS_EXPIRED" />
+  </div>
+  </#if>
+  
+  <#if (wrongAccountCredential?? && wrongAccountCredential == true) >
+  <div class="alert alert-block alert-error">
+  <@wp.i18n key="USER_STATUS_CREDENTIALS_INVALID" />
+  </div>
+  </#if>
+  <@wp.currentPage param="code" var="currentPageVar" />
+  <a href="<@wp.info key="systemParam" paramName="applicationBaseURL"/>do/login.action?redirectTo=<@wp.url page="${currentPageVar}" />" class="btn btn-success">
+  Area riservata
+  </a>
+  
+  </#if>
+  </div>
+  </div>

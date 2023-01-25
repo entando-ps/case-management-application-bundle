@@ -553,7 +553,8 @@ p.insert-data {
     align-self: center;
     text-align: center;
     margin-bottom:45px;
-    padding:0 15%;
+    padding: 0 22%;
+    min-height: 90px;
 }
 .login-actions {
     text-align:center;
@@ -561,6 +562,9 @@ p.insert-data {
 .login-actions .btn {
     width:200px;
     margin:20px 0;
+    color: #fff;
+    font-size: 16px;
+    padding: 0.72rem;
 }
 .login-actions a {
     font-family: 'Arial';
@@ -579,6 +583,7 @@ p.insert-data {
     font-size: 12.8px;
     line-height: 19px;
     margin:20px 0;
+    column-count: 1;
 }
 .login-banner {
     background-image: url(/entando-de-app/cmsresources/bundles/case-management-bundle-29795610/resources/cdppoc/img/reserved.png);
@@ -593,4 +598,17 @@ p.insert-data {
     align-items: center;
     color: #fff;
 }
- 
+.cdp-container-login {
+    margin: -7px;
+    padding: 0;
+}
+.user-form {
+    margin: 8% 10% 5%;
+}
+.manage-form {
+    margin: 8% 10% 5%;
+}
+.cdp-face {
+    border-radius: 31px;
+    height: 56px;
+}

@@ -2,10 +2,10 @@
   titles:
     en: CDP
     it: CDP
-- key: ADMINISTRATION
+- key: CDP_ADMINISTRATION
   titles:
-    en: Administration
-    it: Amministrazione
+    en: Entando administration
+    it: Amministrazione Entando
 - key: SIGN_IN
   titles:
     en: Sign in
@@ -14,3 +14,15 @@
   titles:
     en: Log in
     it: Accedi
+- key: CDP_USER
+  titles:
+    en: Form area
+    it: Area form
+- key: CDP_ADMIN
+  titles:
+    en: Form management
+    it: Gestione form
+- key: CDP_RISERVATA
+  titles:
+    en: Form management
+    it: Gestione form
