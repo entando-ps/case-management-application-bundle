@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static org.entando.bundle.BundleConstants.PROP_TMP_DIR;
 
+@Deprecated
 public class FileHelper {
 
   private static Logger log = LoggerFactory.getLogger(FileHelper.class);
@@ -17,9 +18,11 @@ public class FileHelper {
 
   /**
    * Build a path for the given file in the system temporary path
+   * @Deprecated
    * @param fileName the file to be placed in tmp
    * @return the desired path or null
    */
+  @Deprecated
   public static String getTmpPathForFile(String fileName) {
     String path = null;
     
@@ -33,9 +36,11 @@ public class FileHelper {
 
   /**
    * Build a path for the given file in the system temporary path
+   * @Deprecated
    * @param file the multipart file
    * @return the desired path or null
    */
+  @Deprecated
   public static String getTmpPathForFile(MultipartFile file) {
     String path = null;
 
@@ -49,9 +54,11 @@ public class FileHelper {
   
   /**
    * Write a multipart file to a temporary directory preserving the original name
+   * @Deprecated
    * @param file multipart file
    * @return the newly created File handle, null otherwise
    */
+  @Deprecated
   public static File toFile(MultipartFile file) {
     if (file != null) {
       try {
