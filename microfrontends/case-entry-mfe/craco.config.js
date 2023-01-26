@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     webpack: {
       plugins: {
@@ -37,10 +39,12 @@ module.exports = {
             library: {
                 type: 'umd',
                 name: 'build',
-            }
+            },
+            path: path.resolve(__dirname, 'build')
         };
         webpackConfig.entry = entry;
         webpackConfig.output = output;
+        paths.appBuild = output.path;
  
         return webpackConfig;
       },
