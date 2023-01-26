@@ -4,7 +4,42 @@
             "name": "case-service",
             "stack": "spring-boot",
             "healthCheckPath": "/api/health",
-            "dbms": "mysql"
+            "dbms": "mysql",
+            "roles": ["case-management-entry", "case-management-admin"],
+            "env" : [
+                {
+                    "name": "AWS_DEFAULT_REGION",
+                    "value": "eu-west-1"
+                },
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "secretKeyRef" : {
+                        "name" : "secret_id_with_a_password",
+                        "key" : "keyId"
+                    }
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "secretKeyRef" : {
+                        "name" : "secret_id_with_a_password",
+                        "key" : "password"
+                    }
+                },
+                {
+                    "name": "S3_BUCKET_NAME",
+                    "secretKeyRef" : {
+                        "name" : "secret_id_with_a_password",
+                        "key" : "bucketname"
+                    }
+                },
+                {
+                    "name" : "S3_BUCKET_URL",
+                    "secretKeyRef" : {
+                        "name" : "secret_id_with_a_password",
+                        "key" : "bucketurl"
+                    }
+                }
+            ]
         }
     ],
     "microfrontends": [
