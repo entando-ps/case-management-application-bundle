@@ -5,6 +5,7 @@ import org.entando.bundle.domain.Resource;
 import org.entando.bundle.entity.Case;
 import org.entando.bundle.entity.enumeration.State;
 import org.entando.bundle.repository.CaseRepository;
+import org.entando.bundle.service.CamundaService;
 import org.entando.bundle.service.CaseIdentityService;
 import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.FileService;
@@ -30,12 +31,15 @@ public class CaseServiceImpl implements CaseService {
 
   private final FileService fileService;
 
+  private final CamundaService bpmService;
+
   @Autowired
   private CaseRepository caseRepository;
 
-  public CaseServiceImpl(CaseIdentityService caseIdentityService, FileService fileService) {
+  public CaseServiceImpl(CaseIdentityService caseIdentityService, FileService fileService, CamundaService bpmService) {
     this.caseIdentityService = caseIdentityService;
     this.fileService = fileService;
+    this.bpmService = bpmService;
   }
 
   @Override
@@ -94,18 +98,23 @@ public class CaseServiceImpl implements CaseService {
       resources.add(resource);
       log.info("adding resource {} (size: {}) to case metadata", file.getOriginalFilename(), file.getSize());
       // upload resource
-      fileService.fileUpload(file, new HashMap<>());
+      if (fileService.fileUpload(file, new HashMap<>()) == null) {
+        throw new RuntimeException("Could not copy a file in the file repository");
+      }
     }
+    final String processId = bpmService.startProcess();
+    log.debug("Associating Process {} to the current case");
+
     data.setResources(resources);
     aCase.setMetadata(data);
     aCase.setCreated(LocalDateTime.now());
     aCase.setIdentifier(progressive);
-    aCase.setState(State.CREATED);
-    aCase.setPid(2677L); // FIXME
+    aCase.setState(State.VALID);
+    aCase.setProcessId(processId);
     aCase.setOwnerId(name);
     // persist
     saveCase(aCase);
-    // TODO start the related process and change state
+    log.info("Created case {} with process {}", aCase.getId(), aCase.getProcessId());
     return aCase;
   }
 
@@ -126,6 +135,8 @@ public class CaseServiceImpl implements CaseService {
         log.error("the case persisted {} won't be deleted and will be marked \"DELETED\"", id);
         updateState(id, State.DELETED);
       }
+      // delete associated process
+      bpmService.deleteProcess(caseOptional.get().getProcessId());
     }
     return deleted;
   }
@@ -154,10 +165,5 @@ public class CaseServiceImpl implements CaseService {
     return deleted[0];
   }
 
-  public void stopProcess() {
-  }
-
-  public void resumeProcess() {
-  }
 
 }

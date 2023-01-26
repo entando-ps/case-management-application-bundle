@@ -110,12 +110,13 @@
 			<version>5.16.0</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>2.4.15</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.codehaus.groovy</groupId>-->
+<!--			<artifactId>groovy-all</artifactId>-->
+<!--			<version>2.4.15</version>-->
+<!--		</dependency>-->
 		<!-- Camunda end -->
+		<!-- H2 for testing-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

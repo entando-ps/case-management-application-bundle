@@ -27,7 +27,7 @@ public class Case {
   private Long id;
 
   @Column(nullable = false)
-  private Long pid;
+  private String processId;
 
   @Column(name = "state", nullable = false)
   @Enumerated(EnumType.STRING)

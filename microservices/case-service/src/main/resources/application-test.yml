@@ -2,7 +2,7 @@ logging:
   level:
     ROOT: INFO
     org.hibernate.SQL: INFO
-    org.entando.bundle: INFO
+    org.entando.bundle: DEBUG
     org.camunda.bpm: INFO
 server:
   port: 8081
