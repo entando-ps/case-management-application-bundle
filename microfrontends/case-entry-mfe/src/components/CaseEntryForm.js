@@ -1,4 +1,4 @@
-import { Button, Form, Stack } from 'react-bootstrap';
+import { Button, Card, Form, Stack } from 'react-bootstrap';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,23 +24,35 @@ function CaseEntryForm({ config }) {
 
   return (
     <FormProvider {...formMethods}>
-      <div className="mb-5">
-        <h2>Compilazione dati autorizzazione e richiesta codice dispositivo</h2>
-        <p>Inserire di seguito i dati del sottoscrittore dell’autorizzazione e le informazioni del soggetto autorizzato</p>
-      </div>
+      <Card className="mb-5 ">
+        <Card.Body>
+          <h2>Compilazione dati autorizzazione e richiesta codice dispositivo</h2>
+          <p>Inserire di seguito i dati del sottoscrittore dell’autorizzazione e le informazioni del soggetto autorizzato</p>
+        </Card.Body>
+      </Card>
       <Form onSubmit={formMethods.handleSubmit(handleSubmit)}>
-        <div className="mb-4">
-          <CaseEntryFormSubscriberSection />
-        </div>
-        <div className="mb-4">
-          <CaseEntryFormAuthorizedSection />
-        </div>
-        <div className="mb-4">
-          <CaseEntryFormUploadSection />
-        </div>
-        <Stack direction="horizontal">
-          <Button type="submit" className="ms-auto">Invia</Button>
-        </Stack>
+        <Card className="mb-4">
+          <Card.Body>
+            <CaseEntryFormSubscriberSection />
+          </Card.Body>
+        </Card>
+        <Card className="mb-4">
+          <Card.Body>
+            <CaseEntryFormAuthorizedSection />
+          </Card.Body>
+        </Card>
+        <Card className="mb-4">
+          <Card.Body>
+            <CaseEntryFormUploadSection />
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Body>
+            <Stack direction="horizontal">
+              <Button type="submit" className="ms-auto px-5">Invia</Button>
+            </Stack>
+          </Card.Body>
+        </Card>
       </Form>
     </FormProvider>
   );

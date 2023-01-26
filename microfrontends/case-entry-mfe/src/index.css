@@ -31,11 +31,27 @@
   --bs-btn-disabled-border-color: var(--bs-light);
 }
 
+.card {
+  --bs-card-spacer-y: 1.5rem;
+  --bs-card-spacer-x: 1.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.075);
+  border: 0;
+}
+
 .list-group {
   --bs-list-group-border-color: #E9EBED;
   --bs-list-group-color: #405464;
+  --bs-list-group-item-padding-x: 0;
 }
 
 .form-label {
   color: var(--bs-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+hr {
+  border: 1px solid #B5C8E6;
 }
