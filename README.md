@@ -8,7 +8,6 @@ Before running make sure to have the following *environment variables* defined c
 - AWS_ACCESS_KEY_ID
 - AWS_SECRET_ACCESS_KEY
 - S3_BUCKET_NAME
-- S3_BUCKET_URL
 - AWS_DEFAULT_REGION (optional, the default `EU-WEST-1` will be used if not defined)
 
 *NOTE:* it's possible to avoid defining those variables by editing the configuration file `application.yml` and
@@ -21,8 +20,7 @@ aws:
     secret: ${AWS_SECRET_ACCESS_KEY:my_secret_access_key}
     region: ${AWS_DEFAULT_REGION:eu-west-1}
     bucket:
-      name: ${S3_BUCKET_NAME:entando-cdp-poc}
-      url: ${S3_BUCKET_URL:fancy_aws_url}
+      name: ${S3_BUCKET_NAME:my_development_bucket}
 ```
 
 to something similar to the following:  
@@ -35,7 +33,6 @@ aws:
     region: eu-west-1                          # this won't be overridden    
     bucket:
       name: ${S3_BUCKET_NAME:production-bucket-name}
-      url: ${S3_BUCKET_URL:https://bucket.url}
 ```
 
 *Warning!* Be sure to not push your `application.yml` credentials! 

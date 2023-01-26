@@ -27,6 +27,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.camunda.bpm</groupId>
+				<artifactId>camunda-bom</artifactId>
+				<version>${camunda.spring-boot.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -109,6 +116,10 @@
 			<version>2.4.15</version>
 		</dependency>
 		<!-- Camunda end -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope> </dependency>
 	</dependencies>
 	<build>
 	    <finalName>case-service</finalName>
