@@ -101,7 +101,11 @@ function CaseEntryFormSubscriberSection() {
           <Col md="6">
             <Form.Group className="mb-3" controlId="subscriber.delegation">
               <Form.Label>Delega</Form.Label>
-              <Form.Control type="text" {...register('subscriber.delegation')} />
+              <Form.Select {...register('subscriber.delegation')}>
+                <option value="" hidden></option>
+                <option value="TIPO_UNO">TIPO_UNO</option>
+                <option value="TIPO_DUE">TIPO_DUE</option>
+              </Form.Select>
             </Form.Group>
           </Col>
         </Row>
