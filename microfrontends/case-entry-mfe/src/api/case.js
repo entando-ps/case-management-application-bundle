@@ -19,12 +19,42 @@ export const getCases = async (config, token) => {
   }
 };
 
-export const postCase = async (data, config, token) => {
+export const getCase = async (id, config, token) => {
   const { api } = config.systemParams;
 
+  try {
+    const res = await fetch(`${api['case-api'].url}/api/cases/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      throw new Error('Impossibile recuperare il caso');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const postCase = async (data, config, token) => {
+  const { api } = config.systemParams;
+  const { documents, authorized, subscriber } = data;
+
   const formData = new FormData();
-  formData.append('metadata', '');
-  formData.append('attachments', '');
+  documents.forEach(document => {
+    formData.append('attachments', document?.[0]);
+  });
+  formData.append(
+    'case_metadata',
+    new Blob(
+      [JSON.stringify({ authorized, subscriber })],
+      { type: 'application/json' }
+    ),
+  );
   
   try {
     const res = await fetch(`${api['case-api'].url}/api/cases`, {

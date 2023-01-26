@@ -10,7 +10,7 @@ function App({ config }) {
   return (
     <Routes>
       <Route path="/" element={<UserArea config={config} />} />
-      <Route path="/case-view" element={<CaseView />} />
+      <Route path="/case/:id" element={<CaseView config={config} />} />
       <Route path="/case-entry" element={<CaseEntryForm config={config} />} />
       <Route path="/case-entry-success" element={<CaseEntrySuccess />} />
     </Routes>

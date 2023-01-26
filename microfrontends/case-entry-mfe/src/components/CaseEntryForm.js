@@ -2,7 +2,7 @@ import { Button, Form, Stack } from 'react-bootstrap';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import CaseEntryFormSubjectSection from './CaseEntryFormSubjectSection';
+import CaseEntryFormAuthorizedSection from './CaseEntryFormAuthorizedSection';
 import CaseEntryFormSubscriberSection from './CaseEntryFormSubscriberSection';
 import CaseEntryFormUploadSection from './CaseEntryFormUploadSection';
 import { postCase } from '../api/case';
@@ -14,16 +14,12 @@ function CaseEntryForm({ config }) {
   const navigate = useNavigate();
 
   const handleSubmit = async data => {
-    console.log(data);
-    
     try {
       const newCase = await postCase(data, config, token);
-      console.log(newCase);
+      navigate(`/case-entry-success?id=${newCase.identifier}`);
     } catch (error) {
       console.error(error);
     }
-
-    navigate('/case-entry-success');
   };
 
   return (
@@ -37,7 +33,7 @@ function CaseEntryForm({ config }) {
           <CaseEntryFormSubscriberSection />
         </div>
         <div className="mb-4">
-          <CaseEntryFormSubjectSection />
+          <CaseEntryFormAuthorizedSection />
         </div>
         <div className="mb-4">
           <CaseEntryFormUploadSection />

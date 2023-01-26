@@ -1,7 +1,7 @@
 import { Col, Container, Form, Row, Stack } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 
-function CaseEntryFormSubjectSection() {
+function CaseEntryFormAuthorizedSection() {
   const { register } = useFormContext();
 
   return (
@@ -13,79 +13,79 @@ function CaseEntryFormSubjectSection() {
       <Container className="p-0" fluid>
         <Row>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectFirstName">
+            <Form.Group className="mb-3" controlId="authorized.name">
               <Form.Label>Nome</Form.Label>
-              <Form.Control type="text" {...register('subjectFirstName')} />
+              <Form.Control type="text" {...register('authorized.name')} />
             </Form.Group>
           </Col>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectLastName">
+            <Form.Group className="mb-3" controlId="authorized.lastname">
               <Form.Label>Cognome</Form.Label>
-              <Form.Control type="text" {...register('subjectLastName')} />
+              <Form.Control type="text" {...register('authorized.lastname')} />
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectBirthdate">
+            <Form.Group className="mb-3" controlId="authorized.birthDate">
               <Form.Label>Data di nascita</Form.Label>
-              <Form.Control type="text" {...register('subjectBirthdate')} />
+              <Form.Control type="text" {...register('authorized.birthDate')} />
             </Form.Group>
           </Col>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectBirthCountry">
+            <Form.Group className="mb-3" controlId="authorized.birthCountry">
               <Form.Label>Paese di nascita</Form.Label>
-              <Form.Control type="text" {...register('subjectBirthCountry')} />
+              <Form.Control type="text" {...register('authorized.birthCountry')} />
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectBirthplace">
+            <Form.Group className="mb-3" controlId="authorized.birthCity">
               <Form.Label>Comune di nascita</Form.Label>
-              <Form.Control type="text" {...register('subjectBirthplace')} />
+              <Form.Control type="text" {...register('authorized.birthCity')} />
             </Form.Group>
           </Col>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectProvince">
+            <Form.Group className="mb-3" controlId="authorized.birthProvince">
               <Form.Label>Provincia</Form.Label>
-              <Form.Control type="text" {...register('subjectProvince')} />
+              <Form.Control type="text" {...register('authorized.birthProvince')} />
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectRegion">
+            <Form.Group className="mb-3" controlId="authorized.birthRegion">
               <Form.Label>Regione</Form.Label>
-              <Form.Control type="text" {...register('subjectRegion')} />
+              <Form.Control type="text" {...register('authorized.birthRegion')} />
             </Form.Group>
           </Col>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectFiscalCode">
+            <Form.Group className="mb-3" controlId="authorized.fiscalCode">
               <Form.Label>Codice Fiscale</Form.Label>
-              <Form.Control type="text" {...register('subjectFiscalCode')} />
+              <Form.Control type="text" {...register('authorized.fiscalCode')} />
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectEmail">
+            <Form.Group className="mb-3" controlId="authorized.email">
               <Form.Label>E-mail</Form.Label>
-              <Form.Control type="text" {...register('subjectEmail')} />
+              <Form.Control type="text" {...register('authorized.email')} />
             </Form.Group>
           </Col>
           <Col md>
-            <Form.Group className="mb-3" controlId="subjectMobilePhone">
+            <Form.Group className="mb-3" controlId="authorized.mobile">
               <Form.Label>Cellulare</Form.Label>
-              <Form.Control type="text" {...register('subjectMobilePhone')} />
+              <Form.Control type="text" {...register('authorized.mobile')} />
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Col md="6">
-            <Form.Group className="mb-3" controlId="subjectRole">
+            <Form.Group className="mb-3" controlId="authorized.role">
               <Form.Label>Ruolo</Form.Label>
-              <Form.Control type="text" {...register('subjectRole')} />
+              <Form.Control type="text" {...register('authorized.role')} />
             </Form.Group>
           </Col>
         </Row>
@@ -94,4 +94,4 @@ function CaseEntryFormSubjectSection() {
   )
 }
 
-export default CaseEntryFormSubjectSection;
+export default CaseEntryFormAuthorizedSection;

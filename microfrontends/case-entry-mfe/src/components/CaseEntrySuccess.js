@@ -1,7 +1,10 @@
 import { ReactComponent as SuccessIcon } from 'bootstrap-icons/icons/check2-circle.svg';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 function CaseEntrySuccess() {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
+
   return (
     <div className="text-center">
       <SuccessIcon className="text-success mb-4" width="86" height="86" />
@@ -10,7 +13,7 @@ function CaseEntrySuccess() {
         <p>Di seguito il numero di pratica assegnato</p>
       </div>
       <Link to="/" className="text-decoration-none">
-        <big className="text-primary fw-bold">123456723</big>
+        <big className="text-primary fw-bold">{id}</big>
       </Link>
     </div>
   );
