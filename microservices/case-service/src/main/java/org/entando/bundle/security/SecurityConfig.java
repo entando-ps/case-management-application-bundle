@@ -40,7 +40,7 @@ public class SecurityConfig {
           .cors()
           .and()
           .authorizeHttpRequests(authorize -> authorize
-            .antMatchers(HttpMethod.OPTIONS,"/management/**").permitAll()
+            .antMatchers("/management/**").permitAll()
             .antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
             .mvcMatchers("/api/**").authenticated()
             .anyRequest().permitAll()
