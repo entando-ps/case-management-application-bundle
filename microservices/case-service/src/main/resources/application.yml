@@ -30,6 +30,10 @@ spring:
         registration:
           oidc:
             client-id: web_app
+management:
+  endpoints:
+    web:
+      base-path: /management
 aws:
   s3:
     key: ${AWS_ACCESS_KEY_ID:my_access_key}

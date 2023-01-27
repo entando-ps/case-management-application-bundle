@@ -3,7 +3,7 @@
         {
             "name": "case-service",
             "stack": "spring-boot",
-            "healthCheckPath": "/api/health",
+            "healthCheckPath": "/management/health",
             "dbms": "mysql",
             "roles": ["case-management-entry", "case-management-admin"],
             "env" : [
@@ -30,13 +30,6 @@
                     "secretKeyRef" : {
                         "name" : "secret_id_with_a_password",
                         "key" : "bucketname"
-                    }
-                },
-                {
-                    "name" : "S3_BUCKET_URL",
-                    "secretKeyRef" : {
-                        "name" : "secret_id_with_a_password",
-                        "key" : "bucketurl"
                     }
                 }
             ]
