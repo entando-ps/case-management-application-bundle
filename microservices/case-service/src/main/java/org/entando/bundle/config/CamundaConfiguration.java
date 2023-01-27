@@ -37,19 +37,13 @@ public class CamundaConfiguration {
 
     config.setDataSource(dataSource);
     config.setDatabaseSchemaUpdate("true");
-
     config.setTransactionManager(transactionManager());
     config.setProcessEngineName("Process engine for CDP");
     config.setHistory(historyLevel);
-
     config.setJobExecutorActivate(true);
     config.setMetricsEnabled(false);
-
-
-
     Resource[] resources = resourceLoader.getResources("classpath:/process/*.bpmn");
     config.setDeploymentResources(resources);
-
     return config;
   }
 
