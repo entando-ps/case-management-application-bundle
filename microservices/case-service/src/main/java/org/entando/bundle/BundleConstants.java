@@ -10,4 +10,6 @@ public interface BundleConstants {
   String PROCESS_INSTANCE_KEY = "approvationRequest";
   String USER_TASK_NAME = "Invia richiesta";
 
+  String VAR_UPDATED = "updated";
+
 }

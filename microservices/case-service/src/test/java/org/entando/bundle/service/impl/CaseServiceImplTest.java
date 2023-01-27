@@ -1,149 +1,124 @@
 package org.entando.bundle.service.impl;
 
-
-import org.camunda.bpm.engine.HistoryService;
-import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.TaskService;
-import org.camunda.bpm.engine.history.HistoricVariableInstance;
-import org.camunda.bpm.engine.impl.persistence.entity.HistoricVariableInstanceEntity;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.task.Task;
 import org.entando.bundle.CaseServiceApplication;
+import org.entando.bundle.domain.AuthorizedUser;
+import org.entando.bundle.domain.CaseMetadata;
+import org.entando.bundle.domain.Delegation;
+import org.entando.bundle.domain.SubscribedUser;
+import org.entando.bundle.entity.Case;
+import org.entando.bundle.repository.CaseRepository;
 import org.entando.bundle.service.CamundaService;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import org.junit.platform.commons.util.StringUtils;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.Optional;
 
-import static junit.framework.TestCase.*;
-import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_KEY;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = CaseServiceApplication.class)
+@EnableJpaRepositories(basePackages = "org.entando.bundle.repository")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+  classes = CaseServiceApplication.class)
+//@Transactional
 public class CaseServiceImplTest {
 
   @Autowired
-  HistoryService historyService;
+  private CamundaService bpmService;
 
   @Autowired
-  private RuntimeService runtimeService;
+  private CaseServiceImpl caseService;
 
   @Autowired
-  private TaskService taskService;
-
-  @Autowired
-  private CamundaService camundaService;
+  private CaseRepository caseRepository;
 
   @Test
-  public void verifyProcessInstanceStarted() {
-    ProcessInstance p1 = runtimeService.startProcessInstanceByKey(PROCESS_INSTANCE_KEY);
-    ProcessInstance p2 = runtimeService.startProcessInstanceByKey(PROCESS_INSTANCE_KEY);
-
-    List<Task> tasks = taskService.createTaskQuery().taskName("Invia richiesta").list();
-    tasks.forEach(t -> {
-//      System.out.println(">>> " + t.getProcessInstanceId());
-      assertThat(t, is(notNullValue()));
-      // set variables in task
-      taskService.setVariable(t.getId(), "approved", false);
-      taskService.setVariable(t.getId(), "PID", t.getProcessInstanceId());
-      assertEquals(false,  taskService.getVariable(t.getId(), "approved"));
-      // complete the task
-      taskService.complete(t.getId());
-    });
-    // no process running
-    assertThat(runtimeService.createProcessInstanceQuery().count(), is(0L));
-    // retrieve values from EXPIRED process p1
-    List<HistoricVariableInstance> vars = historyService
-      .createHistoricVariableInstanceQuery()
-      .processInstanceId(p1.getProcessInstanceId())
-      .orderByVariableName()
-      .asc()
-      .list();
-
-    // verify values injected in task
-    assertEquals(2, vars.size());
-    HistoricVariableInstanceEntity historicVariable = (HistoricVariableInstanceEntity) vars.get(0);
-    vars.forEach(v -> {
-      if (v.getName().equals("PID")) {
-        assertThat(p1.getProcessInstanceId(),is(v.getValue()));
-      } else {
-        assertThat("approved",is(v.getName()));
-        assertThat(false, is(v.getValue()));
-      }
-    });
+  public void testContext() {
+    assertThat(caseService, is(notNullValue()));
+    assertThat(bpmService, is(notNullValue()));
+    assertThat(caseRepository, is(notNullValue()));
   }
 
   @Test
-  public void testServiceAndClose() {
-    // start
-    final String instanceId = camundaService.startProcess();
-    assertThat(instanceId, is(notNullValue()));
-
-    // update
-    camundaService.setUserTaskVariablesAndState(instanceId, true, Map.of("nice",true));
-    // retrieve
-    Map<String, Object> vars = camundaService.getProcessData(instanceId);
-    assertThat(vars, is(notNullValue()));
-    assertThat(1, is(vars.size()));
-    assertThat(true, is(vars.get("nice")));
-
-    assertFalse(camundaService.isProcessRunning(instanceId));
-  }
-
-  @Test
-  public void testServiceAndKeepRunning() {
-    String instanceId = null;
-
+  public void testCreateNoAttachments() throws InterruptedException {
+    Case c = null;
+    CaseMetadata metadata = getCaseMetadata();
     try {
-      // start
-      instanceId = camundaService.startProcess();
-      assertThat(instanceId, is(notNullValue()));
-      // update
-      camundaService.setUserTaskVariablesAndState(instanceId, false, Map.of("nice", true));
-      // retrieve
-      Map<String, Object> vars = camundaService.getProcessData(instanceId);
-      assertThat(vars, is(notNullValue()));
-      assertThat(1, is(vars.size()));
-      assertThat(true, is(vars.get("nice")));
-      // still running
-      assertTrue(camundaService.isProcessRunning(instanceId));
+      // to startup process etc etc
+      c = caseService.createCase(null, metadata, "test");
+      assertThat(c, is(notNullValue()));
+//      assertThat(c.getId(), is(notNullValue()));
+      assertThat(c.getProcessInstanceId(), is(notNullValue()));
+      assertTrue(bpmService.isProcessRunning(c.getProcessInstanceId()));
     } catch (Throwable t) {
-        throw t;
+      t.printStackTrace();
+      throw t;
     } finally {
-      if (StringUtils.isNotBlank(instanceId)) {
-        camundaService.deleteProcess(instanceId);
+      if (c != null && c.getId()!= null) {
+        caseService.deleteCase(c.getId());
       }
+      bpmService.setUserTaskVariablesAndState(c.getProcessInstanceId(), true, null);
     }
   }
 
   @Test
-  public void testDelete() {
-    final String instanceId = camundaService.startProcess();
-    assertTrue(camundaService.isProcessRunning(instanceId));
-    camundaService.deleteProcess(instanceId);
-    assertFalse(camundaService.isProcessRunning(instanceId));
+  public void testTaskTermination() {
+    CaseMetadata metadata = getCaseMetadata();
+    Case cp = caseService.createCase(null, metadata, "test");
+    assertThat(cp,is(notNullValue()));
+    caseService.completeTaskState(Optional.of(cp), null);
+    assertFalse(bpmService.isProcessRunning(cp.getProcessInstanceId()));
+    assertThat(bpmService.getProcessData(cp.getProcessInstanceId()), is(notNullValue()));
+    assertThat(bpmService.getProcessData(cp.getProcessInstanceId()).size(), is(1));
   }
 
-  @Test
-  public void testUnknownProcessForVariables() {
-    List<HistoricVariableInstance> varz = historyService
-      .createHistoricVariableInstanceQuery()
-      .processInstanceId("some-process")
-      .orderByVariableName()
-      .asc()
-      .list();
-    assertTrue(varz.isEmpty());
+
+  @NotNull
+  private CaseMetadata getCaseMetadata() {
+    CaseMetadata metadata = new CaseMetadata();
+    AuthorizedUser au = new AuthorizedUser();
+    SubscribedUser su = new SubscribedUser();
+    metadata.setAuthorized(au);
+    metadata.setSubscriber(su);
+
+    su.setSector("sector");
+    su.setName("test");
+    su.setLastname("pest");
+    su.setBirthDate(LocalDate.now());
+    su.setBirthCountry("Italy");
+    su.setBirthCity("Cagliari");
+    su.setBirthProvince("CA");
+    su.setBirthRegion("Sardinia");
+    su.setFiscalCode("MTNMTN77J07B745U");
+    su.setEmail("su@email.it");
+    su.setLandline("048161832");
+    su.setMobile("3283285328");
+    su.setSector("sector");
+    su.setDelegation(Delegation.TIPO_DUE);
+
+    au.setRole("role");
+    au.setName("test");
+    au.setLastname("pest");
+    au.setBirthDate(LocalDate.now());
+    au.setBirthCountry("Italy");
+    au.setBirthCity("Carbonia");
+    au.setBirthProvince("SU");
+    au.setBirthRegion("Sardinia");
+    au.setFiscalCode("DVDMTN77J07B745U");
+    au.setEmail("su@email.it");
+    au.setMobile("3283285328");
+    return metadata;
   }
 
 }

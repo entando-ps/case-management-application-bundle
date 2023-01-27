@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface CaseService {
@@ -79,4 +80,7 @@ public interface CaseService {
    */
   boolean destroyCase(Long id);
 
+  void completeTaskState(Long id, Map<String, Object> props);
+
+  void completeTaskState(Optional<Case> optCase, Map<String, Object> props);
 }
