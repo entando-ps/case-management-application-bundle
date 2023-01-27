@@ -80,7 +80,13 @@ public interface CaseService {
    */
   boolean destroyCase(Long id);
 
+  /**
+   * Complete the task for the process held by the desired state updating the variables
+   * @param id case ID
+   * @param props properties to be inserted in the process
+   */
   void completeTaskState(Long id, Map<String, Object> props);
-
   void completeTaskState(Optional<Case> optCase, Map<String, Object> props);
+
+
 }
