@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     webpack: {
       plugins: {
@@ -18,6 +20,10 @@ module.exports = {
   
                   parent.appendChild(element);
                 },
+                styleTagTransform: function transformCSS(css, style) {
+                  // makes root styles (i.e. Bootstrap CSS variables) apply to shadow DOM host
+                  style.innerHTML = css.replace(':root', ':host,:root');
+                }
             }
         }
 
@@ -33,10 +39,12 @@ module.exports = {
             library: {
                 type: 'umd',
                 name: 'build',
-            }
+            },
+            path: path.resolve(__dirname, 'build')
         };
         webpackConfig.entry = entry;
         webpackConfig.output = output;
+        paths.appBuild = output.path;
  
         return webpackConfig;
       },

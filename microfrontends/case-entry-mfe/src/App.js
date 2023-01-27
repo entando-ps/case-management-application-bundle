@@ -1,10 +1,19 @@
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+import './App.css';
+import CaseEntryForm from './components/CaseEntryForm';
+import CaseEntrySuccess from './components/CaseEntrySuccess';
+import CaseView from './components/CaseView';
+import UserArea from './components/UserArea';
+
+function App({ config }) {
   return (
-    <div>
-      Case Entry MFE
-    </div>
+    <Routes>
+      <Route path="/" element={<UserArea config={config} />} />
+      <Route path="/case/:id" element={<CaseView config={config} />} />
+      <Route path="/case-entry" element={<CaseEntryForm config={config} />} />
+      <Route path="/case-entry-success" element={<CaseEntrySuccess />} />
+    </Routes>
   );
 }
 
