@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,15 +37,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
-                .authorizeHttpRequests(authorize -> authorize
-                        .mvcMatchers("/api/**").authenticated()
-                        .anyRequest().permitAll()
-                )
-                .oauth2ResourceServer().jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter())
-                .decoder(jwtDecoder());
+          .cors()
+          .and()
+          .authorizeHttpRequests(authorize -> authorize
+            .antMatchers(HttpMethod.OPTIONS,"/management/**").permitAll()
+            .antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
+            .mvcMatchers("/api/**").authenticated()
+            .anyRequest().permitAll()
+          )
+          .oauth2ResourceServer().jwt()
+          .jwtAuthenticationConverter(jwtAuthenticationConverter())
+          .decoder(jwtDecoder());
         return http.build();
     }
 
@@ -72,8 +75,8 @@ public class SecurityConfig {
                 return Collections.emptyList();
             } else {
                 return ((List<String>) clientAccess.get("roles")).stream()
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
+                  .map(SimpleGrantedAuthority::new)
+                  .collect(Collectors.toList());
             }
         }
     }
