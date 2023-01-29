@@ -6,7 +6,7 @@
             "healthCheckPath": "/management/health",
             "dbms": "mysql",
             "roles": ["case-management-entry", "case-management-admin"],
-            "env" : [
+            "env" :  [
                 {
                     "name": "AWS_DEFAULT_REGION",
                     "value": "eu-west-1"
@@ -14,21 +14,21 @@
                 {
                     "name": "AWS_ACCESS_KEY_ID",
                     "secretKeyRef" : {
-                        "name" : "secret_id_with_a_password",
+                        "name" : "e8827cec-case-management-bundle-secret",
                         "key" : "keyId"
                     }
                 },
                 {
                     "name": "AWS_SECRET_ACCESS_KEY",
                     "secretKeyRef" : {
-                        "name" : "secret_id_with_a_password",
-                        "key" : "password"
+                        "name" : "e8827cec-case-management-bundle-secret",
+                        "key" : "secret"
                     }
                 },
                 {
                     "name": "S3_BUCKET_NAME",
                     "secretKeyRef" : {
-                        "name" : "secret_id_with_a_password",
+                        "name" : "e8827cec-case-management-bundle-secret",
                         "key" : "bucketname"
                     }
                 }
