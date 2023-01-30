@@ -65,47 +65,41 @@ public class CamundaServiceImpl implements CamundaService {
       && (vars = getProcessVariables(instanceId)) != null) {
 
       res = vars.stream()
-//        .peek(t -> log.debug("Getting variable {} : {} from process {}", t.getName(), t.getValue(), instanceId))
         .collect(Collectors.toMap(t -> t.getName(), t -> t.getValue()));
     }
     return res;
   }
 
-
-  /**
-   * Return the desired user task for the current running process
-   * @param instanceId the process instance ID
-   * @param taskName the task ID
-   * @return the task, null otherwise
-   */
-  private Task getRunningProcessTask(final String instanceId, final String taskName) {
+  @Override
+  public Task getRunningProcessTask(final String instanceId, final String taskName) {
     return taskService.createTaskQuery()
       .processInstanceId(instanceId)
       .taskName(taskName).singleResult();
   }
 
   @Override
-  public void setUserTaskVariablesAndState(final String instanceId, boolean complete, Map<String, Object> props) {
+  public void setUserTaskVariables(final String instanceId, final String taskId, final Map<String, Object> props) {
     if (StringUtils.isNotBlank(instanceId)) {
       Task task;
 
       if ((task = getRunningProcessTask(instanceId, USER_TASK_NAME)) != null) {
         if (props != null && !props.isEmpty()) {
           props.entrySet()
-//            .stream().peek(e -> log.debug("setting variable {} : {} to task {}", e.getKey(), e.getValue(), task.getId()))
             .forEach(e -> taskService.setVariable(task.getId(), e.getKey(), e.getValue()));
-        }
-        // finally
-        if (complete) {
-          log.debug("marking complete user task {}", task.getId());
-          taskService.complete(task.getId());
-        } else {
-          log.debug("leaving user task {} start unchanged", task.getId());
         }
       } else {
         log.debug("Invalid process specification");
       }
     }
+  }
+
+  @Override
+  public void completeTask(Task task) {
+      completeTask(task.getId());
+  }
+  @Override
+  public void completeTask(String taskId) {
+    taskService.complete(taskId);
   }
 
   @Override

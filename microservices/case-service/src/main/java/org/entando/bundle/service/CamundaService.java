@@ -1,5 +1,7 @@
 package org.entando.bundle.service;
 
+import org.camunda.bpm.engine.task.Task;
+
 import java.util.Map;
 
 public interface CamundaService {
@@ -18,12 +20,32 @@ public interface CamundaService {
   Map<String, Object> getProcessData(String instanceId);
 
   /**
-   * Update the user task with the given variables and close if desired
-   * @param instanceId process ID
-   * @param complete if true complete the task
-   * @param props the properties to inject in the process
+   * Return the desired user task for the current running process
+   * @param instanceId the process instance ID
+   * @param taskName the task ID
+   * @return the task, null otherwise
    */
-  void setUserTaskVariablesAndState(String instanceId, boolean complete, Map<String, Object> props);
+  Task getRunningProcessTask(String instanceId, String taskName);
+
+  /**
+   * Specify the variables for the given task
+   * @param instanceId process instance ID
+   * @param taskId task ID
+   * @param props properties to write
+   */
+  void setUserTaskVariables(String instanceId, String taskId, Map<String, Object> props);
+
+  /**
+   * Mark user task completed
+   * @param task the task object
+   */
+  void completeTask(Task task);
+
+  /**
+   * Mark user task completed
+   * @param taskId the task id
+   */
+  void completeTask(String taskId);
 
   /**
    * Check whether the process is running or not

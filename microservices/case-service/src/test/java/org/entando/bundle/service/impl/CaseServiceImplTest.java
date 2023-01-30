@@ -1,5 +1,6 @@
 package org.entando.bundle.service.impl;
 
+import org.camunda.bpm.engine.task.Task;
 import org.entando.bundle.CaseServiceApplication;
 import org.entando.bundle.domain.AuthorizedUser;
 import org.entando.bundle.domain.CaseMetadata;
@@ -18,10 +19,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.entando.bundle.BundleConstants.USER_TASK_NAME;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -68,7 +71,7 @@ public class CaseServiceImplTest {
       if (c != null && c.getId()!= null) {
         caseService.deleteCase(c.getId());
       }
-      bpmService.setUserTaskVariablesAndState(c.getProcessInstanceId(), true, null);
+      setUserTaskVariablesAndState(c.getProcessInstanceId(), null);
     }
   }
 
@@ -119,6 +122,12 @@ public class CaseServiceImplTest {
     au.setEmail("su@email.it");
     au.setMobile("3283285328");
     return metadata;
+  }
+
+  private void setUserTaskVariablesAndState(String instanceId, Map<String, Object> props) {
+    Task task = bpmService.getRunningProcessTask(instanceId, USER_TASK_NAME);
+    bpmService.setUserTaskVariables(instanceId, task.getId(), props);
+    bpmService.completeTask(task);
   }
 
 }
