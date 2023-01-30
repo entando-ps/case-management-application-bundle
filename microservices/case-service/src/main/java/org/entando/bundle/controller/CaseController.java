@@ -87,11 +87,7 @@ public class CaseController {
                 log.debug("returning Case {} of the user {}", id, principal.getName());
                 optionalCase = caseService.getCaseByIdAndOwner(id, principal.getName());
             }
-            if (optionalCase.isPresent()) {
-                return ResponseEntity.ok(optionalCase.get());
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
+            return optionalCase.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
         } catch (Throwable t) {
             log.error("error getting a Cases", t);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error getting a Case", t);
@@ -120,12 +116,12 @@ public class CaseController {
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
     public @ResponseBody ResponseEntity deleteCase(@PathVariable Long id) {
 
-        log.info("REST to delete the case ID ", id);
+        log.info("REST to delete the case ID {} ", id);
         try {
             if (caseService.destroyCase(id)) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
-                // logical deletion because some resource could not be deleted. Status = DELETED
+                // logical deletion because some resources could not be deleted. Status = DELETED
                 return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
             }
         } catch (Throwable t) {
@@ -147,7 +143,7 @@ public class CaseController {
         return changeRequestState(id, false);
     }
 
-    private ResponseEntity<Object> changeRequestState(Long id, Boolean approved) {
+    private ResponseEntity<Object> changeRequestState(final Long id, final boolean approved) {
         try {
             if (caseService.completeTaskState(id, new HashMap<>(Map.of(PROCESS_INSTANCE_VARIABLES_APPROVED, approved)))) {
                 return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -155,8 +151,8 @@ public class CaseController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
         } catch (Throwable t) {
-            log.error("error creating a new Cases", t);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error creating aCase", t);
+            log.error("error while updating case to " + (approved ? "approved":"rejected"), t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error updating case to " + (approved ? "approved":"rejected"), t);
         }
     }
 }

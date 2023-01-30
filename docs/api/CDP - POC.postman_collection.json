@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "79a7db58-0a62-41f8-b7e1-6c16805135ec",
 		"name": "CDP - POC",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18894411"
 	},
 	"item": [
 		{
@@ -138,6 +139,10 @@
 							"value": "Access-Control-Request-Headers"
 						},
 						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=8F4234702595E25CFEEC7593C245EE36; Path=/; HttpOnly"
+						},
+						{
 							"key": "X-Content-Type-Options",
 							"value": "nosniff"
 						},
@@ -171,7 +176,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Tue, 24 Jan 2023 14:38:27 GMT"
+							"value": "Mon, 30 Jan 2023 15:43:12 GMT"
 						},
 						{
 							"key": "Keep-Alive",
@@ -183,7 +188,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"id\": 2,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-24T15:35:48\",\n        \"identifier\": \"0000002/23\",\n        \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                },\n                {\n                    \"key\": \"Entando_bg_Modular.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                    \"size\": 325082\n                }\n            ]\n        }\n    },\n    {\n        \"id\": 4,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-24T15:38:12\",\n        \"identifier\": \"0000004/23\",\n        \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                },\n                {\n                    \"key\": \"Entando_bg_Modular.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                    \"size\": 325082\n                }\n            ]\n        }\n    }\n]"
+					"body": "[\n    {\n        \"id\": 1,\n        \"processInstanceId\": \"101\",\n        \"state\": \"COMPLETED\",\n        \"created\": \"2023-01-30T08:43:03\",\n        \"identifier\": \"0000001/23\",\n        \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"x-mark-128.gif\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/x-mark-128.gif\",\n                    \"size\": 1159\n                },\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                }\n            ],\n            \"processData\": {\n                \"approved\": false,\n                \"updated\": \"2023-01-30T09:00:47.702867\"\n            }\n        }\n    },\n    {\n        \"id\": 2,\n        \"processInstanceId\": \"301\",\n        \"state\": \"COMPLETED\",\n        \"created\": \"2023-01-30T09:05:11\",\n        \"identifier\": \"0000002/23\",\n        \"ownerId\": \"4c973896-5761-41fc-8217-07c5d13a004b\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"x-mark-128.gif\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/x-mark-128.gif\",\n                    \"size\": 1159\n                },\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                }\n            ],\n            \"processData\": {\n                \"approved\": false,\n                \"updated\": \"2023-01-30T16:26:18.660552\"\n            }\n        }\n    },\n    {\n        \"id\": 3,\n        \"processInstanceId\": \"506\",\n        \"state\": \"RUNNING\",\n        \"created\": \"2023-01-30T16:26:34\",\n        \"identifier\": \"0000003/23\",\n        \"ownerId\": \"4c973896-5761-41fc-8217-07c5d13a004b\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"x-mark-128.gif\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/x-mark-128.gif\",\n                    \"size\": 1159\n                },\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                }\n            ]\n        }\n    },\n    {\n        \"id\": 4,\n        \"processInstanceId\": \"601\",\n        \"state\": \"COMPLETED\",\n        \"created\": \"2023-01-30T16:42:49\",\n        \"identifier\": \"0000004/23\",\n        \"ownerId\": \"4c973896-5761-41fc-8217-07c5d13a004b\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"x-mark-128.gif\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/x-mark-128.gif\",\n                    \"size\": 1159\n                },\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                }\n            ],\n            \"processData\": {\n                \"approved\": true,\n                \"updated\": \"2023-01-30T16:43:06.291302\"\n            }\n        }\n    }\n]"
 				}
 			]
 		},
@@ -334,84 +339,6 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/api/cases/3",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"cases",
-								"3"
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "plain",
-					"header": [
-						{
-							"key": "Vary",
-							"value": "Origin"
-						},
-						{
-							"key": "Vary",
-							"value": "Access-Control-Request-Method"
-						},
-						{
-							"key": "Vary",
-							"value": "Access-Control-Request-Headers"
-						},
-						{
-							"key": "X-Content-Type-Options",
-							"value": "nosniff"
-						},
-						{
-							"key": "X-XSS-Protection",
-							"value": "1; mode=block"
-						},
-						{
-							"key": "Cache-Control",
-							"value": "no-cache, no-store, max-age=0, must-revalidate"
-						},
-						{
-							"key": "Pragma",
-							"value": "no-cache"
-						},
-						{
-							"key": "Expires",
-							"value": "0"
-						},
-						{
-							"key": "X-Frame-Options",
-							"value": "DENY"
-						},
-						{
-							"key": "Content-Length",
-							"value": "0"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 24 Jan 2023 14:40:48 GMT"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=60"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": null
-				},
-				{
-					"name": "GET PROCESS",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
 							"raw": "localhost:8081/api/cases/2",
 							"host": [
 								"localhost"
@@ -487,6 +414,84 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"id\": 2,\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-24T15:35:48\",\n    \"identifier\": \"0000002/23\",\n    \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n    \"metadata\": {\n        \"authorized\": {\n            \"name\": \"Matteo\",\n            \"lastname\": \"Emanuele\",\n            \"birthDate\": \"1977-01-19\",\n            \"birthCountry\": \"Italy\",\n            \"birthCity\": \"Carbonia\",\n            \"birthProvince\": \"CA\",\n            \"birthRegion\": \"Sardegna\",\n            \"fiscalCode\": \"MTTMML77G05U654U\",\n            \"email\": \"mail@gmail.com\",\n            \"mobile\": \"3281235123\",\n            \"role\": \"sector\"\n        },\n        \"subscriber\": {\n            \"name\": \"Matteo\",\n            \"lastname\": \"Emanuele\",\n            \"birthDate\": \"2023-01-19\",\n            \"birthCountry\": \"Italy\",\n            \"birthCity\": \"Cagliari\",\n            \"birthProvince\": \"CA\",\n            \"birthRegion\": \"Sardegna\",\n            \"fiscalCode\": \"MAAMML77G05U654U\",\n            \"email\": \"another_mail@gmail.com\",\n            \"landline\": \"178161832\",\n            \"mobile\": \"3281235123\",\n            \"sector\": \"sector\",\n            \"delegation\": \"TIPO_DUE\"\n        },\n        \"resources\": [\n            {\n                \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                \"size\": 9021\n            },\n            {\n                \"key\": \"Entando_bg_Modular.png\",\n                \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                \"size\": 325082\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "GET PROCESS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/cases/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases",
+								"3"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 14:40:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
 				}
 			]
 		},
@@ -511,12 +516,12 @@
 						{
 							"key": "attachments",
 							"type": "file",
-							"src": "/home/matteo/Pictures/Entando_Logo_Dark_Blue@4x.png"
+							"src": "/home/matteo/Pictures/WTF.png"
 						},
 						{
 							"key": "attachments",
 							"type": "file",
-							"src": "/home/matteo/Pictures/Entando_bg_Modular.png"
+							"src": "/home/matteo/Pictures/x-mark-128.png"
 						},
 						{
 							"key": "attachments",
@@ -530,12 +535,7 @@
 							"contentType": "application/json",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:8081/api/cases",
@@ -769,6 +769,169 @@
 					"body": null
 				}
 			]
+		},
+		{
+			"name": "HEALTH",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/management/health",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"management",
+						"health"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "HEALTH",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/management/health",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"management",
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.spring-boot.actuator.v3+json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Jan 2023 07:38:36 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"UP\"\n}"
+				}
+			]
+		},
+		{
+			"name": "REJECT REQUEST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/cases/2/reject",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"cases",
+						"2",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "APPROVE REQUEST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/cases/4/approve",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"cases",
+						"4",
+						"approve"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
