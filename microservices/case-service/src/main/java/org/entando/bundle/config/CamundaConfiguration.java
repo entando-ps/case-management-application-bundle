@@ -1,8 +1,12 @@
 package org.entando.bundle.config;
 
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.impl.ProcessEngineImpl;
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean;
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration;
 import org.camunda.bpm.engine.spring.SpringProcessEngineServicesConfiguration;
+import org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,6 +61,13 @@ public class CamundaConfiguration {
     ProcessEngineFactoryBean factoryBean = new ProcessEngineFactoryBean();
     factoryBean.setProcessEngineConfiguration(processEngineConfiguration());
     return factoryBean;
+  }
+
+  @Bean(name = "jobExecutor")
+  public SpringJobExecutor jobExecutor(ProcessEngine processEngine) {
+    SpringJobExecutor jobExecutor = new SpringJobExecutor();
+    jobExecutor.registerProcessEngine((ProcessEngineImpl) processEngine);
+    return jobExecutor;
   }
 
 }
