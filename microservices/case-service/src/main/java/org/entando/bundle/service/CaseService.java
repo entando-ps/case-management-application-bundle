@@ -82,11 +82,21 @@ public interface CaseService {
 
   /**
    * Complete the task for the process held by the desired state updating the variables
-   * @param id case ID
+   * @param id    case ID
    * @param props properties to be inserted in the process
+   * @return true if the task was completed and the process run to completion, false if no process found
+   * @throws RuntimeException if the task was completed and the process is still running
    */
-  void completeTaskState(Long id, Map<String, Object> props);
-  void completeTaskState(Optional<Case> optCase, Map<String, Object> props);
+  boolean completeTaskState(Long id, Map<String, Object> props);
+
+  /**
+   * Complete the task for the process held by the desired state updating the variables
+   * @param optCase optional case object
+   * @param props properties to be inserted in the process
+   * @return true if the task was completed and the process run to completion, false if no process found
+   * @throws RuntimeException if the task was completed and the process is still running
+   */
+  boolean completeTaskState(Optional<Case> optCase, Map<String, Object> props);
 
 
 }

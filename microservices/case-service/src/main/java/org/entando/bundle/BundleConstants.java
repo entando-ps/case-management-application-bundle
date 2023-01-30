@@ -11,5 +11,6 @@ public interface BundleConstants {
   String USER_TASK_NAME = "Invia richiesta";
 
   String VAR_UPDATED = "updated";
+  String PROCESS_INSTANCE_VARIABLES_APPROVED = "approved";
 
 }

@@ -46,7 +46,8 @@ Prepare a secret containing AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and S3_BUCK
 This is done with the command:
 
 ```shell
-ent k create secret generic e8827cec-case-management-bundle-secret --from-literal=keyId=<AWS_ACCESS_KEY_ID> --from-literal=secret=<AWS_SECRET_ACCESS_KEY> --from-literal=bucketname=<BUCKET_NAME> -n <NAMESPACE>
+ent k create secret generic e8827cec-case-management-bundle-secret --from-literal=keyId=<AWS_ACCESS_KEY_ID> --from-literal=secret=<AWS_SECRET_ACCESS_KEY> \
+--from-literal=bucketname=<BUCKET_NAME> -n <NAMESPACE>
 ```
 
 *NOTE:* the name of the secret is tailored after the **bundle id** (which changes with the repository) and the **bundle name** (declared in the `entando.json`) 

@@ -26,10 +26,13 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.entando.bundle.BundleConstants.CASE_MANAGEMENT_ADMIN;
+import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_VARIABLES_APPROVED;
 
 @RestController
 @RequestMapping("/api/cases")
@@ -130,5 +133,30 @@ public class CaseController {
         }
     }
 
+    @PostMapping(value = "/{id}/approve")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity approveCase(@PathVariable Long id) {
+        log.info("REST to approve case {}", id);
+        return changeRequestState(id, true);
+    }
 
+    @PostMapping(value = "/{id}/reject")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity rejectCase(@PathVariable Long id) {
+        log.info("REST to reject case {}", id);
+        return changeRequestState(id, false);
+    }
+
+    private ResponseEntity<Object> changeRequestState(Long id, Boolean approved) {
+        try {
+            if (caseService.completeTaskState(id, new HashMap<>(Map.of(PROCESS_INSTANCE_VARIABLES_APPROVED, approved)))) {
+                return ResponseEntity.status(HttpStatus.OK).body(null);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Throwable t) {
+            log.error("error creating a new Cases", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error creating aCase", t);
+        }
+    }
 }

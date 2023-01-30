@@ -213,26 +213,36 @@ public class CaseServiceImpl implements CaseService {
 
   @Override
   @Transactional
-  public void completeTaskState(final Long id, Map<String, Object> props) {
+  public boolean completeTaskState(final Long id, Map<String, Object> props) {
     if (id != null) {
       Optional<Case> optCase = getCase(id);
-      completeTaskState(optCase, props);
+      return completeTaskState(optCase, props);
     }
+    return false;
   }
 
   @Override
-  public void completeTaskState(Optional<Case> optCase, Map<String, Object> props) {
-    if (optCase.isPresent()) {
+  public boolean completeTaskState(Optional<Case> optCase, Map<String, Object> props) {
+    final Case cur = optCase.orElse(null);
+    boolean completed = false;
 
+    if (cur != null && cur.getState() == State.RUNNING) {
       if (props == null) {
         props = new HashMap<>();
       }
-      Case cur = optCase.get();
       String instanceId = cur.getProcessInstanceId();
       // update /add the current date time
       props.put(VAR_UPDATED, LocalDateTime.now());
       bpmService.setUserTaskVariablesAndState(instanceId, true, props);
       log.info("Changed user task of process {} of case {}", instanceId, cur.getId());
+      if (bpmService.isProcessRunning(instanceId)) {
+        throw new RuntimeException("process should have been stopped");
+      }
+      completed = true;
+    } else {
+      log.debug("no case to operate to");
     }
+    return completed;
   }
+
 }
