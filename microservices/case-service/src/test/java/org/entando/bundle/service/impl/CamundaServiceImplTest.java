@@ -24,6 +24,7 @@ import java.util.Map;
 
 import static junit.framework.TestCase.*;
 import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_KEY;
+import static org.entando.bundle.BundleConstants.USER_TASK_NAME;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -89,10 +90,12 @@ public class CamundaServiceImplTest {
   public void testServiceAndClose() {
     // start
     final String instanceId = camundaService.startProcess();
+    final Map<String, Object> props = Map.of("nice", true);
     assertThat(instanceId, is(notNullValue()));
 
     // update
-    camundaService.setUserTaskVariablesAndState(instanceId, true, Map.of("nice",true));
+    setUserTaskVariablesAndState(instanceId, props, true);
+
     // retrieve
     Map<String, Object> vars = camundaService.getProcessData(instanceId);
     assertThat(vars, is(notNullValue()));
@@ -111,7 +114,7 @@ public class CamundaServiceImplTest {
       instanceId = camundaService.startProcess();
       assertThat(instanceId, is(notNullValue()));
       // update
-      camundaService.setUserTaskVariablesAndState(instanceId, false, Map.of("nice", true));
+      setUserTaskVariablesAndState(instanceId, Map.of("nice", true), false);
       // retrieve
       Map<String, Object> vars = camundaService.getProcessData(instanceId);
       assertThat(vars, is(notNullValue()));
@@ -145,6 +148,15 @@ public class CamundaServiceImplTest {
       .asc()
       .list();
     assertTrue(varz.isEmpty());
+  }
+
+  private void setUserTaskVariablesAndState(String instanceId, Map<String, Object> props, boolean complete) {
+    Task task = camundaService.getRunningProcessTask(instanceId, USER_TASK_NAME);
+    assertThat(task,is(notNullValue()));
+    camundaService.setUserTaskVariables(instanceId, task.getId(), props);
+    if (complete) {
+      camundaService.completeTask(task);
+    }
   }
 
 }

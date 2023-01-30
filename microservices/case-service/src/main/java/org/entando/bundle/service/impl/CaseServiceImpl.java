@@ -1,5 +1,6 @@
 package org.entando.bundle.service.impl;
 
+import org.camunda.bpm.engine.task.Task;
 import org.entando.bundle.domain.CaseMetadata;
 import org.entando.bundle.domain.Resource;
 import org.entando.bundle.entity.Case;
@@ -25,7 +26,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.entando.bundle.BundleConstants.VAR_UPDATED;
+import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_VARIABLES_LAST_UPDATE;
+import static org.entando.bundle.BundleConstants.USER_TASK_NAME;
 
 @Service
 public class CaseServiceImpl implements CaseService {
@@ -230,9 +232,15 @@ public class CaseServiceImpl implements CaseService {
       Case cur = optCase.get();
       String instanceId = cur.getProcessInstanceId();
       // update /add the current date time
-      props.put(VAR_UPDATED, LocalDateTime.now());
-      bpmService.setUserTaskVariablesAndState(instanceId, true, props);
+      props.put(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE, LocalDateTime.now());
+      // fetch the user task...
+      Task task = bpmService.getRunningProcessTask(instanceId, USER_TASK_NAME);
+      // ...update variables...
+      bpmService.setUserTaskVariables(instanceId, task.getId(), props);
+      // .. complete the task
+      bpmService.completeTask(task);
       log.info("Changed user task of process {} of case {}", instanceId, cur.getId());
     }
   }
+
 }
