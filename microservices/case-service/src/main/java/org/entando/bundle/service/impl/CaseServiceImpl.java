@@ -3,6 +3,8 @@ package org.entando.bundle.service.impl;
 import org.camunda.bpm.engine.task.Task;
 import org.entando.bundle.domain.CaseMetadata;
 import org.entando.bundle.domain.Resource;
+import org.entando.bundle.domain.StatisticElement;
+import org.entando.bundle.domain.Statistics;
 import org.entando.bundle.entity.Case;
 import org.entando.bundle.entity.enumeration.State;
 import org.entando.bundle.repository.CaseRepository;
@@ -18,7 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.utils.StringUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_VARIABLES_LAST_UPDATE;
-import static org.entando.bundle.BundleConstants.USER_TASK_NAME;
+import static org.entando.bundle.BundleConstants.*;
 
 @Service
 public class CaseServiceImpl implements CaseService {
@@ -250,6 +253,57 @@ public class CaseServiceImpl implements CaseService {
       log.debug("no case to operate to");
     }
     return completed;
+  }
+
+  @Override
+  public Statistics getStatisticsRange(LocalDate from, LocalDate to) {
+    List<Case> cases;
+
+    if (from != null) {
+      if (to == null) {
+        to = LocalDate.now();
+      }
+      from = from.with(LocalTime.MIDNIGHT);
+      cases = caseRepository.findByCreatedAfterAndCreatedBefore(from.atStartOfDay(),
+        to.atTime(LocalTime.now()));
+    } else {
+      cases = caseRepository.findAll();
+    }
+    return extractStatistics(cases).setPeriod(from, to);
+  }
+
+  /**
+   * Return a subset of cases data useful for the statistics
+   * @param cases
+   * @return
+   */
+  private Statistics extractStatistics(List<Case> cases) {
+    Statistics stats = new Statistics();
+
+    if (cases != null && !cases.isEmpty()) {
+      cases.forEach(c -> {
+        StatisticElement elem = new StatisticElement();
+
+        elem.setOpened(c.getCreated());
+        if (c.getState() == State.RUNNING) {
+          // add to opened...
+          stats.addOpen(elem);
+        } else if (c.getState() == State.COMPLETED) {
+          elem.setClosed((LocalDateTime) c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE));
+          if ((boolean)c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_APPROVED)) {
+            // ..add approved...
+            stats.addApproved(elem);
+          } else {
+            // ...add rejected...
+            stats.addRejected(elem);
+          }
+        } else {
+          // add fault
+          stats.addFaulty(elem);
+        }
+      });
+    }
+    return stats;
   }
 
 }

@@ -1,11 +1,14 @@
 package org.entando.bundle.service;
 
 import org.entando.bundle.domain.CaseMetadata;
+import org.entando.bundle.domain.Statistics;
 import org.entando.bundle.entity.Case;
 import org.entando.bundle.entity.enumeration.State;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -98,5 +101,11 @@ public interface CaseService {
    */
   boolean completeTaskState(Optional<Case> optCase, Map<String, Object> props);
 
-
+  /**
+   * Get the statistics in the desired period (if any)
+   * @param from starting date, can be null
+   * @param to ending date, must be null if 'from' is null
+   * @return the statistics
+   */
+  Statistics getStatisticsRange(LocalDate from, LocalDate to);
 }

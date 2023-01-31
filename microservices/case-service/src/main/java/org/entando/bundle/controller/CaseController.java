@@ -1,6 +1,7 @@
 package org.entando.bundle.controller;
 
 import org.entando.bundle.domain.CaseMetadata;
+import org.entando.bundle.domain.Statistics;
 import org.entando.bundle.entity.Case;
 import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.impl.CaseServiceImpl;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -155,4 +158,16 @@ public class CaseController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error updating case to " + (approved ? "approved":"rejected"), t);
         }
     }
+
+    @GetMapping("/stats")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity<Statistics> getCaseStatistics(@RequestParam LocalDate from, @RequestParam LocalDate to) {
+        try {
+
+        } catch (Throwable t) {
+            log.error("error while getting usage statistics", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);
+        }
+    }
+
 }
