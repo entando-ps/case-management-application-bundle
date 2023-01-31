@@ -16,8 +16,9 @@ export function KeycloakProvider({ children }) {
   const [instance, saveInstance] = useState(getKeycloakInstance());
 
   useEffect(() => {
-    const refresh = () =>
+    const refresh = () => {
       saveInstance({ ...getKeycloakInstance(), initialized: true });
+    };
 
     window.addEventListener('keycloak', refresh);
     
