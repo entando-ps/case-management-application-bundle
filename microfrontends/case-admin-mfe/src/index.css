@@ -1,1 +1,63 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+:host {
+  margin: 0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #405464;
+  
+  /* Bootstrap overrides */
+  --bs-primary: #009640;
+  --bs-primary-rgb: 0,150,64;
+  --bs-light: #F3F5F7;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: var(--bs-primary);
+  --bs-btn-hover-border-color: var(--bs-primary);
+  --bs-btn-active-bg: var(--bs-primary);
+  --bs-btn-active-border-color: var(--bs-primary);
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+.btn-light {
+  --bs-btn-bg: var(--bs-light);
+  --bs-btn-border-color: var(--bs-light);
+  --bs-btn-disabled-bg: var(--bs-light);
+  --bs-btn-disabled-border-color: var(--bs-light);
+}
+
+.card {
+  --bs-card-spacer-y: 1.5rem;
+  --bs-card-spacer-x: 1.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.075);
+  border: 0;
+}
+
+.list-group {
+  --bs-list-group-border-color: #E9EBED;
+  --bs-list-group-color: #405464;
+  --bs-list-group-item-padding-x: 0;
+}
+
+.table {
+  --bs-table-color: #405464;
+  --bs-table-striped-color: #405464;
+  --bs-table-hover-color: #405464;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+hr {
+  border: 1px solid #B5C8E6;
+}
+
+a {
+  text-decoration: none;
+}

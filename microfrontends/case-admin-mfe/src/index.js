@@ -2,6 +2,7 @@ import './utils/public-path';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { HashRouter as Router } from 'react-router-dom';
 
 import styles from './index.css';
 import App from './App';
@@ -59,7 +60,9 @@ class CaseEntryMFE extends HTMLElement {
       this.#appInstance.render(
         <React.StrictMode>
           <KeycloakProvider>
-            <App config={config} />
+            <Router>
+              <App config={config} />
+            </Router>
           </KeycloakProvider>
         </React.StrictMode>
       );

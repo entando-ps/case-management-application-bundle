@@ -1,10 +1,13 @@
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+import Dashboard from './components/Dashboard';
+
+function App({ config }) {
   return (
-    <div>
-      Case Admin MFE
-    </div>
+    <Routes>
+      <Route path="/" element={<Dashboard config={config} />} />
+      {/* <Route path="/case/:id" element={<CaseView config={config} />} /> */}
+    </Routes>
   );
 }
 
