@@ -7,4 +7,9 @@ public interface BundleConstants {
 
   String CASE_MANAGEMENT_ADMIN = "case-management-admin";
 
+  String PROCESS_INSTANCE_KEY = "approvationRequest";
+  String USER_TASK_NAME = "Invia richiesta";
+
+  String PROCESS_INSTANCE_VARIABLES_LAST_UPDATE = "updated";
+
 }
