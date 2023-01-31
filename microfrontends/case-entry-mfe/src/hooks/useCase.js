@@ -16,7 +16,11 @@ export function useCase(config) {
         keycloak.login();
       } else {
         const request = async () => {
-          const data = await getCase(id, config, keycloak.token);
+          const data = await getCase(
+            id.split('&')[0], // trim out unwanted extra hash params
+            config,
+            keycloak.token
+          );
           
           setLoading(false);
           setCaseData(data);

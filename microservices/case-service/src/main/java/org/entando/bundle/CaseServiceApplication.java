@@ -16,18 +16,8 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class CaseServiceApplication {
 
-	@Autowired
-	private ProcessEngine processEngine;
-
 	public static void main(String[] args) {
 		SpringApplication.run(CaseServiceApplication.class, args);
-	}
-
-	@Bean(name = "jobExecutor")
-	public SpringJobExecutor jobExecutor() {
-		SpringJobExecutor jobExecutor = new SpringJobExecutor();
-		jobExecutor.registerProcessEngine((ProcessEngineImpl) processEngine);
-		return jobExecutor;
 	}
 
 }

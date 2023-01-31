@@ -29,7 +29,7 @@ spring:
             issuer-uri: http://localhost:9080/auth/realms/entando-dev
         registration:
           oidc:
-            client-id: web_app
+            client-id: entando-web
 management:
   endpoints:
     web:

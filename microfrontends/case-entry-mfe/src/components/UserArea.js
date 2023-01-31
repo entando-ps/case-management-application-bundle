@@ -12,7 +12,7 @@ const caseStates = {
 };
 
 function UserArea({ config }) {
-  const { idTokenParsed: { given_name, family_name } = {} } = useKeycloak();
+  const { idTokenParsed: { given_name, family_name, preferred_username } = {} } = useKeycloak();
   const { cases } = useCases(config);
 
   return (
@@ -22,7 +22,7 @@ function UserArea({ config }) {
           <h2 className="mb-4">Benvenuto nella tua Area Riservata</h2>
           <Container className="p-0" fluid>
             <Row className="mb-2">
-              <Col xs="3">Nome: <b>{given_name}</b></Col>
+              <Col xs="3">Nome: <b>{given_name || preferred_username}</b></Col>
               <Col xs>Data Registrazione: <b>20 Dicembre 2022</b></Col>
             </Row>
             <Row>
