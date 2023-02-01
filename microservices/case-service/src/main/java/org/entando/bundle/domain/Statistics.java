@@ -20,7 +20,7 @@ public class Statistics {
   private Map<Integer, StatisticElement> byYear;
 
   /**
-   * Return the statistic element of the desired yesr
+   * Return the statistic element of the desired year
    * @param year the year of the statistics
    * @return the statistic elements of the desired year
    */

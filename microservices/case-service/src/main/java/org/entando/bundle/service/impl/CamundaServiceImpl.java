@@ -22,7 +22,7 @@ import static org.entando.bundle.BundleConstants.USER_TASK_NAME;
 @Service
 public class CamundaServiceImpl implements CamundaService {
 
-  private Logger log = LoggerFactory.getLogger(CamundaServiceImpl.class);
+  private final Logger log = LoggerFactory.getLogger(CamundaServiceImpl.class);
 
   private final HistoryService historyService;
 
@@ -65,7 +65,7 @@ public class CamundaServiceImpl implements CamundaService {
       && (vars = getProcessVariables(instanceId)) != null) {
 
       res = vars.stream()
-        .collect(Collectors.toMap(t -> t.getName(), t -> t.getValue()));
+        .collect(Collectors.toMap(HistoricVariableInstance::getName, HistoricVariableInstance::getValue));
     }
     return res;
   }
@@ -84,8 +84,7 @@ public class CamundaServiceImpl implements CamundaService {
 
       if ((task = getRunningProcessTask(instanceId, USER_TASK_NAME)) != null) {
         if (props != null && !props.isEmpty()) {
-          props.entrySet()
-            .forEach(e -> taskService.setVariable(task.getId(), e.getKey(), e.getValue()));
+          props.forEach((key, value) -> taskService.setVariable(task.getId(), key, value));
         }
       } else {
         log.debug("Invalid process specification");

@@ -518,12 +518,13 @@
 						{
 							"key": "attachments",
 							"type": "file",
-							"src": "/home/matteo/Pictures/x-mark-128.gif"
+							"src": "/home/matteo/Pictures/Entando_Logo_Dark_Blue@4x.png"
 						},
 						{
 							"key": "attachments",
 							"type": "file",
-							"src": "/home/matteo/Pictures/Entando_Logo_Dark_Blue@4x.png"
+							"src": "/home/matteo/Pictures/x-mark-128.png",
+							"disabled": true
 						},
 						{
 							"key": "attachments",
@@ -533,7 +534,7 @@
 						},
 						{
 							"key": "case_metadata",
-							"value": "{\n    \"authorized\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"1977-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Carbonia\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MTTMML77G05U654U\",\n        \"email\": \"mail@gmail.com\",\n        \"mobile\": \"3281235123\",\n        \"role\": \"sector\"\n    },\n    \"subscriber\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"2023-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Cagliari\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MAAMML77G05U654U\",\n        \"email\": \"another_mail@gmail.com\",\n        \"landline\": \"178161832\",\n        \"mobile\": \"3281235123\",\n        \"sector\": \"sector\",\n        \"delegation\": \"TIPO_DUE\"\n    }\n}",
+							"value": "{\n    \"authorized\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"1977-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Carbonia\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MTTMML77G05U654U\",\n        \"email\": \"mail@gmail.com\",\n        \"mobile\": \"3281235123\",\n        \"role\": \"sector\"\n    },\n    \"subscriber\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"2023-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Cagliari\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MAAMML77G05U654U\",\n        \"email\": \"another_mail@gmail.com\",\n        \"landline\": \"178161832\",\n        \"mobile\": \"3281235123\",\n        \"sector\": \"sector\",\n        \"delegation\": \"PROCURATORE\"\n    }\n}",
 							"contentType": "application/json",
 							"type": "text"
 						}
@@ -1213,7 +1214,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Tue, 31 Jan 2023 19:35:18 GMT"
+							"value": "Wed, 01 Feb 2023 15:16:06 GMT"
 						},
 						{
 							"key": "Keep-Alive",
@@ -1225,48 +1226,8 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"by_status\": {\n        \"approved\": 1,\n        \"open\": 3,\n        \"rejected\": 1\n    },\n    \"by_year\": {\n        \"2023\": {\n            \"approved\": 1,\n            \"open\": 3,\n            \"rejected\": 1\n        }\n    }\n}"
-				}
-			]
-		},
-		{
-			"name": "STATISTICS DATE RANGE",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"body": "{\n    \"by_status\": {\n        \"open\": 10\n    },\n    \"by_year\": {\n        \"2019\": {\n            \"open\": 2\n        },\n        \"2020\": {\n            \"open\": 2\n        },\n        \"2021\": {\n            \"open\": 2\n        },\n        \"2022\": {\n            \"open\": 2\n        },\n        \"2023\": {\n            \"open\": 2\n        }\n    }\n}"
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{staging_url}}/api/cases/dashboard?from=2023-02-01&to=2023-02-01",
-					"host": [
-						"{{staging_url}}"
-					],
-					"path": [
-						"api",
-						"cases",
-						"dashboard"
-					],
-					"query": [
-						{
-							"key": "from",
-							"value": "2023-02-01"
-						},
-						{
-							"key": "to",
-							"value": "2023-02-01"
-						}
-					]
-				}
-			},
-			"response": [
 				{
 					"name": "STATISTICS",
 					"originalRequest": {
@@ -1334,7 +1295,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Tue, 31 Jan 2023 19:35:18 GMT"
+							"value": "Wed, 01 Feb 2023 15:18:35 GMT"
 						},
 						{
 							"key": "Keep-Alive",
@@ -1346,7 +1307,138 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"by_status\": {\n        \"approved\": 1,\n        \"open\": 3,\n        \"rejected\": 1\n    },\n    \"by_year\": {\n        \"2023\": {\n            \"approved\": 1,\n            \"open\": 3,\n            \"rejected\": 1\n        }\n    }\n}"
+					"body": "{\n    \"by_status\": {\n        \"approved\": 5,\n        \"rejected\": 5\n    },\n    \"by_year\": {\n        \"2019\": {\n            \"approved\": 1,\n            \"open\": 2,\n            \"rejected\": 1\n        },\n        \"2020\": {\n            \"approved\": 1,\n            \"open\": 2,\n            \"rejected\": 1\n        },\n        \"2021\": {\n            \"approved\": 2,\n            \"open\": 2\n        },\n        \"2022\": {\n            \"open\": 2,\n            \"rejected\": 2\n        },\n        \"2023\": {\n            \"approved\": 1,\n            \"open\": 2,\n            \"rejected\": 1\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "STATISTICS DATE RANGE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/dashboard?from=2021-01-01&to=2022-01-01",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"dashboard"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2021-01-01"
+						},
+						{
+							"key": "to",
+							"value": "2022-01-01"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "STATISTICS DATE RANGE",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{staging_url}}/api/cases/dashboard?from=2021-01-01&to=2022-01-01",
+							"host": [
+								"{{staging_url}}"
+							],
+							"path": [
+								"api",
+								"cases",
+								"dashboard"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "to",
+									"value": "2022-01-01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Feb 2023 15:19:15 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"by_status\": {\n        \"approved\": 2\n    },\n    \"by_year\": {\n        \"2021\": {\n            \"approved\": 2,\n            \"open\": 2\n        }\n    }\n}"
 				}
 			]
 		}

@@ -14,7 +14,6 @@ import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +35,7 @@ import static org.entando.bundle.BundleConstants.*;
 public class CaseServiceImpl implements CaseService {
 
 
-  private Logger log = LoggerFactory.getLogger(CaseServiceImpl.class);
+  private final Logger log = LoggerFactory.getLogger(CaseServiceImpl.class);
 
   private final CaseIdentityService caseIdentityService;
 
@@ -44,26 +43,26 @@ public class CaseServiceImpl implements CaseService {
 
   private final CamundaService bpmService;
 
-  @Autowired
-  private CaseRepository caseRepository;
+  private final CaseRepository caseRepository;
 
-  public CaseServiceImpl(CaseIdentityService caseIdentityService, FileService fileService, CamundaService bpmService) {
+  public CaseServiceImpl(CaseIdentityService caseIdentityService, FileService fileService, CamundaService bpmService, CaseRepository caseRepository) {
     this.caseIdentityService = caseIdentityService;
     this.fileService = fileService;
     this.bpmService = bpmService;
+    this.caseRepository = caseRepository;
   }
 
   @Override
   public List<Case> getAllCases() {
     return caseRepository.findAll().stream()
-      .map(c -> syncWithProcessData(c))
+      .map(this::syncWithProcessData)
       .collect(Collectors.toList());
   }
 
   @Override
   public List<Case> getCasesByName(String name) {
     return caseRepository.findByOwnerId(name).stream()
-      .map(c -> syncWithProcessData(c))
+      .map(this::syncWithProcessData)
       .collect(Collectors.toList());
   }
 
@@ -75,13 +74,13 @@ public class CaseServiceImpl implements CaseService {
   @Override
   public Optional<Case> getCase(Long id) {
     Optional<Case> dbCase = caseRepository.findById(id);
-    return Optional.ofNullable(dbCase.map(c -> syncWithProcessData(c)).orElse(null));
+    return dbCase.map(this::syncWithProcessData);
   }
 
   @Override
   public Optional<Case> getCaseByIdAndOwner(Long id, String name) {
     Optional<Case> dbCase =  caseRepository.findByIdAndOwnerIdIs(id,name);
-    return Optional.ofNullable(dbCase.map(c -> syncWithProcessData(c)).orElse(null));
+    return dbCase.map(this::syncWithProcessData);
   }
 
   @Override
@@ -238,6 +237,7 @@ public class CaseServiceImpl implements CaseService {
       String instanceId = cur.getProcessInstanceId();
       // update /add the current date time
       props.put(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE, LocalDateTime.now());
+//      props.put(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE, cur.getCreated()); // UNCOMMENT THIS FOR SAME YEAR APPROVAL
       // fetch the user task...
       Task task = bpmService.getRunningProcessTask(instanceId, USER_TASK_NAME);
       // ...update variables...
@@ -269,7 +269,7 @@ public class CaseServiceImpl implements CaseService {
       }
       return caseRepository.findByCreatedAfterAndCreatedBefore(from.atStartOfDay(),
         to.atTime(LocalTime.now())).stream()
-        .map(c -> syncWithProcessData(c))
+        .map(this::syncWithProcessData)
         .collect(Collectors.toList());
     }
     return getAllCases();
@@ -277,35 +277,36 @@ public class CaseServiceImpl implements CaseService {
 
   /**
    * Return a subset of cases data useful for the statistics
-   * @param cases
-   * @return
+   * @param cases case list to analyze
+   * @return the statistics
    */
   private Statistics extractStatistics(final List<Case> cases) {
     final Statistics stats = new Statistics();
-    final StatisticElement byStatusElement = new StatisticElement();
+    final StatisticElement overall = new StatisticElement();
 
-    stats.setByStatus(byStatusElement);
+    stats.setByStatus(overall);
     if (cases != null && !cases.isEmpty()) {
       cases.forEach(c -> {
-        StatisticElement elem = new StatisticElement();
-
         if (c.getState() == State.RUNNING) {
           final StatisticElement creationYearElement = stats.getYear(c.getCreated().getYear());
           // add to opened...
-          byStatusElement.addOpen();
+          overall.addOpen();
           creationYearElement.addOpen();
         } else if (c.getState() == State.COMPLETED) {
+          final LocalDateTime openingDate = c.getCreated();
           final LocalDateTime completedDate = (LocalDateTime) c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE);
           final StatisticElement completedYearElement = stats.getYear(completedDate.getYear());
+          final StatisticElement openingYearElement = stats.getYear(openingDate.getYear());
 
+          openingYearElement.addOpen();
           if ((boolean)c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_APPROVED)) {
             // ..add approved...
             completedYearElement.addApproved();
-            byStatusElement.addApproved();
+            overall.addApproved();
           } else {
             // ...add rejected...
             completedYearElement.addRejected();
-            byStatusElement.addRejected();
+            overall.addRejected();
           }
         } else {
           // add fault
