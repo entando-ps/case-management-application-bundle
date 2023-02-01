@@ -5,15 +5,18 @@ import CaseEntryForm from './components/CaseEntryForm';
 import CaseEntrySuccess from './components/CaseEntrySuccess';
 import CaseView from './components/CaseView';
 import UserArea from './components/UserArea';
+import { ToastProvider } from './contexts/ToastContext';
 
 function App({ config }) {
   return (
-    <Routes>
-      <Route path="/" element={<UserArea config={config} />} />
-      <Route path="/case/:id" element={<CaseView config={config} />} />
-      <Route path="/case-entry" element={<CaseEntryForm config={config} />} />
-      <Route path="/case-entry-success" element={<CaseEntrySuccess />} />
-    </Routes>
+    <ToastProvider>
+      <Routes>
+        <Route path="/" element={<UserArea config={config} />} />
+        <Route path="/case/:id" element={<CaseView config={config} />} />
+        <Route path="/case-entry" element={<CaseEntryForm config={config} />} />
+        <Route path="/case-entry-success" element={<CaseEntrySuccess />} />
+      </Routes>
+    </ToastProvider>
   );
 }
 

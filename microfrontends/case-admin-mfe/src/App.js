@@ -1,10 +1,17 @@
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+import CaseView from './components/CaseView';
+import Dashboard from './components/Dashboard';
+import { ToastProvider } from './contexts/ToastContext';
+
+function App({ config }) {
   return (
-    <div>
-      Case Admin MFE
-    </div>
+    <ToastProvider>
+      <Routes>
+        <Route path="/" element={<Dashboard config={config} />} />
+        <Route path="/case/:id" element={<CaseView config={config} />} />
+      </Routes>
+    </ToastProvider>
   );
 }
 

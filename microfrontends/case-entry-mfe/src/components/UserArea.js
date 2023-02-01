@@ -3,13 +3,8 @@ import { Link } from 'react-router-dom';
 import { useKeycloak } from '../auth/Keycloak';
 
 import { useCases } from '../hooks/useCases';
+import deriveDisplayTextFromCaseState from '../utils/deriveDisplayTextFromCaseState';
 import formatDateToIt from '../utils/formatDateToIt';
-
-const caseStates = {
-  CREATED: 'Aperte',
-  APPROVED: 'Approvata',
-  REJECTED: 'Rifiutata',
-};
 
 function UserArea({ config }) {
   const { idTokenParsed: { given_name, family_name, preferred_username } = {} } = useKeycloak();
@@ -27,7 +22,10 @@ function UserArea({ config }) {
             </Row>
             <Row>
               <Col xs="3">Cognome: <b>{family_name}</b></Col>
-              <Col xs>Numero pratica: <b>{cases[0]?.identifier}</b></Col>
+              <Col xs>Numero pratica: {cases[0]
+                ? <b>{cases[0]?.identifier}</b>
+                : <span className="text-muted">Nessuna pratica presentata</span>}
+              </Col>
             </Row>
           </Container>
         </Card.Body>
@@ -49,7 +47,7 @@ function UserArea({ config }) {
             <Card.Body>
               <h5 className="mb-3">Compilazione dati autorizzazione e richiesta codice dispositivo</h5>
               <p className="mb-1">Data Creazione: <b>{formatDateToIt(cases[0].created)}</b></p>
-              <p>Stato: <b className="text-primary">{caseStates[cases[0].state]}</b></p>
+              <p>Stato: <b className="text-primary">{deriveDisplayTextFromCaseState(cases[0])}</b></p>
               <Link to={`/case/${cases[0].id}`}>
                 <Button>Vai alla tua pratica</Button>
               </Link>

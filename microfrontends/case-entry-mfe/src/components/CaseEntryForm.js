@@ -7,17 +7,20 @@ import CaseEntryFormSubscriberSection from './CaseEntryFormSubscriberSection';
 import CaseEntryFormUploadSection from './CaseEntryFormUploadSection';
 import { postCase } from '../api/case';
 import { useKeycloak } from '../auth/Keycloak';
+import { useToast } from '../contexts/ToastContext';
 
 function CaseEntryForm({ config }) {
   const { token } = useKeycloak();
   const formMethods = useForm();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleSubmit = async data => {
     try {
       const newCase = await postCase(data, config, token);
       navigate(`/case-entry-success?id=${newCase.identifier}`);
     } catch (error) {
+      showToast(error.message, 'danger');
       console.error(error);
     }
   };
