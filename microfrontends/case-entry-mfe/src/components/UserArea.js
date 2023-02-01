@@ -22,7 +22,10 @@ function UserArea({ config }) {
             </Row>
             <Row>
               <Col xs="3">Cognome: <b>{family_name}</b></Col>
-              <Col xs>Numero pratica: <b>{cases[0]?.identifier}</b></Col>
+              <Col xs>Numero pratica: {cases[0]
+                ? <b>{cases[0]?.identifier}</b>
+                : <span className="text-muted">Nessuna pratica presentata</span>}
+              </Col>
             </Row>
           </Container>
         </Card.Body>
