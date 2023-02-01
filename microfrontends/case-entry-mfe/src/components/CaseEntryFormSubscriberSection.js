@@ -102,9 +102,8 @@ function CaseEntryFormSubscriberSection() {
             <Form.Group className="mb-3" controlId="subscriber.delegation">
               <Form.Label>Delega</Form.Label>
               <Form.Select {...register('subscriber.delegation')}>
-                <option value="" hidden></option>
-                <option value="TIPO_UNO">TIPO_UNO</option>
-                <option value="TIPO_DUE">TIPO_DUE</option>
+                <option value="LEGALE_RAPPRESENTANTE">Legale rappresentante</option>
+                <option value="PROCURATORE">Procuratore</option>
               </Form.Select>
             </Form.Group>
           </Col>

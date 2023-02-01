@@ -107,7 +107,7 @@ public class CaseServiceImplTest {
     su.setLandline("048161832");
     su.setMobile("3283285328");
     su.setSector("sector");
-    su.setDelegation(Delegation.TIPO_DUE);
+    su.setDelegation(Delegation.LEGALE_RAPPRESENTANTE);
 
     au.setRole("role");
     au.setName("test");

@@ -110,9 +110,14 @@ public class CamundaServiceImpl implements CamundaService {
 
   @Override
   public void deleteProcess(String instanceId) {
-    if (StringUtils.isNotBlank(instanceId)) {
+    if (StringUtils.isNotBlank(instanceId) && isProcessRunning(instanceId)) {
       runtimeService.deleteProcessInstance(instanceId, "no reason");
-      log.info("deleted process {}", instanceId);
+      log.info("deleted running process {}", instanceId);
+    } else if (StringUtils.isNotBlank(instanceId)) {
+      historyService.deleteHistoricProcessInstanceIfExists(instanceId);
+      log.info("deleted completed process {}", instanceId);
+    } else {
+      log.debug("Invalid process to delete");
     }
   }
 
