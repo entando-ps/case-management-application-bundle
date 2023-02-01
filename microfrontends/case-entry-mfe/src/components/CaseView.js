@@ -1,5 +1,6 @@
 import { Card, Col, Container, ListGroup, Row, Stack } from 'react-bootstrap';
 import { ReactComponent as PdfIcon } from 'bootstrap-icons/icons/file-earmark-pdf.svg';
+import { ReactComponent as DownloadIcon } from 'bootstrap-icons/icons/download.svg';
 
 import { useKeycloak } from '../auth/Keycloak';
 import { useCase } from '../hooks/useCase';
@@ -53,7 +54,7 @@ function CaseView({ config }) {
       <Card className="mb-4">
         <Card.Body>
           <h4 className="mb-4">Dati del sottoscrittore dell’autorizzazione<br />
-            (legale rappresentante del Sogetto Proponente o suo delegato)
+            (legale rappresentante del Soggetto Proponente o suo delegato)
           </h4>
           <ListGroup variant="flush">
             {subscriberFields.map(({ label, key }) => (
@@ -85,11 +86,14 @@ function CaseView({ config }) {
       <Card className="mb-4">
         <Card.Body>
           <h4 className="mb-4">Caricamento Documenti</h4>
-          {caseData?.metadata?.resources?.map(({ key }, idx) => (
+          {caseData?.metadata?.resources?.map(({ key, url }, idx) => (
             <div key={key} className="mb-3">
               <Stack direction="horizontal">
                 <small className="fw-bold">Documento {idx + 1}</small>
                 <div className="ms-auto">
+                  <a href={url} download style={{ color: 'inherit' }}>
+                    <DownloadIcon style={{ cursor: 'pointer' }} />
+                  </a>
                   <small className="me-2">{key}</small>
                   <PdfIcon width="22" height="30" className="text-danger" />
                 </div>
