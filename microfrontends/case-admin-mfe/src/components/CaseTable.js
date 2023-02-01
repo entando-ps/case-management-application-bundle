@@ -1,7 +1,7 @@
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import deriveCaseState from '../utils/deriveCaseState';
+import deriveDisplayTextFromCaseState from '../utils/deriveDisplayTextFromCaseState';
 import formatDateToIt from '../utils/formatDateToIt';
 
 
@@ -27,7 +27,7 @@ function CaseTable({ cases }) {
             <td>Accademia Danza</td>
             <td>NO</td>
             <td>{formatDateToIt(c.created)}</td>
-            <td>{deriveCaseState(c)}</td>
+            <td>{deriveDisplayTextFromCaseState(c)}</td>
             <td>
               <Link to={`/case/${c.id}`}>Vedi pratica</Link>
             </td>
