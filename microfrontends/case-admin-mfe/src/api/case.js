@@ -75,3 +75,47 @@ export const postCase = async (data, config, token) => {
     throw new Error(error.message);
   }
 };
+
+export const rejectCase = async (id, config, token) => {
+  const { api } = config.systemParams;
+
+  try {
+    const res = await fetch(`${api['case-api'].url}/api/cases/${id}/reject`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      throw new Error('Impossibile rifiutare il caso');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const approveCase = async (id, config, token) => {
+  const { api } = config.systemParams;
+  
+  try {
+    const res = await fetch(`${api['case-api'].url}/api/cases/${id}/approve`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      throw new Error('Impossibile approvare il caso');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

@@ -10,6 +10,7 @@
   /* Bootstrap overrides */
   --bs-primary: #009640;
   --bs-primary-rgb: 0,150,64;
+  --bs-secondary: #415464;
   --bs-light: #F3F5F7;
 }
 
@@ -22,6 +23,17 @@
   --bs-btn-active-border-color: var(--bs-primary);
   --bs-btn-disabled-bg: var(--bs-primary);
   --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+.btn-secondary {
+  --bs-btn-bg: var(--bs-secondary);
+  --bs-btn-border-color: var(--bs-secondary);
+  --bs-btn-hover-bg: var(--bs-secondary);
+  --bs-btn-hover-border-color: var(--bs-secondary);
+  --bs-btn-active-bg: var(--bs-secondary);
+  --bs-btn-active-border-color: var(--bs-secondary);
+  --bs-btn-disabled-bg: var(--bs-secondary);
+  --bs-btn-disabled-border-color: var(--bs-secondary);
 }
 
 .btn-light {
