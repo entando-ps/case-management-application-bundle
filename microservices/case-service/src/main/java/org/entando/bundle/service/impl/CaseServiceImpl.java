@@ -256,6 +256,12 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
+  public Statistics getStatisticsRange(LocalDate from, LocalDate to) {
+    List<Case> cases = getCaseByDate(from, to);
+    return extractStatistics(cases);
+  }
+
+  @Override
   public List<Case> getCaseByDate(LocalDate from, LocalDate to) {
     if (from != null) {
       if (to == null) {
@@ -267,12 +273,6 @@ public class CaseServiceImpl implements CaseService {
         .collect(Collectors.toList());
     }
     return getAllCases();
-  }
-
-  @Override
-  public Statistics getStatisticsRange(LocalDate from, LocalDate to) {
-    List<Case> cases = getCaseByDate(from, to);
-    return extractStatistics(cases);
   }
 
   /**

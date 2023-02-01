@@ -113,7 +113,7 @@ public interface CaseService {
   /**
    * Get the statistics in the desired period (if any)
    * @param from starting date, can be null
-   * @param to ending date, must be null if 'from' is null
+   * @param to ending date, must be null if 'from' is null, otherwise the current instant is used if none passed
    * @return the statistics
    */
   Statistics getStatisticsRange(LocalDate from, LocalDate to);
