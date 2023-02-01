@@ -94,7 +94,7 @@ function CaseView({ config }) {
                   <a href={url} download style={{ color: 'inherit' }}>
                     <DownloadIcon style={{ cursor: 'pointer' }} />
                   </a>
-                  <small className="me-2">{key}</small>
+                  <small className="mx-2">{key}</small>
                   <PdfIcon width="22" height="30" className="text-danger" />
                 </div>
               </Stack>
