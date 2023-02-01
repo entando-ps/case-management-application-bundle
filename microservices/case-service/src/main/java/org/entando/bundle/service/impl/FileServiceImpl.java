@@ -279,7 +279,7 @@ public class FileServiceImpl implements FileService {
     if (StringUtils.isNotBlank(keyName)) {
       try {
         URIBuilder builder = new URIBuilder(getBucketUrl());
-        builder.setPath(getBucketName() + "/" + keyName);
+        builder.setPath(keyName);
         name = builder.toString();
       } catch (Throwable t) {
         log.error("Error generating public url of a file", t.getLocalizedMessage());
