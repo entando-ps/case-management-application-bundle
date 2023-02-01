@@ -21,9 +21,15 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <ToastContainer position="bottom-end" className="p-3">
-        <Toast bg={toast.variant} onClose={() => setToast({ open: false })} show={toast.open} delay={5000} autohide>
-          <Toast.Body>{toast.message}</Toast.Body>
+      <ToastContainer position="top-end" className="p-3 position-fixed">
+        <Toast
+          bg={toast.variant}
+          onClose={() => setToast({ open: false })}
+          show={toast.open}
+          delay={5000} 
+          autohide
+        >
+          <Toast.Body className="text-white">{toast.message}</Toast.Body>
         </Toast>
       </ToastContainer>
     </ToastContext.Provider>

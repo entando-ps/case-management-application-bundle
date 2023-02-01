@@ -42,7 +42,7 @@ function CaseView({ config }) {
   const handleReject = async () => {
     try {
       await rejectCase(caseData.id, config, token);
-      showToast(`Pratica approvata ${caseData.identifier}`);
+      showToast(`Pratica approvata ${caseData.identifier}`, 'secondary');
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -52,7 +52,7 @@ function CaseView({ config }) {
   const handleApprove = async () => {
     try {
       await approveCase(caseData.id, config, token);
-      showToast(`Pratica rifiutata ${caseData.identifier}`);
+      showToast(`Pratica rifiutata ${caseData.identifier}`, 'primary');
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -85,7 +85,7 @@ function CaseView({ config }) {
       <Card className="mb-4">
         <Card.Body>
           <h4 className="mb-4">Dati del sottoscrittore dell’autorizzazione<br />
-            (legale rappresentante del Sogetto Proponente o suo delegato)
+            (legale rappresentante del Soggetto Proponente o suo delegato)
           </h4>
           <ListGroup variant="flush">
             {subscriberFields.map(({ label, key }) => (
