@@ -29,7 +29,12 @@ spring:
             issuer-uri: http://localhost:9080/auth/realms/entando-dev
         registration:
           oidc:
-            client-id: entando-web
+            client-id: web_app
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
 management:
   endpoints:
     web:

@@ -8,7 +8,7 @@ function CaseEntryFormSubscriberSection() {
     <div>
       <Stack direction="horizontal" className="mb-4">
         <h4>Dati del sottoscrittore dell’autorizzazione<br />
-          (legale rappresentante del Sogetto Proponente o suo delegato)
+          (legale rappresentante del Soggetto Proponente o suo delegato)
         </h4>
         <small className="text-muted ms-auto">*Campi Obbligatori</small>
       </Stack>
