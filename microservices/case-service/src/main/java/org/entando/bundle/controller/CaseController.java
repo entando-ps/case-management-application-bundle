@@ -125,6 +125,7 @@ public class CaseController {
                 return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
             }
         } catch (Throwable t) {
+            log.error("error deleting a case", t);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error deleting Case", t);
         }
     }
