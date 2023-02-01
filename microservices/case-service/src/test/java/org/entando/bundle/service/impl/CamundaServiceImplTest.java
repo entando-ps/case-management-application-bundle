@@ -4,6 +4,7 @@ package org.entando.bundle.service.impl;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.history.HistoricVariableInstance;
 import org.camunda.bpm.engine.impl.persistence.entity.HistoricVariableInstanceEntity;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
@@ -131,11 +132,33 @@ public class CamundaServiceImplTest {
   }
 
   @Test
-  public void testDelete() {
+  public void testDeleteRunning() {
     final String instanceId = camundaService.startProcess();
     assertTrue(camundaService.isProcessRunning(instanceId));
     camundaService.deleteProcess(instanceId);
     assertFalse(camundaService.isProcessRunning(instanceId));
+    ProcessInstance proc = runtimeService.createProcessInstanceQuery().processInstanceId(instanceId).singleResult();
+    assertNull(proc);
+    // NOTA QUESTO!!!
+    HistoricProcessInstance hiProc = historyService.createHistoricProcessInstanceQuery()
+      .processInstanceId(instanceId).singleResult();
+    assertThat(hiProc, is(notNullValue()));
+  }
+
+  @Test
+  public void testDeleteCompleted() {
+    // start
+    final String instanceId = camundaService.startProcess();
+    final Map<String, Object> props = Map.of("nice", true);
+    assertThat(instanceId, is(notNullValue()));
+
+    // update
+    setUserTaskVariablesAndState(instanceId, props, true);
+    camundaService.deleteProcess(instanceId);
+    assertFalse(camundaService.isProcessRunning(instanceId));
+    HistoricProcessInstance proc = historyService.createHistoricProcessInstanceQuery()
+      .processInstanceId(instanceId).singleResult();
+    assertNull(proc);
   }
 
   @Test
