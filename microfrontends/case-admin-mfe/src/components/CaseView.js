@@ -7,6 +7,7 @@ import { useKeycloak } from '../auth/Keycloak';
 import { useCase } from '../hooks/useCase';
 import { approveCase, rejectCase } from '../api/case';
 import { useToast } from '../contexts/ToastContext';
+import deriveDisplayTextFromCaseState from '../utils/deriveDisplayTextFromCaseState';
 
 const commonFields = [
   { label: 'Nome', key: 'name' },
@@ -42,9 +43,10 @@ function CaseView({ config }) {
   const handleReject = async () => {
     try {
       await rejectCase(caseData.id, config, token);
-      showToast(`Pratica approvata ${caseData.identifier}`, 'secondary');
+      showToast(`Pratica rifiutata ${caseData.identifier}`, 'secondary');
       navigate('/');
     } catch (error) {
+      showToast(error.message, 'danger');
       console.error(error);
     }
   };
@@ -52,9 +54,10 @@ function CaseView({ config }) {
   const handleApprove = async () => {
     try {
       await approveCase(caseData.id, config, token);
-      showToast(`Pratica rifiutata ${caseData.identifier}`, 'primary');
+      showToast(`Pratica approvata ${caseData.identifier}`, 'primary');
       navigate('/');
     } catch (error) {
+      showToast(error.message, 'danger');
       console.error(error);
     }
   };
@@ -75,10 +78,16 @@ function CaseView({ config }) {
                 <Col xs>Numero pratica: <b>{caseData?.identifier}</b></Col>
               </Row>
             </Container>
-            <Stack direction="horizontal">
-              <Button onClick={handleReject} variant="secondary" className="px-5">Rifiuta</Button>
-              <Button onClick={handleApprove} className="px-5 ms-3">Approva</Button>
-            </Stack>
+            {caseData?.state === 'COMPLETED' ? (
+              <b className={caseData.metadata.processData.approved ? 'text-primary': 'text-secondary'}>
+                {deriveDisplayTextFromCaseState(caseData)}
+              </b>
+            ) : (
+              <Stack direction="horizontal">
+                <Button onClick={handleReject} variant="secondary" className="px-5">Rifiuta</Button>
+                <Button onClick={handleApprove} className="px-5 ms-3">Approva</Button>
+              </Stack>
+            )}
           </Stack>
         </Card.Body>
       </Card>

@@ -1,10 +1,10 @@
-export default function deriveCaseState({ state, processData }) {
+export default function deriveDisplayTextFromCaseState({ state, metadata }) {
   if (state === 'RUNNING') {
     return 'Aperta';
   }
 
   if (state === 'COMPLETED') {
-    return processData?.approved ? 'Approvata' : 'Rifiutata';
+    return metadata?.processData?.approved ? 'Approvata' : 'Rifiutata';
   }
 
   return null;

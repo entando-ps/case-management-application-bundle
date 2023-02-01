@@ -87,10 +87,7 @@ export const rejectCase = async (id, config, token) => {
       },
     });
 
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    } else {
+    if (!res.ok) {
       throw new Error('Impossibile rifiutare il caso');
     }
   } catch (error) {
@@ -109,10 +106,7 @@ export const approveCase = async (id, config, token) => {
       },
     });
 
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    } else {
+    if (!res.ok) {
       throw new Error('Impossibile approvare il caso');
     }
   } catch (error) {
