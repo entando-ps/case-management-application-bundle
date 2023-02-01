@@ -936,17 +936,98 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/api/health",
+					"raw": "{{base_url}}/management/health",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"api",
+						"management",
 						"health"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "HEALTH",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/management/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"management",
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.spring-boot.actuator.v3+json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 31 Jan 2023 19:37:16 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"UP\"\n}"
+				}
+			]
 		},
 		{
 			"name": "WELL KNOWN ENDPOINTS",
@@ -967,7 +1048,307 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "WELL KNOWN ENDPOINTS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kc_base_url}}/auth/realms/{{realm}}/.well-known/openid-configuration",
+							"host": [
+								"{{kc_base_url}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"{{realm}}",
+								".well-known",
+								"openid-configuration"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, must-revalidate, no-transform, no-store"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 31 Jan 2023 19:36:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5786"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"issuer\": \"http://localhost:9080/auth/realms/entando-dev\",\n    \"authorization_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/auth\",\n    \"token_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/token\",\n    \"introspection_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/token/introspect\",\n    \"userinfo_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/userinfo\",\n    \"end_session_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/logout\",\n    \"frontchannel_logout_session_supported\": true,\n    \"frontchannel_logout_supported\": true,\n    \"jwks_uri\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/certs\",\n    \"check_session_iframe\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/login-status-iframe.html\",\n    \"grant_types_supported\": [\n        \"authorization_code\",\n        \"implicit\",\n        \"refresh_token\",\n        \"password\",\n        \"client_credentials\",\n        \"urn:ietf:params:oauth:grant-type:device_code\",\n        \"urn:openid:params:grant-type:ciba\"\n    ],\n    \"response_types_supported\": [\n        \"code\",\n        \"none\",\n        \"id_token\",\n        \"token\",\n        \"id_token token\",\n        \"code id_token\",\n        \"code token\",\n        \"code id_token token\"\n    ],\n    \"subject_types_supported\": [\n        \"public\",\n        \"pairwise\"\n    ],\n    \"id_token_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\"\n    ],\n    \"id_token_encryption_alg_values_supported\": [\n        \"RSA-OAEP\",\n        \"RSA-OAEP-256\",\n        \"RSA1_5\"\n    ],\n    \"id_token_encryption_enc_values_supported\": [\n        \"A256GCM\",\n        \"A192GCM\",\n        \"A128GCM\",\n        \"A128CBC-HS256\",\n        \"A192CBC-HS384\",\n        \"A256CBC-HS512\"\n    ],\n    \"userinfo_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\",\n        \"none\"\n    ],\n    \"request_object_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\",\n        \"none\"\n    ],\n    \"request_object_encryption_alg_values_supported\": [\n        \"RSA-OAEP\",\n        \"RSA-OAEP-256\",\n        \"RSA1_5\"\n    ],\n    \"request_object_encryption_enc_values_supported\": [\n        \"A256GCM\",\n        \"A192GCM\",\n        \"A128GCM\",\n        \"A128CBC-HS256\",\n        \"A192CBC-HS384\",\n        \"A256CBC-HS512\"\n    ],\n    \"response_modes_supported\": [\n        \"query\",\n        \"fragment\",\n        \"form_post\",\n        \"query.jwt\",\n        \"fragment.jwt\",\n        \"form_post.jwt\",\n        \"jwt\"\n    ],\n    \"registration_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/clients-registrations/openid-connect\",\n    \"token_endpoint_auth_methods_supported\": [\n        \"private_key_jwt\",\n        \"client_secret_basic\",\n        \"client_secret_post\",\n        \"tls_client_auth\",\n        \"client_secret_jwt\"\n    ],\n    \"token_endpoint_auth_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\"\n    ],\n    \"introspection_endpoint_auth_methods_supported\": [\n        \"private_key_jwt\",\n        \"client_secret_basic\",\n        \"client_secret_post\",\n        \"tls_client_auth\",\n        \"client_secret_jwt\"\n    ],\n    \"introspection_endpoint_auth_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\"\n    ],\n    \"authorization_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\"\n    ],\n    \"authorization_encryption_alg_values_supported\": [\n        \"RSA-OAEP\",\n        \"RSA-OAEP-256\",\n        \"RSA1_5\"\n    ],\n    \"authorization_encryption_enc_values_supported\": [\n        \"A256GCM\",\n        \"A192GCM\",\n        \"A128GCM\",\n        \"A128CBC-HS256\",\n        \"A192CBC-HS384\",\n        \"A256CBC-HS512\"\n    ],\n    \"claims_supported\": [\n        \"aud\",\n        \"sub\",\n        \"iss\",\n        \"auth_time\",\n        \"name\",\n        \"given_name\",\n        \"family_name\",\n        \"preferred_username\",\n        \"email\",\n        \"acr\"\n    ],\n    \"claim_types_supported\": [\n        \"normal\"\n    ],\n    \"claims_parameter_supported\": true,\n    \"scopes_supported\": [\n        \"openid\",\n        \"roles\",\n        \"entando-dev\",\n        \"web-origins\",\n        \"email\",\n        \"offline_access\",\n        \"profile\",\n        \"address\",\n        \"phone\"\n    ],\n    \"request_parameter_supported\": true,\n    \"request_uri_parameter_supported\": true,\n    \"require_request_uri_registration\": true,\n    \"code_challenge_methods_supported\": [\n        \"plain\",\n        \"S256\"\n    ],\n    \"tls_client_certificate_bound_access_tokens\": true,\n    \"revocation_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/revoke\",\n    \"revocation_endpoint_auth_methods_supported\": [\n        \"private_key_jwt\",\n        \"client_secret_basic\",\n        \"client_secret_post\",\n        \"tls_client_auth\",\n        \"client_secret_jwt\"\n    ],\n    \"revocation_endpoint_auth_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"HS256\",\n        \"HS512\",\n        \"ES256\",\n        \"RS256\",\n        \"HS384\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\"\n    ],\n    \"backchannel_logout_supported\": true,\n    \"backchannel_logout_session_supported\": true,\n    \"device_authorization_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/auth/device\",\n    \"backchannel_token_delivery_modes_supported\": [\n        \"poll\",\n        \"ping\"\n    ],\n    \"backchannel_authentication_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/ext/ciba/auth\",\n    \"backchannel_authentication_request_signing_alg_values_supported\": [\n        \"PS384\",\n        \"ES384\",\n        \"RS384\",\n        \"ES256\",\n        \"RS256\",\n        \"ES512\",\n        \"PS256\",\n        \"PS512\",\n        \"RS512\"\n    ],\n    \"require_pushed_authorization_requests\": false,\n    \"pushed_authorization_request_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/ext/par/request\",\n    \"mtls_endpoint_aliases\": {\n        \"token_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/token\",\n        \"revocation_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/revoke\",\n        \"introspection_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/token/introspect\",\n        \"device_authorization_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/auth/device\",\n        \"registration_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/clients-registrations/openid-connect\",\n        \"userinfo_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/userinfo\",\n        \"pushed_authorization_request_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/ext/par/request\",\n        \"backchannel_authentication_endpoint\": \"http://localhost:9080/auth/realms/entando-dev/protocol/openid-connect/ext/ciba/auth\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "STATISTICS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/dashboard",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"dashboard"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "STATISTICS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{staging_url}}/api/cases/dashboard",
+							"host": [
+								"{{staging_url}}"
+							],
+							"path": [
+								"api",
+								"cases",
+								"dashboard"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 31 Jan 2023 19:35:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"by_status\": {\n        \"approved\": 1,\n        \"open\": 3,\n        \"rejected\": 1\n    },\n    \"by_year\": {\n        \"2023\": {\n            \"approved\": 1,\n            \"open\": 3,\n            \"rejected\": 1\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "STATISTICS DATE RANGE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/dashboard?from=2023-02-01&to=2023-02-01",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"dashboard"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2023-02-01"
+						},
+						{
+							"key": "to",
+							"value": "2023-02-01"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "STATISTICS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{staging_url}}/api/cases/dashboard",
+							"host": [
+								"{{staging_url}}"
+							],
+							"path": [
+								"api",
+								"cases",
+								"dashboard"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 31 Jan 2023 19:35:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"by_status\": {\n        \"approved\": 1,\n        \"open\": 3,\n        \"rejected\": 1\n    },\n    \"by_year\": {\n        \"2023\": {\n            \"approved\": 1,\n            \"open\": 3,\n            \"rejected\": 1\n        }\n    }\n}"
+				}
+			]
 		}
 	]
 }
