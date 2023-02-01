@@ -102,6 +102,15 @@ public interface CaseService {
   boolean completeTaskState(Optional<Case> optCase, Map<String, Object> props);
 
   /**
+   * Return the case by date range
+   *  @param from starting date, can be null
+   *  @param to ending date, must be null if 'from' is null
+   * @return the case in the desired interval (if at least from is specified). Otherwise,
+   * it behaves like 'getAllCases'
+   */
+  List<Case> getCaseByDate(LocalDate from, LocalDate to);
+
+  /**
    * Get the statistics in the desired period (if any)
    * @param from starting date, can be null
    * @param to ending date, must be null if 'from' is null

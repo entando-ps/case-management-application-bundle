@@ -256,20 +256,23 @@ public class CaseServiceImpl implements CaseService {
   }
 
   @Override
-  public Statistics getStatisticsRange(LocalDate from, LocalDate to) {
-    List<Case> cases;
-
+  public List<Case> getCaseByDate(LocalDate from, LocalDate to) {
     if (from != null) {
       if (to == null) {
         to = LocalDate.now();
       }
-      from = from.with(LocalTime.MIDNIGHT);
-      cases = caseRepository.findByCreatedAfterAndCreatedBefore(from.atStartOfDay(),
-        to.atTime(LocalTime.now()));
-    } else {
-      cases = caseRepository.findAll();
+      return caseRepository.findByCreatedAfterAndCreatedBefore(from.atStartOfDay(),
+        to.atTime(LocalTime.now())).stream()
+        .map(c -> syncWithProcessData(c))
+        .collect(Collectors.toList());
     }
-    return extractStatistics(cases).setPeriod(from, to);
+    return getAllCases();
+  }
+
+  @Override
+  public Statistics getStatisticsRange(LocalDate from, LocalDate to) {
+    List<Case> cases = getCaseByDate(from, to);
+    return extractStatistics(cases);
   }
 
   /**
@@ -277,29 +280,36 @@ public class CaseServiceImpl implements CaseService {
    * @param cases
    * @return
    */
-  private Statistics extractStatistics(List<Case> cases) {
-    Statistics stats = new Statistics();
+  private Statistics extractStatistics(final List<Case> cases) {
+    final Statistics stats = new Statistics();
+    final StatisticElement byStatusElement = new StatisticElement();
 
+    stats.setByStatus(byStatusElement);
     if (cases != null && !cases.isEmpty()) {
       cases.forEach(c -> {
         StatisticElement elem = new StatisticElement();
 
-        elem.setOpened(c.getCreated());
         if (c.getState() == State.RUNNING) {
+          final StatisticElement creationYearElement = stats.getYear(c.getCreated().getYear());
           // add to opened...
-          stats.addOpen(elem);
+          byStatusElement.addOpen();
+          creationYearElement.addOpen();
         } else if (c.getState() == State.COMPLETED) {
-          elem.setClosed((LocalDateTime) c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE));
+          final LocalDateTime completedDate = (LocalDateTime) c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_LAST_UPDATE);
+          final StatisticElement completedYearElement = stats.getYear(completedDate.getYear());
+
           if ((boolean)c.getMetadata().getProcessData().get(PROCESS_INSTANCE_VARIABLES_APPROVED)) {
             // ..add approved...
-            stats.addApproved(elem);
+            completedYearElement.addApproved();
+            byStatusElement.addApproved();
           } else {
             // ...add rejected...
-            stats.addRejected(elem);
+            completedYearElement.addRejected();
+            byStatusElement.addRejected();
           }
         } else {
           // add fault
-          stats.addFaulty(elem);
+//          stats.addFaulty(elem);
         }
       });
     }

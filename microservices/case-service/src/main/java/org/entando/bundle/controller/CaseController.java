@@ -7,6 +7,7 @@ import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.impl.CaseServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -93,7 +94,7 @@ public class CaseController {
             return optionalCase.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
         } catch (Throwable t) {
             log.error("error getting a Cases", t);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error getting a Case", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error getting a case", t);
         }
     }
 
@@ -110,7 +111,7 @@ public class CaseController {
             aCase = caseService.createCase(files, data, name);
         } catch (Throwable t) {
             log.error("error creating a new Cases", t);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error creating aCase", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error creating a case", t);
         }
         return aCase;
     }
@@ -128,7 +129,7 @@ public class CaseController {
                 return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
             }
         } catch (Throwable t) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error deleting Case", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error deleting a case", t);
         }
     }
 
@@ -159,11 +160,14 @@ public class CaseController {
         }
     }
 
-    @GetMapping("/stats")
+    @GetMapping("/dashboard")
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
-    public @ResponseBody ResponseEntity<Statistics> getCaseStatistics(@RequestParam LocalDate from, @RequestParam LocalDate to) {
+    public @ResponseBody Statistics getCaseStatistics(@RequestParam(required = false)
+                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+                                                      @RequestParam(required = false)
+                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
         try {
-
+            return caseService.getStatisticsRange(from, to);
         } catch (Throwable t) {
             log.error("error while getting usage statistics", t);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);

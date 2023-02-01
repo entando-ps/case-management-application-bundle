@@ -1,59 +1,40 @@
 package org.entando.bundle.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Statistics {
 
-  private List<StatisticElement> open;
-  private List<StatisticElement> rejected;
-  private List<StatisticElement> approved;
-  private List<StatisticElement> faulty;
-  private Period period;
+  @JsonProperty("by_status")
+  private StatisticElement byStatus;
 
-  public void addOpen(StatisticElement elem) {
-    if (open == null) {
-      open = new ArrayList<>();
-    }
-    open.add(elem);
-  }
+  @JsonProperty("by_year")
+  private Map<Integer, StatisticElement> byYear;
 
-  public void addRejected(StatisticElement elem) {
-    if (rejected == null) {
-      rejected = new ArrayList<>();
+  /**
+   * Return the statistic element of the desired yesr
+   * @param year the year of the statistics
+   * @return the statistic elements of the desired year
+   */
+  public StatisticElement getYear(int year) {
+    if (byYear == null) {
+        byYear = new HashMap<>();
     }
-    rejected.add(elem);
-  }
+    if (!byYear.containsKey(year)) {
+      StatisticElement elem = new StatisticElement();
 
-  public void addApproved(StatisticElement elem) {
-    if (approved == null) {
-      approved = new ArrayList<>();
+      byYear.put(year, elem);
+      return elem;
     }
-    approved.add(elem);
-  }
-
-  public void addFaulty(StatisticElement elem) {
-    if (faulty == null) {
-      faulty = new ArrayList<>();
-    }
-    faulty.add(elem);
-  }
-
-  public Statistics setPeriod(LocalDate from, LocalDate to) {
-    if (from !=null && to != null) {
-      this.period = Period.between(from, to);
-    }
-    return this;
+    return byYear.get(year);
   }
 
 }
