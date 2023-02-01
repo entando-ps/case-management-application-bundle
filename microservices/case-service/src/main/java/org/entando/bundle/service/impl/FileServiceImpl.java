@@ -267,7 +267,7 @@ public class FileServiceImpl implements FileService {
         }
       }
     } catch(Throwable t) {
-      log.error("error getting plublic url of a resource in a basket", t.getLocalizedMessage());
+      log.error("error getting public url of a resource in a basket", t.getLocalizedMessage());
     }
     return null;
   }
