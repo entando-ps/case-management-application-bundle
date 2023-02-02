@@ -57,7 +57,7 @@ public class CamundaServiceImpl implements CamundaService {
   }
 
   @Override
-  public Map<String, Object> getProcessData(final String instanceId) {
+  public Map<String, Object> getCompletedProcessData(final String instanceId) {
     Map<String, Object> res = null;
     List<HistoricVariableInstance> vars;
 
@@ -96,6 +96,7 @@ public class CamundaServiceImpl implements CamundaService {
   public void completeTask(Task task) {
       completeTask(task.getId());
   }
+
   @Override
   public void completeTask(String taskId) {
     taskService.complete(taskId);

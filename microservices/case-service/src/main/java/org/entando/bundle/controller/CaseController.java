@@ -43,7 +43,7 @@ import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_VARIABLES_APPR
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CaseController {
 
-    private Logger log = LoggerFactory.getLogger(CaseController.class);
+    private final Logger log = LoggerFactory.getLogger(CaseController.class);
 
     private final CaseService caseService;
 
@@ -169,6 +169,30 @@ public class CaseController {
                                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
         try {
             return caseService.getStatisticsRange(from, to);
+        } catch (Throwable t) {
+            log.error("error while getting usage statistics", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);
+        }
+    }
+
+    @GetMapping("/generate-fake-data")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity createtCaseStatistics(@RequestParam Integer size) {
+        try {
+            caseService.createFakeData(size);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Throwable t) {
+            log.error("error while getting usage statistics", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);
+        }
+    }
+
+    @DeleteMapping("/")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity flush() {
+        try {
+            caseService.flush();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Throwable t) {
             log.error("error while getting usage statistics", t);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);

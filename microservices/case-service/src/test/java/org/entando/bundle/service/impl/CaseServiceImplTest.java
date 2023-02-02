@@ -15,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
@@ -53,7 +52,7 @@ public class CaseServiceImplTest {
   }
 
   @Test
-  public void testCreateNoAttachments() throws InterruptedException {
+  public void testCreateNoAttachments() {
     Case c = null;
     CaseMetadata metadata = getCaseMetadata();
     try {
@@ -81,8 +80,8 @@ public class CaseServiceImplTest {
     assertThat(cp,is(notNullValue()));
     caseService.completeTaskState(Optional.of(cp), null);
     assertFalse(bpmService.isProcessRunning(cp.getProcessInstanceId()));
-    assertThat(bpmService.getProcessData(cp.getProcessInstanceId()), is(notNullValue()));
-    assertThat(bpmService.getProcessData(cp.getProcessInstanceId()).size(), is(1));
+    assertThat(bpmService.getCompletedProcessData(cp.getProcessInstanceId()), is(notNullValue()));
+    assertThat(bpmService.getCompletedProcessData(cp.getProcessInstanceId()).size(), is(1));
   }
 
 

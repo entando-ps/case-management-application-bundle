@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -67,12 +66,12 @@ public interface CaseService {
   /**
    * Create a case starting from the metadata and attachment information and persist it in the database
    *
-   * @param files the attachment (multipart)
-   * @param data  the metadata of the case
-   * @param name the principal name of the user making the request
+   * @param files   the attachment (multipart)
+   * @param data    the metadata of the case
+   * @param ownerId the principal name of the user making the request
    * @return the saved case
    */
-  Case createCase(MultipartFile[] files, CaseMetadata data, String name);
+  Case createCase(MultipartFile[] files, CaseMetadata data, String ownerId);
 
   /**
    * Delete the case attachments and then delete the record from the DB.
@@ -94,6 +93,8 @@ public interface CaseService {
 
   /**
    * Complete the task for the process held by the desired state updating the variables
+   * If properties are null, them we create them with the current time value for
+   * 'PROCESS_INSTANCE_VARIABLES_LAST_UPDATE'
    * @param optCase optional case object
    * @param props properties to be inserted in the process
    * @return true if the task was completed and the process run to completion, false if no process found
@@ -117,4 +118,15 @@ public interface CaseService {
    * @return the statistics
    */
   Statistics getStatisticsRange(LocalDate from, LocalDate to);
+
+  /**
+   * Create fake cases
+   * @param size the number of case to create
+   */
+  void createFakeData(int size);
+
+  /**
+   * Delete all the cases
+   */
+  void flush();
 }
