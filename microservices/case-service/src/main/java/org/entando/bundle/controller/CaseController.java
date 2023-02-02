@@ -177,7 +177,7 @@ public class CaseController {
 
     @GetMapping("/generate-fake-data")
     @PreAuthorize("hasAnyAuthority('case-management-admin')")
-    public @ResponseBody ResponseEntity createtCaseStatistics(@RequestParam Integer size) {
+    public @ResponseBody ResponseEntity createCaseStatistics(@RequestParam Integer size) {
         try {
             caseService.createFakeData(size);
             return new ResponseEntity<>(HttpStatus.OK);
