@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import static org.entando.bundle.BundleConstants.PROP_TMP_DIR;
 
-@Deprecated
 public class FileHelper {
 
   private static Logger log = LoggerFactory.getLogger(FileHelper.class);
@@ -22,7 +21,6 @@ public class FileHelper {
    * @param fileName the file to be placed in tmp
    * @return the desired path or null
    */
-  @Deprecated
   public static String getTmpPathForFile(String fileName) {
     String path = null;
     

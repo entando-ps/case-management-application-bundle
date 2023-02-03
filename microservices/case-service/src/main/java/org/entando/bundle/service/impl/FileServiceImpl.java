@@ -1,5 +1,6 @@
 package org.entando.bundle.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.entando.bundle.config.BundleConfiguration;
 import org.entando.bundle.service.FileService;
@@ -25,7 +26,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 import software.amazon.awssdk.services.s3.model.S3Object;
-import software.amazon.awssdk.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +33,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,7 +58,7 @@ public class FileServiceImpl implements FileService {
     try {
       name = config.getS3().getBucket().getName();
     } catch (Throwable t) {
-      log.error("Configuration error detected! No bucket name defined", t.getLocalizedMessage());
+      log.error("Configuration error detected! No bucket name defined: " + t);
     }
     return name;
   }
@@ -66,7 +69,7 @@ public class FileServiceImpl implements FileService {
     try {
       url = "https://" + getBucketName() + ".s3." + getBucketRegion() + ".amazonaws.com";
     } catch (Throwable t) {
-      log.error("Configuration error detected! No bucket url defined", t.getLocalizedMessage());
+      log.error("Configuration error detected! No bucket url defined: " + t);
     }
     return url;
   }
@@ -77,17 +80,39 @@ public class FileServiceImpl implements FileService {
     try {
       region = Region.of(config.getS3().getRegion());
     } catch (Throwable t) {
-      log.error("Configuration error detected! No AWS region defined", t.getLocalizedMessage());
+      log.error("Configuration error detected! No AWS region defined: " + t);
     }
     return region;
   }
 
+  /**
+   * Create S3 client
+   * @return the S£ client for the base calls
+   */
   private S3Client getClient() {
-    // Create the S3Client object.
     return S3Client.builder()
       .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
       .region(getBucketRegion())
       .build();
+  }
+  @Override
+  public String fileUpload(String resourceToUpload, String key, HashMap<String, String> metadata) {
+    S3Client s3 = getClient();
+
+    try {
+      PutObjectRequest putOb = PutObjectRequest.builder()
+        .bucket(getBucketName())
+        .key(key)
+        .metadata(metadata)
+        .build();
+      PutObjectResponse response = s3.putObject(putOb,
+        RequestBody.fromBytes(resourceToUpload.getBytes(StandardCharsets.UTF_8)));
+      log.info("Uploaded file {}", key);
+    } catch (S3Exception t) {
+      log.error(t.awsErrorDetails().errorMessage());
+      key = null;
+    }
+    return key;
   }
 
   @Override
@@ -190,7 +215,7 @@ public class FileServiceImpl implements FileService {
       log.debug("File list successfully downloaded from bucket");
       return res.contents();
     } catch (S3Exception t) {
-      log.error("Error getting the file list of a bucket", t.awsErrorDetails().errorMessage());
+      log.error("Error getting the file list of a bucket", t);
     }
     return null;
   }
@@ -219,7 +244,7 @@ public class FileServiceImpl implements FileService {
     } catch (IOException ex) {
       ex.printStackTrace();
     } catch (S3Exception t) {
-      log.error("Error getting the file list of a bucket", t.awsErrorDetails().errorMessage());
+      log.error("Error getting the file list of a bucket", t);
     }
     return dest;
   }
@@ -267,7 +292,7 @@ public class FileServiceImpl implements FileService {
         }
       }
     } catch(Throwable t) {
-      log.error("error getting public url of a resource in a basket", t.getLocalizedMessage());
+      log.error("error getting public url of a resource in a basket", t);
     }
     return null;
   }
@@ -282,7 +307,7 @@ public class FileServiceImpl implements FileService {
         builder.setPath(keyName);
         name = builder.toString();
       } catch (Throwable t) {
-        log.error("Error generating public url of a file", t.getLocalizedMessage());
+        log.error("Error generating public url of a file", t);
       }
     }
     return name;

@@ -1,4 +1,4 @@
-# CDP Case Management microservice
+# CDP Case Management bundle 
 
 
 ## Development environment

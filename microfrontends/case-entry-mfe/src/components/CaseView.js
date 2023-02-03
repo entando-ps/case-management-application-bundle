@@ -1,5 +1,4 @@
 import { Card, Col, Container, ListGroup, Row, Stack } from 'react-bootstrap';
-import { ReactComponent as PdfIcon } from 'bootstrap-icons/icons/file-earmark-pdf.svg';
 import { ReactComponent as DownloadIcon } from 'bootstrap-icons/icons/download.svg';
 
 import { useKeycloak } from '../auth/Keycloak';
@@ -95,7 +94,6 @@ function CaseView({ config }) {
                     <DownloadIcon style={{ cursor: 'pointer' }} />
                   </a>
                   <small className="mx-2">{key}</small>
-                  <PdfIcon width="22" height="30" className="text-danger" />
                 </div>
               </Stack>
             </div>

@@ -11,7 +11,11 @@ import { useToast } from '../contexts/ToastContext';
 
 function CaseEntryForm({ config }) {
   const { token } = useKeycloak();
-  const formMethods = useForm();
+  const formMethods = useForm({
+    defaultValues: {
+      documents: [{ 0: null }]
+    },
+  });
   const navigate = useNavigate();
   const { showToast } = useToast();
 
