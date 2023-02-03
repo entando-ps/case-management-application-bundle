@@ -14,10 +14,10 @@ import org.entando.bundle.service.CamundaService;
 import org.junit.Test;
 import org.junit.platform.commons.util.StringUtils;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
@@ -34,6 +34,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = CaseServiceApplication.class)
 public class CamundaServiceImplTest {
+
+  private final Logger log = LoggerFactory.getLogger(CamundaServiceImplTest.class);
 
   @Autowired
   HistoryService historyService;
@@ -97,7 +99,7 @@ public class CamundaServiceImplTest {
     setUserTaskVariablesAndState(instanceId, props, true);
 
     // retrieve
-    Map<String, Object> vars = camundaService.getProcessData(instanceId);
+    Map<String, Object> vars = camundaService.getCompletedProcessData(instanceId);
     assertThat(vars, is(notNullValue()));
     assertThat(1, is(vars.size()));
     assertThat(true, is(vars.get("nice")));
@@ -116,13 +118,14 @@ public class CamundaServiceImplTest {
       // update
       setUserTaskVariablesAndState(instanceId, Map.of("nice", true), false);
       // retrieve
-      Map<String, Object> vars = camundaService.getProcessData(instanceId);
+      Map<String, Object> vars = camundaService.getCompletedProcessData(instanceId);
       assertThat(vars, is(notNullValue()));
       assertThat(1, is(vars.size()));
       assertThat(true, is(vars.get("nice")));
       // still running
       assertTrue(camundaService.isProcessRunning(instanceId));
     } catch (Throwable t) {
+        t.printStackTrace();
         throw t;
     } finally {
       if (StringUtils.isNotBlank(instanceId)) {

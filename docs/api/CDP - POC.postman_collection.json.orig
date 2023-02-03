@@ -1,0 +1,984 @@
+{
+	"info": {
+		"_postman_id": "79a7db58-0a62-41f8-b7e1-6c16805135ec",
+		"name": "CDP - POC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET PROCESS LIST WITH AUTH",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "{{client_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{base_url}}",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{kc_base_url}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{kc_base_url}}/auth/realms/{{realm}}/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{client_id}}",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJYWG1OSHlKZGR6dHlSdjFRaDNka29SeW40RXpxX0piQ2o0VllwMkwtaEhBIn0.eyJleHAiOjE2NzQ0ODU4NDQsImlhdCI6MTY3NDQ4NTU0NCwiYXV0aF90aW1lIjoxNjc0NDg1MTYwLCJqdGkiOiJmMTNhMGVjOC1lMTU0LTRkMjUtODc5Ni1hNTAzZTZmNDE5N2EiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvZW50YW5kby1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGM5NzM4OTYtNTc2MS00MWZjLTgyMTctMDdjNWQxM2EwMDRiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoid2ViX2FwcCIsInNlc3Npb25fc3RhdGUiOiIyZDhkZGRhNC1iNDQ5LTQ5NjgtODkwMi1jMjFiMmU0YTI3NGQiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfVVNFUiIsIm9mZmxpbmVfYWNjZXNzIiwiUk9MRV9BRE1JTiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsid2ViX2FwcCI6eyJyb2xlcyI6WyJjYXNlLW1hbmFnZW1lbnQtYWRtaW4iLCJjYXNlLW1hbmFnZW1lbnQtZW50cnkiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVudGFuZG8tZGV2IGVtYWlsIHByb2ZpbGUiLCJzaWQiOiIyZDhkZGRhNC1iNDQ5LTQ5NjgtODkwMi1jMjFiMmU0YTI3NGQiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicm9sZXMiOlsiUk9MRV9VU0VSIiwib2ZmbGluZV9hY2Nlc3MiLCJST0xFX0FETUlOIiwidW1hX2F1dGhvcml6YXRpb24iXSwibmFtZSI6IkFkbWluIEFkbWluaXN0cmF0b3IiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiIsImdpdmVuX25hbWUiOiJBZG1pbiIsImZhbWlseV9uYW1lIjoiQWRtaW5pc3RyYXRvciIsImVtYWlsIjoiYWRtaW5AbG9jYWxob3N0In0.u_L2PvxwPSskV_CDaecn7DB6GmJ4-5DrtyQqKkOllF-oshG6T-oss4pfAjdYN9-zmSr2-mGDPkYlJ0hLgs8XXzfRRSVPx1rr08tqWu-KF8hcmaZ32BY6dQ9wjCe4f_i9Bxhu6IvXdEJDHkMrbKa9wArZGCVzGKdH3UjePvXTF9ZPNIJHPW5XH6XKwvdXlie0sOQP79kY906s24cDBp_Trlmi_BnPBQfCrhJ3TqVFZcTFnM9aI5GYxuupcEQ52N4-QVhgfVyw3pskeV8EFkeFCoxWAeqm7djdpZcS43_4JTMhEfPY4FGFMbhteonjibF5AboKrxGjfwFQ5gmrhD9u-w",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "email openid profile",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Entando",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{staging_url}}/api/cases",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET PROCESS LIST WITH AUTH",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "localhost:8081/api/cases",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 14:38:27 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-24T15:35:48\",\n        \"identifier\": \"0000002/23\",\n        \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                },\n                {\n                    \"key\": \"Entando_bg_Modular.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                    \"size\": 325082\n                }\n            ]\n        }\n    },\n    {\n        \"id\": 4,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-24T15:38:12\",\n        \"identifier\": \"0000004/23\",\n        \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                },\n                {\n                    \"key\": \"Entando_bg_Modular.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                    \"size\": 325082\n                }\n            ]\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET PROCESSES LIST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET PROCESSES LIST",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/cases/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases",
+								"list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 23 Jan 2023 09:50:31 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 9,\n        \"pid\": 2677,\n        \"state\": \"DELETED\",\n        \"created\": \"2023-01-20T17:31:36\",\n        \"identifier\": \"0000001/23\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                },\n                {\n                    \"key\": \"Entando_bg_Modular.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                    \"size\": 325082\n                }\n            ]\n        }\n    },\n    {\n        \"id\": 10,\n        \"pid\": 2677,\n        \"state\": \"CREATED\",\n        \"created\": \"2023-01-23T10:50:08\",\n        \"identifier\": \"0000010/23\",\n        \"metadata\": {\n            \"authorized\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"1977-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Carbonia\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MTTMML77G05U654U\",\n                \"email\": \"mail@gmail.com\",\n                \"mobile\": \"3281235123\",\n                \"role\": \"sector\"\n            },\n            \"subscriber\": {\n                \"name\": \"Matteo\",\n                \"lastname\": \"Emanuele\",\n                \"birthDate\": \"2023-01-19\",\n                \"birthCountry\": \"Italy\",\n                \"birthCity\": \"Cagliari\",\n                \"birthProvince\": \"CA\",\n                \"birthRegion\": \"Sardegna\",\n                \"fiscalCode\": \"MAAMML77G05U654U\",\n                \"email\": \"another_mail@gmail.com\",\n                \"landline\": \"178161832\",\n                \"mobile\": \"3281235123\",\n                \"sector\": \"sector\",\n                \"delegation\": \"TIPO_DUE\"\n            },\n            \"resources\": [\n                {\n                    \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                    \"size\": 9021\n                },\n                {\n                    \"key\": \"Entando_bg_Modular.png\",\n                    \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                    \"size\": 325082\n                }\n            ]\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET PROCESS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/1",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET PROCESS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/cases/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases",
+								"3"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 14:40:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "GET PROCESS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/cases/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 14:39:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-24T15:35:48\",\n    \"identifier\": \"0000002/23\",\n    \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n    \"metadata\": {\n        \"authorized\": {\n            \"name\": \"Matteo\",\n            \"lastname\": \"Emanuele\",\n            \"birthDate\": \"1977-01-19\",\n            \"birthCountry\": \"Italy\",\n            \"birthCity\": \"Carbonia\",\n            \"birthProvince\": \"CA\",\n            \"birthRegion\": \"Sardegna\",\n            \"fiscalCode\": \"MTTMML77G05U654U\",\n            \"email\": \"mail@gmail.com\",\n            \"mobile\": \"3281235123\",\n            \"role\": \"sector\"\n        },\n        \"subscriber\": {\n            \"name\": \"Matteo\",\n            \"lastname\": \"Emanuele\",\n            \"birthDate\": \"2023-01-19\",\n            \"birthCountry\": \"Italy\",\n            \"birthCity\": \"Cagliari\",\n            \"birthProvince\": \"CA\",\n            \"birthRegion\": \"Sardegna\",\n            \"fiscalCode\": \"MAAMML77G05U654U\",\n            \"email\": \"another_mail@gmail.com\",\n            \"landline\": \"178161832\",\n            \"mobile\": \"3281235123\",\n            \"sector\": \"sector\",\n            \"delegation\": \"TIPO_DUE\"\n        },\n        \"resources\": [\n            {\n                \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                \"size\": 9021\n            },\n            {\n                \"key\": \"Entando_bg_Modular.png\",\n                \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                \"size\": 325082\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CREATE PROCESS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "attachments",
+							"type": "file",
+<<<<<<< Updated upstream
+							"src": "/home/matteo/Pictures/Entando_Logo_Dark_Blue@4x.png"
+=======
+							"src": "/home/matteo/Pictures/x-mark-128.gif"
+>>>>>>> Stashed changes
+						},
+						{
+							"key": "attachments",
+							"type": "file",
+<<<<<<< Updated upstream
+							"src": "/home/matteo/Pictures/Entando_bg_Modular.png"
+=======
+							"src": "/home/matteo/Pictures/Entando_Logo_Dark_Blue@4x.png"
+>>>>>>> Stashed changes
+						},
+						{
+							"key": "attachments",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "case_metadata",
+							"value": "{\n    \"authorized\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"1977-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Carbonia\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MTTMML77G05U654U\",\n        \"email\": \"mail@gmail.com\",\n        \"mobile\": \"3281235123\",\n        \"role\": \"sector\"\n    },\n    \"subscriber\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"2023-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Cagliari\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MAAMML77G05U654U\",\n        \"email\": \"another_mail@gmail.com\",\n        \"landline\": \"178161832\",\n        \"mobile\": \"3281235123\",\n        \"sector\": \"sector\",\n        \"delegation\": \"TIPO_DUE\"\n    }\n}",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staging_url}}/api/cases",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CREATE PROCESS",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": "/home/matteo/Pictures/Entando_Logo_Dark_Blue@4x.png"
+								},
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": "/home/matteo/Pictures/Entando_bg_Modular.png"
+								},
+								{
+									"key": "attachments",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "case_metadata",
+									"value": "{\n    \"authorized\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"1977-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Carbonia\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MTTMML77G05U654U\",\n        \"email\": \"mail@gmail.com\",\n        \"mobile\": \"3281235123\",\n        \"role\": \"sector\"\n    },\n    \"subscriber\": {\n        \"name\": \"Matteo\",\n        \"lastname\": \"Emanuele\",\n        \"birthDate\": \"2023-01-19\",\n        \"birthCountry\": \"Italy\",\n        \"birthCity\": \"Cagliari\",\n        \"birthProvince\": \"CA\",\n        \"birthRegion\": \"Sardegna\",\n        \"fiscalCode\": \"MAAMML77G05U654U\",\n        \"email\": \"another_mail@gmail.com\",\n        \"landline\": \"178161832\",\n        \"mobile\": \"3281235123\",\n        \"sector\": \"sector\",\n        \"delegation\": \"TIPO_DUE\"\n    }\n}",
+									"contentType": "application/json",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/cases",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 14:38:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"pid\": 2677,\n    \"state\": \"CREATED\",\n    \"created\": \"2023-01-24T15:38:11.885676\",\n    \"identifier\": \"0000004/23\",\n    \"ownerId\": \"bafe7ff4-a8d5-423a-9730-0db399f17b53\",\n    \"metadata\": {\n        \"authorized\": {\n            \"name\": \"Matteo\",\n            \"lastname\": \"Emanuele\",\n            \"birthDate\": \"1977-01-19\",\n            \"birthCountry\": \"Italy\",\n            \"birthCity\": \"Carbonia\",\n            \"birthProvince\": \"CA\",\n            \"birthRegion\": \"Sardegna\",\n            \"fiscalCode\": \"MTTMML77G05U654U\",\n            \"email\": \"mail@gmail.com\",\n            \"mobile\": \"3281235123\",\n            \"role\": \"sector\"\n        },\n        \"subscriber\": {\n            \"name\": \"Matteo\",\n            \"lastname\": \"Emanuele\",\n            \"birthDate\": \"2023-01-19\",\n            \"birthCountry\": \"Italy\",\n            \"birthCity\": \"Cagliari\",\n            \"birthProvince\": \"CA\",\n            \"birthRegion\": \"Sardegna\",\n            \"fiscalCode\": \"MAAMML77G05U654U\",\n            \"email\": \"another_mail@gmail.com\",\n            \"landline\": \"178161832\",\n            \"mobile\": \"3281235123\",\n            \"sector\": \"sector\",\n            \"delegation\": \"TIPO_DUE\"\n        },\n        \"resources\": [\n            {\n                \"key\": \"Entando_Logo_Dark_Blue@4x.png\",\n                \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_Logo_Dark_Blue@4x.png\",\n                \"size\": 9021\n            },\n            {\n                \"key\": \"Entando_bg_Modular.png\",\n                \"url\": \"https://entando-cdp-poc.s3.eu-west-1.amazonaws.com/entando-cdp-poc/Entando_bg_Modular.png\",\n                \"size\": 325082\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE PROCESS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/3",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE PROCESS",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/cases/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cases",
+								"9"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jan 2023 08:11:03 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+<<<<<<< Updated upstream
+=======
+		},
+		{
+			"name": "HEALTH",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/management/health",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"management",
+						"health"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "HEALTH",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/management/health",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"management",
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.spring-boot.actuator.v3+json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Jan 2023 07:38:36 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"UP\"\n}"
+				}
+			]
+		},
+		{
+			"name": "REJECT REQUEST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/2/reject",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"2",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "APPROVE REQUEST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{staging_url}}/api/cases/3/approve",
+					"host": [
+						"{{staging_url}}"
+					],
+					"path": [
+						"api",
+						"cases",
+						"3",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HEALTH",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WELL KNOWN ENDPOINTS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{kc_base_url}}/auth/realms/{{realm}}/.well-known/openid-configuration",
+					"host": [
+						"{{kc_base_url}}"
+					],
+					"path": [
+						"auth",
+						"realms",
+						"{{realm}}",
+						".well-known",
+						"openid-configuration"
+					]
+				}
+			},
+			"response": []
+>>>>>>> Stashed changes
+		}
+	]
+}

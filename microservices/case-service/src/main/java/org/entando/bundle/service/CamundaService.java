@@ -8,7 +8,7 @@ public interface CamundaService {
 
   /**
    * Run a new process
-   * @return
+   * @return the process instance ID
    */
   String startProcess();
 
@@ -17,7 +17,7 @@ public interface CamundaService {
    * @param instanceId process instance ID
    * @return the map of the requested variables
    */
-  Map<String, Object> getProcessData(String instanceId);
+  Map<String, Object> getCompletedProcessData(String instanceId);
 
   /**
    * Return the desired user task for the current running process
@@ -50,7 +50,7 @@ public interface CamundaService {
   /**
    * Check whether the process is running or not
    * NOTE: we don't check if the process exists!
-   * @param instanceId
+   * @param instanceId the instance id of the process
    * @return true if the prcess is running, false otherwise
    */
   boolean isProcessRunning(String instanceId);

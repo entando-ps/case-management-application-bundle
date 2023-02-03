@@ -2,9 +2,11 @@ package org.entando.bundle.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
+@ToString
 @Data
 @NoArgsConstructor
 public class SubscribedUser {

@@ -5,6 +5,7 @@ import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public interface FileService {
    * Upload the give file
    * @Deprecated
    * @param file file handler
-   * @param metadata
+   * @param metadata the attributes of the file
    * @return the eTag of the uploaded object
    */
   String fileUpload(File file, Map<String, String> metadata);
@@ -35,14 +36,14 @@ public interface FileService {
 
   /**
    * Save a file locally from S3
-   * @param keyName
-   * @return
+   * @param keyName the key of the file
+   * @return the downloaded file
    */
   File downloadFile(String keyName);
 
   /**
    * Delete the given file from S3
-   * @param keyName
+   * @param keyName the key of the file to delete
    * @return true if the file was deleted, false otherwise
    */
   boolean deleteFile(String keyName);
@@ -57,7 +58,7 @@ public interface FileService {
   /**
    * Get the public URL of the file in S3.
    * @param keyName the key of the resource
-   * @return the public URL if the file exists, false otherwise
+   * @return the public URL if the file exists, null otherwise
    */
   String getFilePublicUrl(String keyName);
 
@@ -67,4 +68,13 @@ public interface FileService {
    * @return the presumed public URL of the file
    */
   String getFilePublicUrlNoCheck(String keyName);
+
+  /**
+   * Upload a resource in S3
+   * @param resourceToUpload the resource to upload
+   * @param key the file key
+   * @param props the tag attribute associated to the resource
+   * @return the key of the uploaded file
+   */
+  String fileUpload(String resourceToUpload, String key, HashMap<String, String> props);
 }

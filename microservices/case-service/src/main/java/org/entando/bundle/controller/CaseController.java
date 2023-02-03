@@ -1,11 +1,13 @@
 package org.entando.bundle.controller;
 
 import org.entando.bundle.domain.CaseMetadata;
+import org.entando.bundle.domain.Statistics;
 import org.entando.bundle.entity.Case;
 import org.entando.bundle.service.CaseService;
 import org.entando.bundle.service.impl.CaseServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +28,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +43,7 @@ import static org.entando.bundle.BundleConstants.PROCESS_INSTANCE_VARIABLES_APPR
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CaseController {
 
-    private Logger log = LoggerFactory.getLogger(CaseController.class);
+    private final Logger log = LoggerFactory.getLogger(CaseController.class);
 
     private final CaseService caseService;
 
@@ -90,7 +94,7 @@ public class CaseController {
             return optionalCase.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
         } catch (Throwable t) {
             log.error("error getting a Cases", t);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error getting a Case", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error getting a case", t);
         }
     }
 
@@ -107,7 +111,7 @@ public class CaseController {
             aCase = caseService.createCase(files, data, name);
         } catch (Throwable t) {
             log.error("error creating a new Cases", t);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error creating aCase", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error creating a case", t);
         }
         return aCase;
     }
@@ -154,6 +158,44 @@ public class CaseController {
         } catch (Throwable t) {
             log.error("error while updating case to " + (approved ? "approved":"rejected"), t);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error updating case to " + (approved ? "approved":"rejected"), t);
+        }
+    }
+
+    @GetMapping("/dashboard")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody Statistics getCaseStatistics(@RequestParam(required = false)
+                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+                                                      @RequestParam(required = false)
+                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        try {
+            return caseService.getStatisticsRange(from, to);
+        } catch (Throwable t) {
+            log.error("error while getting usage statistics", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);
+        }
+    }
+
+    @GetMapping("/generate-fake-data")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity createCaseStatistics(@RequestParam Integer size) {
+        try {
+            caseService.createFakeData(size);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Throwable t) {
+            log.error("error while getting usage statistics", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);
+        }
+    }
+
+    @DeleteMapping("/")
+    @PreAuthorize("hasAnyAuthority('case-management-admin')")
+    public @ResponseBody ResponseEntity flush() {
+        try {
+            caseService.flush();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Throwable t) {
+            log.error("error while getting usage statistics", t);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error while getting statistics", t);
         }
     }
 }
