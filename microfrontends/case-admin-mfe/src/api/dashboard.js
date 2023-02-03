@@ -2,7 +2,7 @@ export const getDashboardData = async (config, token) => {
   const { api } = config.systemParams;
 
   try {
-    const res = await fetch(`${api['case-api'].url}/api/dashboard`, {
+    const res = await fetch(`${api['case-api'].url}/api/cases/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
