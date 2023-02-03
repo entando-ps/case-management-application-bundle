@@ -1,4 +1,8 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import { deleteCase } from '../api/case';
+import { useKeycloak } from '../auth/Keycloak';
+import { useToast } from '../contexts/ToastContext';
 
 import { useCases } from '../hooks/useCases';
 import { useDashboard } from '../hooks/useDashboard';
@@ -8,7 +12,21 @@ import CaseTable from './CaseTable';
 
 function Dashboard({ config }) {
   const { cases } = useCases(config);
+  const { token } = useKeycloak();
   const { dashboardData: { by_status, by_year } } = useDashboard(config);
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  const handleCaseDelete = async (id) => {
+    try {
+      await deleteCase(id, config, token);
+      showToast('Pratica eliminato', 'secondary');
+      navigate(0);
+    } catch (error) {
+      console.error(error);
+      showToast(error.message, 'danger');
+    }
+  }
 
   return (
     <div>
@@ -41,7 +59,7 @@ function Dashboard({ config }) {
       <Card>
         <Card.Body>
           <h4 className="mb-4">Elenco delle pratiche</h4>
-          <CaseTable cases={cases} />
+          <CaseTable cases={cases} onDeleteClick={handleCaseDelete} />
         </Card.Body>
       </Card>
     </div>

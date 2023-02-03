@@ -113,3 +113,22 @@ export const approveCase = async (id, config, token) => {
     throw new Error(error.message);
   }
 };
+
+export const deleteCase = async (id, config, token) => {
+  const { api } = config.systemParams;
+  
+  try {
+    const res = await fetch(`${api['case-api'].url}/api/cases/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Impossibile eliminare il caso');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

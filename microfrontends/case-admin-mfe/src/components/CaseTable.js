@@ -1,11 +1,12 @@
 import { Table } from 'react-bootstrap';
+import { ReactComponent as DeleteIcon } from 'bootstrap-icons/icons/trash-fill.svg';
 import { Link } from 'react-router-dom';
 
 import deriveDisplayTextFromCaseState from '../utils/deriveDisplayTextFromCaseState';
 import formatDateToIt from '../utils/formatDateToIt';
 
 
-function CaseTable({ cases }) {
+function CaseTable({ cases, onDeleteClick }) {
   return (
     <Table striped bordered hover>
       <thead>
@@ -16,7 +17,7 @@ function CaseTable({ cases }) {
           <th>Partenariato</th>
           <th>Data Inserimento</th>
           <th>Stato</th>
-          <th></th>
+          <th colSpan={2}></th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,12 @@ function CaseTable({ cases }) {
             <td>{deriveDisplayTextFromCaseState(c)}</td>
             <td>
               <Link to={`/case/${c.id}`}>Vedi pratica</Link>
+            </td>
+            <td>
+              <DeleteIcon
+                onClick={() => onDeleteClick(c.id)}
+                style={{ cursor: 'pointer' }}
+              />
             </td>
           </tr>
         ))}
