@@ -20,12 +20,16 @@ function CaseEntryForm({ config }) {
   const { showToast } = useToast();
 
   const handleSubmit = async data => {
-    try {
-      const newCase = await postCase(data, config, token);
-      navigate(`/case-entry-success?id=${newCase.identifier}`);
-    } catch (error) {
-      showToast(error.message, 'danger');
-      console.error(error);
+    if (!data.documents[0][0]) {
+      showToast('Deve essere allegato almeno 1 documento', 'danger')
+    } else {
+      try {
+        const newCase = await postCase(data, config, token);
+        navigate(`/case-entry-success?id=${newCase.identifier}`);
+      } catch (error) {
+        showToast(error.message, 'danger');
+        console.error(error);
+      }
     }
   };
 
