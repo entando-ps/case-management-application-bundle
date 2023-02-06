@@ -51,14 +51,14 @@ function Dashboard({ config }) {
 
   return (
     <div>
-      <Card className="mb-5 ">
+      <Card className="mb-4">
         <Card.Body>
           <h2>Benvenuto nella tua dashboard</h2>
           <p>In questa sezione potrai visualizzare lo stato delle pratiche.</p>
         </Card.Body>
       </Card>
       {by_status && by_year && (
-        <Container className="mb-5" fluid>
+        <Container className="mb-4" fluid>
           <Row md="2">
             <Col className="ps-0">
               <Card>

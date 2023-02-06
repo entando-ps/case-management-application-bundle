@@ -15,7 +15,7 @@ function CaseDeleteModal({ container, show, caseData, onHide, onConfirm }) {
       </Modal.Header>
       <Modal.Body>
         <p>
-          Elimina pratica {caseData?.identifier}
+          Eliminare la pratica {caseData?.identifier}
         </p>
       </Modal.Body>
       <Modal.Footer>
