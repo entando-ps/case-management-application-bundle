@@ -1,4 +1,5 @@
 import { Table } from 'react-bootstrap';
+import { ReactComponent as ViewIcon } from 'bootstrap-icons/icons/eye-fill.svg';
 import { ReactComponent as DeleteIcon } from 'bootstrap-icons/icons/trash-fill.svg';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ function CaseTable({ cases, onDeleteClick }) {
           <th>Numero Domanda</th>
           <th>Data Inserimento</th>
           <th>Stato</th>
-          <th colSpan={2}></th>
+          <th>Azioni</th>
         </tr>
       </thead>
       <tbody>
@@ -23,12 +24,13 @@ function CaseTable({ cases, onDeleteClick }) {
             <td>{c.identifier}</td>
             <td>{formatDateToIt(c.created)}</td>
             <td>{deriveDisplayTextFromCaseState(c)}</td>
-            <td>
-              <Link to={`/case/${c.id}`}>Vedi pratica</Link>
-            </td>
-            <td>
+            <td className="text-end">
+              <Link to={`/case/${c.id}`} style={{ color: 'inherit' }}>
+                <ViewIcon />
+              </Link>
               <DeleteIcon
-                onClick={() => onDeleteClick(c.id)}
+                onClick={() => onDeleteClick(c)}
+                className="ms-4 me-2"
                 style={{ cursor: 'pointer' }}
               />
             </td>
