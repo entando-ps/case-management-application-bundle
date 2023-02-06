@@ -12,9 +12,6 @@ function CaseTable({ cases, onDeleteClick }) {
       <thead>
         <tr>
           <th>Numero Domanda</th>
-          <th>Codice Ente</th>
-          <th>Ragione Sociale</th>
-          <th>Partenariato</th>
           <th>Data Inserimento</th>
           <th>Stato</th>
           <th colSpan={2}></th>
@@ -24,9 +21,6 @@ function CaseTable({ cases, onDeleteClick }) {
         {cases.map((c) => (
           <tr key={c.id}>
             <td>{c.identifier}</td>
-            <td>08202000030</td>
-            <td>Accademia Danza</td>
-            <td>NO</td>
             <td>{formatDateToIt(c.created)}</td>
             <td>{deriveDisplayTextFromCaseState(c)}</td>
             <td>
