@@ -1,4 +1,4 @@
-import { Button, Card, Form, Stack } from 'react-bootstrap';
+import { Button, Card, Form, Stack, Spinner } from 'react-bootstrap';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,11 +11,14 @@ import { useToast } from '../contexts/ToastContext';
 
 function CaseEntryForm({ config }) {
   const { token } = useKeycloak();
-  const formMethods = useForm({
+  
+  const { formState, ...formMethods } = useForm({
     defaultValues: {
       documents: [{ 0: null }]
     },
   });
+  const { isSubmitting } = formState;
+
   const navigate = useNavigate();
   const { showToast } = useToast();
 
@@ -34,7 +37,7 @@ function CaseEntryForm({ config }) {
   };
 
   return (
-    <FormProvider {...formMethods}>
+    <FormProvider formState={formState} {...formMethods}>
       <Card className="mb-5 ">
         <Card.Body>
           <h2>Compilazione dati autorizzazione e richiesta codice dispositivo</h2>
@@ -60,7 +63,11 @@ function CaseEntryForm({ config }) {
         <Card>
           <Card.Body>
             <Stack direction="horizontal">
-              <Button type="submit" className="ms-auto px-5">Invia</Button>
+              <Button type="submit" className="ms-auto px-5" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <Spinner animation="border" variant="light" size="sm" />
+                ) : 'Invia'}
+              </Button>
             </Stack>
           </Card.Body>
         </Card>
