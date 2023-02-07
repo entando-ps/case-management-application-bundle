@@ -2,7 +2,7 @@ import { Col, Container, Form, Row, Stack } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 
 function CaseEntryFormSubscriberSection() {
-  const { register } = useFormContext();
+  const { register, formState: { errors } } = useFormContext();
 
   return (
     <div>
@@ -31,7 +31,7 @@ function CaseEntryFormSubscriberSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="subscriber.birthDate">
               <Form.Label>Data di nascita</Form.Label>
-              <Form.Control type="text" {...register('subscriber.birthDate')} />
+              <Form.Control type="date" {...register('subscriber.birthDate')} />
             </Form.Group>
           </Col>
           <Col md>
@@ -65,7 +65,11 @@ function CaseEntryFormSubscriberSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="subscriber.fiscalCode">
               <Form.Label>Codice Fiscale</Form.Label>
-              <Form.Control type="text" {...register('subscriber.fiscalCode')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.subscriber?.fiscalCode}
+                {...register('subscriber.fiscalCode', { pattern: /^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/ })}
+              />
             </Form.Group>
           </Col>
         </Row>
@@ -73,13 +77,21 @@ function CaseEntryFormSubscriberSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="subscriber.email">
               <Form.Label>E-mail</Form.Label>
-              <Form.Control type="text" {...register('subscriber.email')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.subscriber?.email}
+                {...register('subscriber.email', { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })}
+              />
             </Form.Group>
           </Col>
           <Col md>
             <Form.Group className="mb-3" controlId="subscriber.landline">
               <Form.Label>Tel Fisso</Form.Label>
-              <Form.Control type="text" {...register('subscriber.landline')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.subscriber?.landline}
+                {...register('subscriber.landline', { pattern: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/ })}
+              />
             </Form.Group>
           </Col>
         </Row>
@@ -87,7 +99,11 @@ function CaseEntryFormSubscriberSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="subscriber.mobile">
               <Form.Label>Cellulare</Form.Label>
-              <Form.Control type="text" {...register('subscriber.mobile')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.subscriber?.mobile}
+                {...register('subscriber.mobile', { pattern: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/ })}
+              />
             </Form.Group>
           </Col>
           <Col md>

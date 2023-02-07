@@ -2,7 +2,7 @@ import { Col, Container, Form, Row, Stack } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 
 function CaseEntryFormAuthorizedSection() {
-  const { register } = useFormContext();
+  const { register, formState: { errors } } = useFormContext();
 
   return (
     <div>
@@ -29,7 +29,7 @@ function CaseEntryFormAuthorizedSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="authorized.birthDate">
               <Form.Label>Data di nascita</Form.Label>
-              <Form.Control type="text" {...register('authorized.birthDate')} />
+              <Form.Control type="date" {...register('authorized.birthDate')} />
             </Form.Group>
           </Col>
           <Col md>
@@ -63,7 +63,11 @@ function CaseEntryFormAuthorizedSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="authorized.fiscalCode">
               <Form.Label>Codice Fiscale</Form.Label>
-              <Form.Control type="text" {...register('authorized.fiscalCode')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.authorized?.fiscalCode}
+                {...register('authorized.fiscalCode', { pattern: /^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/ })}
+              />
             </Form.Group>
           </Col>
         </Row>
@@ -71,13 +75,21 @@ function CaseEntryFormAuthorizedSection() {
           <Col md>
             <Form.Group className="mb-3" controlId="authorized.email">
               <Form.Label>E-mail</Form.Label>
-              <Form.Control type="text" {...register('authorized.email')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.authorized?.email}
+                {...register('authorized.email', { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })}
+              />
             </Form.Group>
           </Col>
           <Col md>
             <Form.Group className="mb-3" controlId="authorized.mobile">
               <Form.Label>Cellulare</Form.Label>
-              <Form.Control type="text" {...register('authorized.mobile')} />
+              <Form.Control
+                type="text"
+                isInvalid={!!errors.authorized?.mobile}
+                {...register('authorized.mobile', { pattern: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/ })}
+              />
             </Form.Group>
           </Col>
         </Row>

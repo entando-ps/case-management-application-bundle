@@ -62,6 +62,13 @@
   --bs-table-hover-color: #405464;
 }
 
+.pagination {
+  --bs-pagination-color: #405464;
+  --bs-pagination-active-color: #405464;
+  --bs-pagination-active-bg: rgba(0, 0, 0, 0.1);
+  --bs-pagination-active-border-color: rgba(0, 0, 0, 0.1);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
