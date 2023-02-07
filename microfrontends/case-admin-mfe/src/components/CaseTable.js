@@ -25,7 +25,8 @@ function CaseTable({ cases, onDeleteClick }) {
     accessor: 'metadata.subscriber.sector',
   }, {
     Header: 'Data Inserimento',
-    accessor: row => formatDateToIt(row.created),
+    accessor: 'created',
+    Cell: ({ value }) => formatDateToIt(value),
   }, {
     Header: 'Stato',
     accessor: row => deriveDisplayTextFromCaseState(row),
@@ -48,6 +49,11 @@ function CaseTable({ cases, onDeleteClick }) {
     )
   }], [onDeleteClick]);
 
+  const initialSortBy = useMemo(() => [{
+    id: 'created',
+    desc: true,
+  }], []);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -65,6 +71,9 @@ function CaseTable({ cases, onDeleteClick }) {
     columns,
     data: cases,
     disableSortRemove: true,
+    initialState: {
+      sortBy: initialSortBy,
+    },
   }, useSortBy, usePagination);
 
   return (
