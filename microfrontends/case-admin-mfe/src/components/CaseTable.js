@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Stack, Table } from 'react-bootstrap';
-import { useTable, useSortBy } from 'react-table';
+import { Pagination, Stack, Table } from 'react-bootstrap';
+import { useTable, useSortBy, usePagination } from 'react-table';
 import { ReactComponent as ViewIcon } from 'bootstrap-icons/icons/eye-fill.svg';
 import { ReactComponent as DeleteIcon } from 'bootstrap-icons/icons/trash-fill.svg';
 import { ReactComponent as CaretUpIcon } from 'bootstrap-icons/icons/caret-up-fill.svg';
@@ -52,62 +52,86 @@ function CaseTable({ cases, onDeleteClick }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    state: { pageIndex },
   } = useTable({
     columns,
     data: cases,
     disableSortRemove: true,
-  }, useSortBy);
+  }, useSortBy, usePagination);
 
   return (
-    <Table striped bordered hover {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th
-                {...column.getHeaderProps(column.getSortByToggleProps())}
-              >
-                <Stack direction="horizontal" gap={2} style={{ height: 24 }}>
-                  {column.render('Header')}
-                  {column.isSorted
-                    ? column.isSortedDesc
-                      ? <CaretDownIcon width={12} height={12} />
-                      : <CaretUpIcon width={12} height={12} />
-                    : column.canSort && (
-                      <Stack style={{ color: '#ADB5BD' }}>
-                        <CaretUpIcon width={12} height={12} />
-                        <CaretDownIcon width={12} height={12} />
-                      </Stack>
-                    )
-                  }
-                </Stack>
-              </th>
-            ))}
-          </tr>
-         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-           prepareRow(row)
-           return (
-             <tr {...row.getRowProps()}>
-               {row.cells.map(cell => {
-                 return (
-                   <td
-                     {...cell.getCellProps()}
-                   >
-                     {cell.render('Cell')}
-                   </td>
-                 )
-               })}
-             </tr>
-           )
-         })}
-      </tbody>
-    </Table>
-  )
+    <>
+      <Table striped bordered hover {...getTableProps()}>
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
+                  <Stack direction="horizontal" gap={2} style={{ height: 24 }}>
+                    {column.render('Header')}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? <CaretDownIcon width={12} height={12} />
+                        : <CaretUpIcon width={12} height={12} />
+                      : column.canSort && (
+                        <Stack style={{ color: '#ADB5BD' }}>
+                          <CaretUpIcon width={12} height={12} />
+                          <CaretDownIcon width={12} height={12} />
+                        </Stack>
+                      )
+                    }
+                  </Stack>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map(row => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return (
+                    <td
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  )
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+      <Pagination style={{ float: 'right' }}>
+        <Pagination.First disabled={!canPreviousPage} onClick={() => gotoPage(0)} />
+        <Pagination.Prev disabled={!canPreviousPage} onClick={() => previousPage()} />
+        {[...Array(pageCount)].map((_, idx) => (
+          <Pagination.Item
+            key={idx}
+            active={idx === pageIndex}
+            onClick={() => gotoPage(idx)}
+          >
+            {idx + 1}
+          </Pagination.Item>
+        ))}
+        <Pagination.Next disabled={!canNextPage} onClick={() => nextPage()} />
+        <Pagination.Last disabled={!canNextPage} onClick={() => gotoPage(pageCount - 1)} />
+      </Pagination>
+    </>
+  );
 }
 
 export default CaseTable;
