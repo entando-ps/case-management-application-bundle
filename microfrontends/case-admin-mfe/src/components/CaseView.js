@@ -7,6 +7,7 @@ import { useCase } from '../hooks/useCase';
 import { approveCase, rejectCase } from '../api/case';
 import { useToast } from '../contexts/ToastContext';
 import deriveDisplayTextFromCaseState from '../utils/deriveDisplayTextFromCaseState';
+import formatDateToIt from '../utils/formatDateToIt';
 
 const commonFields = [
   { label: 'Nome', key: 'name' },
@@ -69,7 +70,7 @@ function CaseView({ config }) {
           <Stack direction="horizontal">
             <Container className="p-0" fluid>
               <Row className="mb-2">
-                <Col xs>Apertura pratica: <b>20 Dicembre 2022</b></Col>
+                <Col xs>Apertura pratica: <b>{caseData && formatDateToIt(caseData.created)}</b></Col>
               </Row>
               <Row>
                 <Col xs>Numero pratica: <b>{caseData?.identifier}</b></Col>
