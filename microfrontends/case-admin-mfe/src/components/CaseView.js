@@ -34,7 +34,7 @@ const authorizedFields = [
 ];
 
 function CaseView({ config }) {
-  const { idTokenParsed: { given_name, family_name, preferred_username } = {}, token } = useKeycloak();
+  const { token } = useKeycloak();
   const { caseData } = useCase(config);
   const { showToast } = useToast();
   const navigate = useNavigate();
@@ -69,11 +69,9 @@ function CaseView({ config }) {
           <Stack direction="horizontal">
             <Container className="p-0" fluid>
               <Row className="mb-2">
-                <Col xs="3">Nome: <b>{given_name || preferred_username}</b></Col>
                 <Col xs>Apertura pratica: <b>20 Dicembre 2022</b></Col>
               </Row>
               <Row>
-                <Col xs="3">Cognome: <b>{family_name}</b></Col>
                 <Col xs>Numero pratica: <b>{caseData?.identifier}</b></Col>
               </Row>
             </Container>
